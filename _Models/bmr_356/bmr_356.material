@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Materials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Material>
+        <Name>Bmr_356</Name>
+        <Diffuse>
+            <R>1</R>
+            <G>1</G>
+            <B>1</B>
+            <B>0.80000001</B>
+        </Diffuse>
+        <DiffuseFile>bmr_356_Bmr_356_BaseColor.png</DiffuseFile>
+        <NormalFile>bmr_356_Bmr_356_Normal.png</NormalFile>
+        <SpecularFile></SpecularFile>
+    </Material>
+</Materials>

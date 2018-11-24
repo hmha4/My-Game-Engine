@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Materials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Material>
+        <Name>kachujin_MAT</Name>
+        <Diffuse>
+            <R>1</R>
+            <G>1</G>
+            <B>1</B>
+            <B>0.80000001</B>
+        </Diffuse>
+        <DiffuseFile>Kachujin_diffuse.png</DiffuseFile>
+        <NormalFile>Kachujin_normal.png</NormalFile>
+        <SpecularFile>Kachujin_specular.png</SpecularFile>
+    </Material>
+</Materials>

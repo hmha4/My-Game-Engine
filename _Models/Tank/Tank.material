@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Materials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Material>
+        <Name>turret_phong</Name>
+        <Diffuse>
+            <R>1</R>
+            <G>1</G>
+            <B>1</B>
+            <B>0.80000001</B>
+        </Diffuse>
+        <DiffuseFile>turret_alt_diff_tex.tga</DiffuseFile>
+        <NormalFile></NormalFile>
+        <SpecularFile></SpecularFile>
+    </Material>
+    <Material>
+        <Name>engine_phong</Name>
+        <Diffuse>
+            <R>1</R>
+            <G>1</G>
+            <B>1</B>
+            <B>0.80000001</B>
+        </Diffuse>
+        <DiffuseFile>engine_diff_tex.tga</DiffuseFile>
+        <NormalFile></NormalFile>
+        <SpecularFile></SpecularFile>
+    </Material>
+</Materials>

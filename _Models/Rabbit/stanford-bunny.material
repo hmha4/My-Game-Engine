@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Materials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Material>
+        <Name>CubeMapRome</Name>
+        <Diffuse>
+            <R>0.49803922</R>
+            <G>0.49803922</G>
+            <B>0.49803922</B>
+            <B>1</B>
+        </Diffuse>
+        <DiffuseFile></DiffuseFile>
+        <NormalFile></NormalFile>
+        <SpecularFile></SpecularFile>
+    </Material>
+    <Material>
+        <Name>Silver</Name>
+        <Diffuse>
+            <R>0.67843139</R>
+            <G>0.67843139</G>
+            <B>0.67058825</B>
+            <B>1</B>
+        </Diffuse>
+        <DiffuseFile></DiffuseFile>
+        <NormalFile></NormalFile>
+        <SpecularFile></SpecularFile>
+    </Material>
+    <Material>
+        <Name>Wood Light</Name>
+        <Diffuse>
+            <R>1</R>
+            <G>1</G>
+            <B>1</B>
+            <B>1</B>
+        </Diffuse>
+        <DiffuseFile>WoodLight_COLOR.png</DiffuseFile>
+        <NormalFile>WoodLight_NRM.png</NormalFile>
+        <SpecularFile>WoodLight_SPEC.png</SpecularFile>
+    </Material>
+    <Material>
+        <Name>Wood Dark Polished</Name>
+        <Diffuse>
+            <R>1</R>
+            <G>1</G>
+            <B>1</B>
+            <B>1</B>
+        </Diffuse>
+        <DiffuseFile>WoodDark_COLOR.png</DiffuseFile>
+        <NormalFile>WoodDark_NRM.png</NormalFile>
+        <SpecularFile>WoodDark_SPEC.png</SpecularFile>
+    </Material>
+</Materials>

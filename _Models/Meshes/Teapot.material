@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Materials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Material>
+        <Name>Material #25</Name>
+        <Diffuse>
+            <R>0.588</R>
+            <G>0.588</G>
+            <B>0.588</B>
+            <B>1</B>
+        </Diffuse>
+        <DiffuseFile></DiffuseFile>
+        <NormalFile></NormalFile>
+        <SpecularFile></SpecularFile>
+    </Material>
+</Materials>
