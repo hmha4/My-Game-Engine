@@ -265,7 +265,7 @@ void TerrainRenderer::CreateBlendMap()
 	SmoothBlendMap(colors);
 	SmoothBlendMap(colors);
 
-	vector<UINT> colors8b(colors.size());
+	/*vector<UINT> colors8b(colors.size());
 	const float f = 255.0f;
 
 	vector<D3DXCOLOR>::iterator it = colors.begin();
@@ -273,9 +273,9 @@ void TerrainRenderer::CreateBlendMap()
 		colors8b[i] = ((UINT)((f * it->a)) << 24)
 		+ ((UINT)((f * it->b)) << 16)
 		+ ((UINT)((f * it->g)) << 8)
-		+ ((UINT)((f * it->r)) << 0);
+		+ ((UINT)((f * it->r)) << 0);*/
 
-	DXGI_FORMAT format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	DXGI_FORMAT format = DXGI_FORMAT_R32G32B32A32_FLOAT;
 
 	ID3D11Texture2D* texture = 0;
 	//   Create Blend Texture2D
@@ -295,9 +295,9 @@ void TerrainRenderer::CreateBlendMap()
 		desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 
 		D3D11_SUBRESOURCE_DATA data = { 0 };
-		data.pSysMem = &colors8b[0];
-		data.SysMemPitch = _width * sizeof(UINT);
-		data.SysMemSlicePitch = _width * _height * sizeof(UINT);
+		data.pSysMem = &colors[0];
+		data.SysMemPitch = _width * sizeof(D3DXCOLOR);
+		//data.SysMemSlicePitch = _width * _height * sizeof(UINT);
 
 		HRESULT hr = D3D::GetDevice()->CreateTexture2D(&desc, &data, &texture);
 		assert(SUCCEEDED(hr));
@@ -317,7 +317,7 @@ void TerrainRenderer::CreateBlendMap()
 
 	SAFE_RELEASE(texture);
 	colors.clear();
-	colors8b.clear();
+	//colors8b.clear();
 }
 
 void TerrainRenderer::SmoothBlendMap(vector<D3DXCOLOR>& colors)
@@ -333,7 +333,7 @@ void TerrainRenderer::SmoothBlendMap(vector<D3DXCOLOR>& colors)
 		for (int x = 0; x < width; x++)
 		{
 			D3DXCOLOR sum = colors[x + y * height];
-			UINT num = 0;
+			UINT num = 1;
 			for (int y1 = y - 1; y1 < y + 2; y1++)
 			{
 				for (int x1 = x - 1; x1 < x + 1; x1++)
