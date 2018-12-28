@@ -164,6 +164,10 @@ float3 WorldNormal(float3 normal)
     return normalize(mul(normal, (float3x3) World));
 }
 
+float3 WorldTangent(float3 tangent)
+{
+    return normalize(mul(tangent, (float3x3) World));
+}
 
 //-----------------------------------------------------------------------------
 // Lighting
@@ -330,4 +334,25 @@ void ComputeSpotLight(Material m, SpotLight l, float3 position, float3 normal, f
     ambient *= attenuate;
     diffuse *= attenuate;
     specular *= attenuate;
+}
+
+//---------------------------------------------------------------------------------------
+// Normal Mapping
+//---------------------------------------------------------------------------------------
+float3 NormalSampleToWorldSpace(float3 normalMap, float3 normal, float3 tangent)
+{
+	// Uncompress each component from [0,1] to [-1,1].
+    float3 normalT = 2.0f * normalMap - 1.0f;
+
+	// Build orthonormal basis.
+    float3 N = normal;
+    float3 T = normalize(tangent - dot(tangent, N) * N);
+    float3 B = cross(N, T);
+
+    float3x3 TBN = float3x3(T, B, N);
+
+	// Transform from tangent space to world space.
+    float3 bumpedNormalW = mul(normalT, TBN);
+
+    return bumpedNormalW;
 }

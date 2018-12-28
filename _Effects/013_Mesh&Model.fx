@@ -22,13 +22,14 @@ VertexOutput VS(VertexTextureNormalTangent input)
     output.Position = mul(output.Position, View);
     output.Position = mul(output.Position, Projection);
 
-    output.Normal = mul(input.Normal, (float3x3) World);
+    output.Tangent = WorldTangent(input.Tangent);
+    output.Normal = WorldNormal(input.Normal);
     output.Uv = input.Uv;
 
     return output;
 }
 
-VertexOutput VS_Model(VertexTextureNormal input)
+VertexOutput VS_Model(VertexTextureNormalTangent input)
 {
     VertexOutput output;
 
@@ -39,6 +40,7 @@ VertexOutput VS_Model(VertexTextureNormal input)
     output.Position = mul(output.Position, View);
     output.Position = mul(output.Position, Projection);
 
+    output.Tangent = WorldTangent(input.Tangent);
     output.Normal = WorldNormal(input.Normal);
     output.Uv = input.Uv;
 
@@ -56,7 +58,9 @@ SamplerState Sampler
 
 float4 PS(VertexOutput input) : SV_TARGET
 {
-    float3 normal = normalize(input.Normal);
+    float3 normalMap = NormalMap.Sample(Sampler, input.Uv);
+    float3 normal = NormalSampleToWorldSpace(normalMap, input.Normal, input.Tangent);
+    
     float3 toEye = normalize(ViewPosition - input.wPosition);
 
     float3 ambient = float3(0, 0, 0);
@@ -72,6 +76,10 @@ float4 PS(VertexOutput input) : SV_TARGET
     ambient += A;
     diffuse += D;
     specular += S;
+
+    ambient *= DiffuseMap.Sample(Sampler, input.Uv);
+    diffuse *= DiffuseMap.Sample(Sampler, input.Uv);
+    specular *= DiffuseMap.Sample(Sampler, input.Uv);
 
     [unroll]
     for (int i = 0; i < PointLightCount; i++)
@@ -92,7 +100,7 @@ float4 PS(VertexOutput input) : SV_TARGET
         diffuse += D;
         specular += S;
     }
-
+    
     float4 color = float4(ambient + diffuse + specular, 1);
     color.a = Diffuse.a;
 
