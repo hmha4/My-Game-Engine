@@ -1,5 +1,6 @@
 #include "000_Header.fx"
 
+matrix ShadowTransform;
 // --------------------------------------------------------------------- //
 //  Vertex Shader
 // --------------------------------------------------------------------- //
@@ -10,6 +11,7 @@ struct VertexOutput
     float2 Uv : UV0;
     float3 Normal : NORMAL0;
     float3 Tangent : TANGENT0;
+    float4 ShadowPos : UV1;
 };
 
 VertexOutput VS(VertexTextureNormalTangent input)
@@ -25,6 +27,8 @@ VertexOutput VS(VertexTextureNormalTangent input)
     output.Tangent = WorldTangent(input.Tangent);
     output.Normal = WorldNormal(input.Normal);
     output.Uv = input.Uv;
+
+    output.ShadowPos = mul(float4(output.wPosition, 1.0f), ShadowTransform);
 
     return output;
 }
@@ -44,6 +48,8 @@ VertexOutput VS_Model(VertexTextureNormalTangent input)
     output.Normal = WorldNormal(input.Normal);
     output.Uv = input.Uv;
 
+    output.ShadowPos = mul(input.Position, ShadowTransform);
+
     return output;
 }
 
@@ -56,6 +62,52 @@ SamplerState Sampler
     AddressV = Wrap;
 };
 
+Texture2D ShadowMap;
+SamplerComparisonState samShadow
+{
+    Filter = COMPARISON_MIN_MAG_LINEAR_MIP_POINT;
+    AddressU = BORDER;
+    AddressV = BORDER;
+    AddressW = BORDER;
+    BorderColor = float4(0.0f, 0.0f, 0.0f, 0.0f);
+
+    ComparisonFunc = LESS;
+};
+
+static const float SMAP_SIZE = 2048.0f;
+static const float SMAP_DX = 1.0f / SMAP_SIZE;
+
+float CalcShadowFactor(SamplerComparisonState samShadow,
+                       Texture2D shadowMap,
+                       float4 shadowPosH)
+{
+    // Complete projection by doing division by w.
+    shadowPosH.xyz /= shadowPosH.w;
+    
+    // Depth in NDC space.
+    float depth = shadowPosH.z;
+
+    // Texel size.
+    const float dx = SMAP_DX;
+
+    float percentLit = 0.0f;
+    const float2 offsets[9] =
+    {
+        float2(-dx, -dx), float2(0.0f, -dx), float2(dx, -dx),
+        float2(-dx, 0.0f), float2(0.0f, 0.0f), float2(dx, 0.0f),
+        float2(-dx, +dx), float2(0.0f, +dx), float2(dx, +dx)
+    };
+
+    [unroll]
+    for (int i = 0; i < 9; ++i)
+    {
+        percentLit += shadowMap.SampleCmpLevelZero(samShadow,
+            shadowPosH.xy + offsets[i], depth).r;
+    }
+
+    return percentLit /= 9.0f;
+}
+
 float4 PS(VertexOutput input) : SV_TARGET
 {
     float3 normalMap = NormalMap.Sample(Sampler, input.Uv);
@@ -67,6 +119,8 @@ float4 PS(VertexOutput input) : SV_TARGET
     float3 diffuse = float3(0, 0, 0);
     float3 specular = float3(0, 0, 0);
 
+    float shadow = float3(1.0f, 1.0f, 1.0f);
+    shadow = CalcShadowFactor(samShadow, ShadowMap, input.ShadowPos);
 
     Material m = { Ambient, Diffuse, Specular, Shininess };
     DirectionalLight l = { LightAmbient, LightDiffuse, LightSpecular, LightDirection };
@@ -74,8 +128,8 @@ float4 PS(VertexOutput input) : SV_TARGET
     float4 A, D, S;
     ComputeDirectionalLight(m, l, normal, toEye, A, D, S);
     ambient += A;
-    diffuse += D;
-    specular += S;
+    diffuse += shadow * D;
+    specular += shadow * S;
 
     ambient *= DiffuseMap.Sample(Sampler, input.Uv);
     diffuse *= DiffuseMap.Sample(Sampler, input.Uv);
