@@ -55,6 +55,78 @@ cbuffer CB_Material
     float  Shininess;
 }
 
+// --------------------------------------------------------------------- //
+//  Shadow
+// --------------------------------------------------------------------- //
+matrix ShadowTransform;
+matrix LightView;
+matrix LightProjection;
+
+struct VertexOutputDepth
+{
+    float4 Position : SV_Position0;
+    float2 Uv : Uv0;
+};
+
+RasterizerState ShadowDepth
+{
+    DepthBias = 10000;
+    DepthBiasClamp = 0.0f;
+    SlopeScaledDepthBias = 1.0f;
+};
+
+SamplerState samLinear
+{
+    Filter = MIN_MAG_MIP_LINEAR;
+    AddressU = Wrap;
+    AddressV = Wrap;
+};
+
+Texture2D ShadowMap;
+SamplerComparisonState samShadow
+{
+    Filter = COMPARISON_MIN_MAG_LINEAR_MIP_POINT;
+    AddressU = BORDER;
+    AddressV = BORDER;
+    AddressW = BORDER;
+    BorderColor = float4(0.0f, 0.0f, 0.0f, 0.0f);
+
+    ComparisonFunc = LESS;
+};
+
+static const float SMAP_SIZE = 2048.0f;
+static const float SMAP_DX = 1.0f / SMAP_SIZE;
+
+float CalcShadowFactor(SamplerComparisonState samShadow,
+                       Texture2D shadowMap,
+                       float4 shadowPosH)
+{
+    // Complete projection by doing division by w.
+    shadowPosH.xyz /= shadowPosH.w;
+    
+    // Depth in NDC space.
+    float depth = shadowPosH.z;
+
+    // Texel size.
+    const float dx = SMAP_DX;
+
+    float percentLit = 0.0f;
+    const float2 offsets[9] =
+    {
+        float2(-dx, -dx), float2(0.0f, -dx), float2(dx, -dx),
+        float2(-dx, 0.0f), float2(0.0f, 0.0f), float2(dx, 0.0f),
+        float2(-dx, +dx), float2(0.0f, +dx), float2(dx, +dx)
+    };
+
+    [unroll]
+    for (int i = 0; i < 9; ++i)
+    {
+        percentLit += shadowMap.SampleCmpLevelZero(samShadow,
+            shadowPosH.xy + offsets[i], depth).r;
+    }
+
+    return percentLit /= 9.0f;
+}
 
 // --------------------------------------------------------------------- //
 //  Textures
@@ -355,4 +427,40 @@ float3 NormalSampleToWorldSpace(float3 normalMap, float3 normal, float3 tangent)
     float3 bumpedNormalW = mul(normalT, TBN);
 
     return bumpedNormalW;
+}
+
+
+void DiffuseLighting(inout float4 color, float4 diffuse, float3 normal)
+{
+    float intensity = saturate(dot(normal, -LightDirection));
+
+    color = color + Diffuse * diffuse * intensity;
+    //color = color +diffuse * intensity;
+}
+
+void SpecularLighting(inout float4 color, float4 specularMap, float3 normal, float3 viewDirection)
+{
+    float3 reflection = reflect(LightDirection, normal);
+    float intensity = saturate(dot(reflection, viewDirection));
+    float specular = pow(intensity, 1);
+
+    color = color + Specular * specular * specularMap;
+    //color = color +specular * specularMap;
+}
+
+void NormalMapping(inout float4 color, float4 normalMap, float3 normal, float3 tangent)
+{
+    float3 N = normal; //Z축
+    float3 T = normalize(tangent - dot(tangent, N) * N); //X축
+    float3 B = cross(T, N); //Y축
+    
+    //탄젠트공간 생성
+    float3x3 TBN = float3x3(T, B, N);
+
+    float3 coord = 2.0f * normalMap - 1.0f;
+    float3 bump = mul(coord, TBN);
+
+    //음영식
+    float intensity = saturate(dot(bump, -LightDirection));
+    color = color * intensity;
 }
