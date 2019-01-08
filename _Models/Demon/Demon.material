@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Materials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Material>
+        <Name>defaultMat</Name>
+        <Diffuse>
+            <R>0.80000001</R>
+            <G>0.80000001</G>
+            <B>0.80000001</B>
+            <B>0.80000001</B>
+        </Diffuse>
+        <DiffuseFile>Game Ready Low Poly - Body.bmp</DiffuseFile>
+        <NormalFile></NormalFile>
+        <SpecularFile></SpecularFile>
+    </Material>
+    <Material>
+        <Name>defaultMat.001</Name>
+        <Diffuse>
+            <R>0.80000001</R>
+            <G>0.80000001</G>
+            <B>0.80000001</B>
+            <B>0.80000001</B>
+        </Diffuse>
+        <DiffuseFile>GreasyGoatLegHairLowPoly.bmp</DiffuseFile>
+        <NormalFile></NormalFile>
+        <SpecularFile></SpecularFile>
+    </Material>
+    <Material>
+        <Name>defaultMat.002</Name>
+        <Diffuse>
+            <R>0.80000001</R>
+            <G>0.80000001</G>
+            <B>0.80000001</B>
+            <B>0.80000001</B>
+        </Diffuse>
+        <DiffuseFile>LowPoly Teeth.bmp</DiffuseFile>
+        <NormalFile></NormalFile>
+        <SpecularFile></SpecularFile>
+    </Material>
+    <Material>
+        <Name>defaultMat.003</Name>
+        <Diffuse>
+            <R>0.80000001</R>
+            <G>0.80000001</G>
+            <B>0.80000001</B>
+            <B>0.80000001</B>
+        </Diffuse>
+        <DiffuseFile>LowPoly Eyes.bmp</DiffuseFile>
+        <NormalFile></NormalFile>
+        <SpecularFile></SpecularFile>
+    </Material>
+    <Material>
+        <Name>material.001</Name>
+        <Diffuse>
+            <R>1</R>
+            <G>1</G>
+            <B>1</B>
+            <B>1</B>
+        </Diffuse>
+        <DiffuseFile></DiffuseFile>
+        <NormalFile></NormalFile>
+        <SpecularFile></SpecularFile>
+    </Material>
+</Materials>

@@ -320,7 +320,6 @@ HullOutput HS_Depth(InputPatch<VertexOutput, 4> input, uint pointID : SV_OutputC
 
     return output;
 }
-
 // --------------------------------------------------------------------- //
 //  Domain Shader
 // --------------------------------------------------------------------- //
@@ -582,7 +581,7 @@ PixelTargetOutput PS(DomainOutput input, uniform bool fogEnabled) : SV_TARGET
     Material m2 = { Ambient, Diffuse, Specular, Shininess };
     DirectionalLight l2 = { LightAmbient, LightDiffuse, LightSpecular, LightDirection };
     
-    ComputeDirectionalLight(m2, l2, normalW, eye, A, D, S);
+    ComputeDirectionalLight(m2, l2, SunColor, normalW, eye, A, D, S);
 
     ambient += A * color;
     diffuse += D * color * shadow;
@@ -595,16 +594,17 @@ PixelTargetOutput PS(DomainOutput input, uniform bool fogEnabled) : SV_TARGET
     {
         float fogFactor = saturate((distanceToEye - FogStart) / FogRange);
 
-        result2 = lerp(result2, FogColor, fogFactor);
+        result2 = lerp(result2, SunColor, fogFactor);
     }
+
 
     output.tColor = result2 + float4(input.BrushColor, 1);
     output.tColor = output.tColor + float4(Line(input.wPosition), 0);
+    
 
     output.pColor = float4(abs(input.Uv.x), abs(1 - input.Uv.y), 0, 1);
 
     return output;
-
 }
 
 void PS_Depth_Alpha(DomainOutput input)
@@ -613,6 +613,26 @@ void PS_Depth_Alpha(DomainOutput input)
 
     // Don't write transparent pixels to the shadow map.
     clip(diffuse.a - 0.15f);
+}
+
+float4 PS_WireFrame(DomainOutput input) : SV_Target
+{
+    float d = distance(input.wPosition.xyz, ViewPosition);
+    float s = saturate((d - MinDistance) / (MaxDistance - MinDistance));
+
+    float4 colorFactor = 0;
+    float4 magenta = float4(1, 0, 1, 1);
+    float4 cyan = float4(0, 1, 1, 1);
+    float4 yellow = float4(1, 1, 0, 1);
+
+    if (s <= 0.5f)
+        colorFactor = lerp(cyan, magenta, s / 0.5f);
+    else
+        colorFactor = lerp(magenta, yellow, (s - 0.5f) / 0.5f);
+    
+    float4 color = colorFactor;
+
+    return color;
 }
 
 // --------------------------------------------------------------------- //
@@ -642,7 +662,7 @@ technique11 T0
         SetVertexShader(CompileShader(vs_5_0, VS()));
         SetHullShader(CompileShader(hs_5_0, HS()));
         SetDomainShader(CompileShader(ds_5_0, DS()));
-        SetPixelShader(CompileShader(ps_5_0, PS(true)));
+        SetPixelShader(CompileShader(ps_5_0, PS_WireFrame()));
     }
 }
 

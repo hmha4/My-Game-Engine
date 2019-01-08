@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Materials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Material>
+        <Name>Lamborginhi_base_phong</Name>
+        <Diffuse>
+            <R>1</R>
+            <G>1</G>
+            <B>1</B>
+            <B>0.80000001</B>
+        </Diffuse>
+        <DiffuseFile>Lamborginhi Aventador_diffuse.jpeg</DiffuseFile>
+        <NormalFile></NormalFile>
+        <SpecularFile>Lamborginhi Aventador_spec.jpeg</SpecularFile>
+    </Material>
+    <Material>
+        <Name>Lamborginhi_glass_phong</Name>
+        <Diffuse>
+            <R>0</R>
+            <G>0</G>
+            <B>0</B>
+            <B>0.80000001</B>
+        </Diffuse>
+        <DiffuseFile></DiffuseFile>
+        <NormalFile></NormalFile>
+        <SpecularFile></SpecularFile>
+    </Material>
+    <Material>
+        <Name>Lamborginhi_collider_lambert</Name>
+        <Diffuse>
+            <R>0.5</R>
+            <G>0.5</G>
+            <B>0.5</B>
+            <B>0.80000001</B>
+        </Diffuse>
+        <DiffuseFile></DiffuseFile>
+        <NormalFile></NormalFile>
+        <SpecularFile></SpecularFile>
+    </Material>
+</Materials>

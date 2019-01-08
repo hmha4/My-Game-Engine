@@ -1,0 +1,15 @@
+MadeOf Wood
+
+PhongEnvironment
+{
+	AlphaToCoverage
+	DiffuseMap C:/Users/Luis/Desktop/characters/leon/models/leon_hair_d.tga
+	NormalMap C:/Users/Luis/Desktop/characters/leon/models/leon_hair_n.tga
+	SpecularMap C:/Users/Luis/Desktop/characters/leon/models/leon_hair_s.tga
+	UseSpecular
+	SpecularExponent 25.7617
+	SpecularColor 1 1 1
+	SpecularIntensity 0.148422
+	Fresnel 0.333132
+}
+

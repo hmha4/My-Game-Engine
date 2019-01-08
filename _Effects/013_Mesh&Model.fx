@@ -1,6 +1,6 @@
 #include "000_Header.fx"
 
-matrix ShadowTransform;
+
 // --------------------------------------------------------------------- //
 //  Vertex Shader
 // --------------------------------------------------------------------- //
@@ -13,6 +13,19 @@ struct VertexOutput
     float3 Tangent : TANGENT0;
     float4 ShadowPos : UV1;
 };
+
+VertexOutputDepth VS_Depth(VertexTextureNormalTangent input)
+{
+    VertexOutputDepth output;
+
+    output.Position = mul(input.Position, World);
+    output.Position = mul(output.Position, LightView);
+    output.Position = mul(output.Position, LightProjection);
+
+    output.Uv = input.Uv;
+
+    return output;
+}
 
 VertexOutput VS(VertexTextureNormalTangent input)
 {
@@ -62,56 +75,19 @@ SamplerState Sampler
     AddressV = Wrap;
 };
 
-Texture2D ShadowMap;
-SamplerComparisonState samShadow
-{
-    Filter = COMPARISON_MIN_MAG_LINEAR_MIP_POINT;
-    AddressU = BORDER;
-    AddressV = BORDER;
-    AddressW = BORDER;
-    BorderColor = float4(0.0f, 0.0f, 0.0f, 0.0f);
 
-    ComparisonFunc = LESS;
-};
-
-static const float SMAP_SIZE = 2048.0f;
-static const float SMAP_DX = 1.0f / SMAP_SIZE;
-
-float CalcShadowFactor(SamplerComparisonState samShadow,
-                       Texture2D shadowMap,
-                       float4 shadowPosH)
-{
-    // Complete projection by doing division by w.
-    shadowPosH.xyz /= shadowPosH.w;
-    
-    // Depth in NDC space.
-    float depth = shadowPosH.z;
-
-    // Texel size.
-    const float dx = SMAP_DX;
-
-    float percentLit = 0.0f;
-    const float2 offsets[9] =
-    {
-        float2(-dx, -dx), float2(0.0f, -dx), float2(dx, -dx),
-        float2(-dx, 0.0f), float2(0.0f, 0.0f), float2(dx, 0.0f),
-        float2(-dx, +dx), float2(0.0f, +dx), float2(dx, +dx)
-    };
-
-    [unroll]
-    for (int i = 0; i < 9; ++i)
-    {
-        percentLit += shadowMap.SampleCmpLevelZero(samShadow,
-            shadowPosH.xy + offsets[i], depth).r;
-    }
-
-    return percentLit /= 9.0f;
-}
 
 float4 PS(VertexOutput input) : SV_TARGET
 {
     float3 normalMap = NormalMap.Sample(Sampler, input.Uv);
-    float3 normal = NormalSampleToWorldSpace(normalMap, input.Normal, input.Tangent);
+    
+    float3 normal = 0;
+
+    [flatten]
+    if (normalMap.r > 0.0f)
+        normal = NormalSampleToWorldSpace(normalMap, input.Normal, input.Tangent);
+    else
+        normal = input.Normal;
     
     float3 toEye = normalize(ViewPosition - input.wPosition);
 
@@ -125,15 +101,17 @@ float4 PS(VertexOutput input) : SV_TARGET
     Material m = { Ambient, Diffuse, Specular, Shininess };
     DirectionalLight l = { LightAmbient, LightDiffuse, LightSpecular, LightDirection };
 
+    float4 specularMap = SpecularMap.Sample(Sampler, input.Uv);
+
     float4 A, D, S;
-    ComputeDirectionalLight(m, l, normal, toEye, A, D, S);
+    ComputeDirectionalLight(m, l, SunColor, normal, toEye, A, D, S);
     ambient += A;
     diffuse += shadow * D;
     specular += shadow * S;
-
-    ambient *= DiffuseMap.Sample(Sampler, input.Uv);
-    diffuse *= DiffuseMap.Sample(Sampler, input.Uv);
-    specular *= DiffuseMap.Sample(Sampler, input.Uv);
+    
+    if (specularMap.r > 0.0f)
+        specular *= specularMap;
+       
 
     [unroll]
     for (int i = 0; i < PointLightCount; i++)
@@ -156,9 +134,22 @@ float4 PS(VertexOutput input) : SV_TARGET
     }
     
     float4 color = float4(ambient + diffuse + specular, 1);
+
+    float4 diffuseMap = DiffuseMap.Sample(Sampler, input.Uv);
+    if (diffuseMap.r > 0.0f)
+        color *= diffuseMap;
+
     color.a = Diffuse.a;
 
     return color;
+}
+
+void PS_Depth_Alpha(VertexOutputDepth input)
+{
+    float4 diffuse = DiffuseMap.Sample(samLinear, input.Uv);
+
+    // Don't write transparent pixels to the shadow map.
+    clip(diffuse.a - 0.15f);
 }
 
 // --------------------------------------------------------------------- //
@@ -176,5 +167,24 @@ technique11 T0
     {
         SetVertexShader(CompileShader(vs_5_0, VS_Model()));
         SetPixelShader(CompileShader(ps_5_0, PS()));
+    }
+}
+
+technique11 T1
+{
+    pass P0
+    {
+        SetVertexShader(CompileShader(vs_5_0, VS_Depth()));
+        SetGeometryShader(NULL);
+        SetPixelShader(NULL);
+
+        SetRasterizerState(ShadowDepth);
+    }
+
+    pass P1
+    {
+        SetVertexShader(CompileShader(vs_5_0, VS_Depth()));
+        SetGeometryShader(NULL);
+        SetPixelShader(CompileShader(ps_5_0, PS_Depth_Alpha()));
     }
 }

@@ -1,0 +1,16 @@
+MadeOf Wood
+
+PhongEnvironment
+{
+	BlendMode AlphaPreMult
+	AlphaToCoverage
+	DiffuseMap C:/Users/Luis/Desktop/characters/leon/models/leontorso_d.tga
+	NormalMap C:/Users/Luis/Desktop/characters/leon/models/leontorso_n.tga
+	SpecularMap C:/Users/Luis/Desktop/characters/leon/models/leontorso_s.tga
+	UseSpecular
+	SpecularExponent 21.6964
+	SpecularColor 1 1 1
+	SpecularIntensity 0.898055
+	Fresnel 0.217666
+}
+

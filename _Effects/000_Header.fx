@@ -41,6 +41,7 @@ cbuffer CB_World
 
 cbuffer CB_Light
 {
+    float4 SunColor;
     float4 LightAmbient;
     float4 LightDiffuse;
     float4 LightSpecular;
@@ -54,6 +55,7 @@ cbuffer CB_Material
     float4 Specular;
     float  Shininess;
 }
+
 
 // --------------------------------------------------------------------- //
 //  Shadow
@@ -263,13 +265,31 @@ struct DirectionalLight
     float3 Direction;
 };
 
-void ComputeDirectionalLight(Material m, DirectionalLight l, float3 normal, float3 toEye, out float4 ambient, out float4 diffuse, out float4 specular)
+void ComputeDirectionalLight(Material m, DirectionalLight l, float4 sunColor, float3 normal, float3 toEye, out float4 ambient, out float4 diffuse, out float4 specular)
 {
     ambient = float4(0, 0, 0, 0);
     diffuse = float4(0, 0, 0, 0);
     specular = float4(0, 0, 0, 0);
 
+    float temp = 0.0f;
     float3 light = -l.Direction;
+    
+    // 밤이됬을때는 방향을다시 뒤집어서 처리한다
+    if (l.Direction.y >= 0.0f)
+    {
+        temp = 0.2f;
+        if (l.Direction.y <= 0.3f)
+        {
+            temp = smoothstep(0.0f, 0.3f, l.Direction.y / 0.3f);
+            temp *= 0.2f;
+        }
+
+        light = light  * -1.0f;
+    }
+
+    float3 nightLightColor = sunColor.rgb + temp;
+    light *= saturate(nightLightColor);
+
     ambient = m.Ambient * l.Ambient;
 
     float diffuseFactor = dot(light, normal);
@@ -278,6 +298,7 @@ void ComputeDirectionalLight(Material m, DirectionalLight l, float3 normal, floa
     if (diffuseFactor > 0.0f)
     {
         diffuse = diffuseFactor * m.Diffuse * l.Diffuse;
+
         
         float3 r = reflect(-light, normal);
         
@@ -461,6 +482,15 @@ void NormalMapping(inout float4 color, float4 normalMap, float3 normal, float3 t
     float3 bump = mul(coord, TBN);
 
     //음영식
-    float intensity = saturate(dot(bump, -LightDirection));
+    //float intensity = saturate(dot(bump, -LightDirection));
+    //color = color * intensity;
+    
+    float3 lightDir = LightDirection;
+    
+    if (lightDir.y >= 0.0f)
+        lightDir.y = lightDir.y * -1.0f;
+
+    float intensity = saturate(dot(bump, -lightDir));
+    
     color = color * intensity;
 }

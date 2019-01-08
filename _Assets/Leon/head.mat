@@ -1,0 +1,14 @@
+MadeOf Wood
+
+PhongEnvironment
+{
+	DiffuseMap C:/Users/Luis/Desktop/characters/leon/models/leonhead_d.tga
+	NormalMap C:/Users/Luis/Desktop/characters/leon/models/leonhead_n.tga
+	SpecularMap C:/Users/Luis/Desktop/characters/leon/models/leonhead_s.tga
+	UseSpecular
+	SpecularExponent 89.513
+	SpecularColor 1 1 1
+	SpecularIntensity 1.40594
+	Fresnel 1.30015
+}
+

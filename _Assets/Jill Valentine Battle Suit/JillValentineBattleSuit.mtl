@@ -1,0 +1,202 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 11.08.2018 15:08:47
+
+newmtl pawn_pl_pl14_model_pl0800_11Hand_BM
+	Ns 70.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.2000 0.2000 0.2000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka pl0800_11hand_bmout.png
+	map_Kd pl0800_11hand_bmout.png
+	map_Ks pl0800_11hand_mmout.png
+	map_bump pl0800_11hand_nmout.png
+	bump pl0800_11hand_nmout.png
+
+newmtl unknownmaterial
+	Ns 43.2193
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.2000 0.2000 0.2000
+	Ke 0.0000 0.0000 0.0000
+	map_bump pl0800_14hex_dmout.png
+	bump pl0800_14hex_dmout.png
+
+newmtl pawn_pl_pl14_model_pl0800_12hair_BM
+	Ns 43.2193
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.2000 0.2000 0.2000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka pl0800_12hair_bmout.png
+	map_Kd pl0800_12hair_bmout.png
+	map_Ks pl0800_12hair_mmout.png
+	map_d pl0800_12hair_bmout_alpha.png
+	map_bump pl0800_12hair_nmout.png
+	bump pl0800_12hair_nmout.png
+
+newmtl pawn_pl_pl14_model_pl0800_01Face_BM
+	Ns 43.2193
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.2000 0.2000 0.2000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka pl0800_01face_bmout.png
+	map_Kd pl0800_01face_bmout.png
+	map_Ks pl0800_01face_mmout.png
+	map_bump pl0800_01face_nmout.png
+	bump pl0800_01face_nmout.png
+
+newmtl pawn_pl_pl14_model_pl0800_02Matuge_BM
+	Ns 43.2193
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.2000 0.2000 0.2000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka pl0800_02matuge_bmout.png
+	map_Kd pl0800_02matuge_bmout.png
+	map_d pl0800_02matuge_bmout_alpha.png
+
+newmtl pawn_pl_pl14_model_pl0800_05arm_BM
+	Ns 70.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.2000 0.2000 0.2000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka pl0800_05arm_bmout.png
+	map_Kd pl0800_05arm_bmout.png
+	map_Ks pl0800_05arm_mmout.png
+	map_bump pl0800_05arm_nmout.png
+	bump pl0800_05arm_nmout.png
+
+newmtl pawn_pl_pl14_model_pl0800_08Gntrt_BM
+	Ns 70.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.2000 0.2000 0.2000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka pl0800_08gntrt_bmout.png
+	map_Kd pl0800_08gntrt_bmout.png
+	map_Ks pl0800_08gntrt_mmout.png
+	map_bump pl0800_08gntrt_nmout.png
+	bump pl0800_08gntrt_nmout.png
+
+newmtl pawn_pl_pl14_model_pl0800_07Leg_BM
+	Ns 70.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.2000 0.2000 0.2000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka pl0800_07leg_bmout.png
+	map_Kd pl0800_07leg_bmout.png
+	map_Ks pl0800_07leg_mmout.png
+	map_bump pl0800_07leg_nmout.png
+	bump pl0800_07leg_nmout.png
+
+newmtl pawn_pl_pl14_model_pl0800_06Boots_BM
+	Ns 70.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.2000 0.2000 0.2000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka pl0800_06boots_bmout.png
+	map_Kd pl0800_06boots_bmout.png
+	map_Ks pl0800_06boots_mmout.png
+	map_bump pl0800_06boots_nmout.png
+	bump pl0800_06boots_nmout.png
+
+newmtl pawn_pl_pl14_model_pl0800_13Belt_BM
+	Ns 70.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.2000 0.2000 0.2000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka pl0800_13belt_bmout.png
+	map_Kd pl0800_13belt_bmout.png
+	map_Ks pl0800_13belt_mmout.png
+	map_bump pl0800_13belt_nmout.png
+	bump pl0800_13belt_nmout.png
+
+newmtl pawn_pl_pl14_model_pl0800_09Chest_BM
+	Ns 43.2193
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.2000 0.2000 0.2000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka pl0800_09chest_bmout.png
+	map_Kd pl0800_09chest_bmout.png
+	map_Ks pl0800_09chest_mmout.png
+	map_bump pl0800_09chest_nmout.png
+	bump pl0800_09chest_nmout.png
+
+newmtl pawn_pl_pl14_model_pl0800_04body_BM
+	Ns 70.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.2000 0.2000 0.2000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka pl0800_04body_bmout.png
+	map_Kd pl0800_04body_bmout.png
+	map_Ks pl0800_04body_mmout.png
+	map_bump pl0800_04body_nmout.png
+	bump pl0800_04body_nmout.png

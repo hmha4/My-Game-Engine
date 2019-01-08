@@ -1,0 +1,21 @@
+MadeOf Wood
+NoCull
+
+PhongEnvironment
+{
+	DiffuseMap C:/Users/Luis/Desktop/characters/leon/models/leonlegs_d.tga
+	NormalMap C:/Users/Luis/Desktop/characters/leon/models/leonlegs_n.tga
+	SpecularMap C:/Users/Luis/Desktop/characters/leon/models/leonlegs_s.tga
+	UseSpecular
+	SpecularExponent 24.3599
+	SpecularColor 1 1 1
+	SpecularIntensity 0.321329
+	Translucent
+	Translucency 0
+	TranslucentColor 1 1 1
+	ShadowedTranslucency
+	Fresnel 0.232099
+	GlowMap C:/Users/Luis/Desktop/characters/leon/models/leonlegs_d.tga
+	GlowStrength 0
+}
+

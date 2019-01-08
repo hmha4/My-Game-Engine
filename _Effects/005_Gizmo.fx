@@ -1,25 +1,31 @@
 #include "000_Header.fx"
 
 float4 Color = { 1, 0, 0, 1 };
-bool IsPick = false;
 
 //=====================================================//
 // States
 //=====================================================//
-//RasterizerState CullModeOn
-//{
-//    CullMode = None;
-//};
+RasterizerState CullModeOn
+{
+    CullMode = None;
+};
 
-//DepthStencilState DepthOff
-//{
-//    DepthEnable = false;
-//};
+DepthStencilState DepthOff
+{
+    DepthEnable = false;
+};
 
-//BlendState BlendOn
-//{
-//    BlendEnable=true;
-//};
+BlendState BlendOn
+{
+    BlendEnable[0] = true;
+    BlendOp[0] = Add;
+    BlendOpAlpha[0] = Add;
+    DestBlend[0] = Inv_Src_Alpha;
+    DestBlendAlpha[0] = Zero;
+    SrcBlend[0] = Src_Alpha;
+    SrcBlendAlpha[0] = One;
+    RenderTargetWriteMask[0] = 1 | 2 | 4 | 8; // Write all colors R | G | B | A
+};
 
 //=====================================================//
 // VertexShader
@@ -27,7 +33,7 @@ bool IsPick = false;
 
 struct VertexOutput
 {
-    float4 Position : SV_POSITION; 
+    float4 Position : SV_POSITION;
     float2 Uv : TEXCOORD0;
     float3 Normal : NORMAL0;
 };
@@ -53,12 +59,6 @@ float4 PS(VertexOutput input) : SV_TARGET
 {
     float4 color = Color;
 
-    if (IsPick==false)
-        color.a = 0.0f;
-    
-    if(IsPick==true)
-        color.a = 0.8f;
-
     return Color;
 }
 
@@ -73,16 +73,16 @@ technique11 T0
         SetVertexShader(CompileShader(vs_5_0, VS()));
         SetPixelShader(CompileShader(ps_5_0, PS()));
         
-        //SetRasterizerState(CullModeOn); 
-        //SetDepthStencilState(DepthOff);
+        SetRasterizerState(CullModeOn);
+        SetDepthStencilState(DepthOff, 0);
     }
     pass P1
     {
         SetVertexShader(CompileShader(vs_5_0, VS()));
         SetPixelShader(CompileShader(ps_5_0, PS()));
 
-       // SetRasterizerState(CullModeOn);
-        //SetDepthStencilState(DepthOff);
-        //SetBlendState(BlendOn);
+        SetRasterizerState(CullModeOn);
+        SetDepthStencilState(DepthOff, 0);
+        SetBlendState(BlendOn, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xFFFFFFFF);
     }
 }
