@@ -1,4 +1,3 @@
-
 //	1. IA : Input Assembly( 기초 데이터 세팅 )
 //	2. VS : Vertex Shader( Culling:vertex단위 )
 //	3. HS : Hul Shading
@@ -14,7 +13,7 @@
 //  Constant Buffer
 //  헤더는 공용으로 사용하지만 Effect에서는 변수가 공유되지는 않는다. FX파일 마다 다르다.
 //  이전에는 cbuffer가 VS용 PS용 따로 있었지만 이제는 어디서든 사용 가능
-//  
+//
 //  cbuffer라고 선언 하면 그 이름의 cbuffer로 선언되고 영역이 나뉜다.
 //  cbuffer라고 선언 안하고 그냥 전역으로 선언하면 Global cbuffer로 자동으로 선언되고 영역이 나뉘지 않는다.
 //  즉, 전역으로 선언한 모든 변수는 모두 cbuffer이다.
@@ -32,7 +31,6 @@ cbuffer CB_Projection
 {
     matrix Projection;
 };
-
 
 cbuffer CB_World
 {
@@ -53,9 +51,27 @@ cbuffer CB_Material
     float4 Ambient;
     float4 Diffuse;
     float4 Specular;
-    float  Shininess;
+    float Shininess;
 }
 
+// --------------------------------------------------------------------- //
+//  Frustum
+// --------------------------------------------------------------------- //
+bool AabbBehindPlaneTest(float3 center, float3 extents, float4 plane)
+{
+    float3 n = abs(plane.xyz);
+
+	// This is always positive.
+    float r = dot(extents, n);
+
+	// signed distance from center point to plane.
+    float s = dot(float4(center, 1.0f), plane);
+
+	// If the center point of the box is a distance of e or more behind the
+	// plane (in which case s is negative since it is behind the plane),
+	// then the box is completely in the negative half space of the plane.
+    return (s + r) < 0.0f;
+}
 
 // --------------------------------------------------------------------- //
 //  Shadow
@@ -105,7 +121,7 @@ float CalcShadowFactor(SamplerComparisonState samShadow,
 {
     // Complete projection by doing division by w.
     shadowPosH.xyz /= shadowPosH.w;
-    
+
     // Depth in NDC space.
     float depth = shadowPosH.z;
 
@@ -137,7 +153,6 @@ Texture2D DiffuseMap;
 Texture2D SpecularMap;
 Texture2D NormalMap;
 Texture2D DetailMap;
-
 
 //  --------------------------------------------------------------------------- //
 //  Vertex Layouts
@@ -273,7 +288,7 @@ void ComputeDirectionalLight(Material m, DirectionalLight l, float4 sunColor, fl
 
     float temp = 0.0f;
     float3 light = -l.Direction;
-    
+
     // 밤이됬을때는 방향을다시 뒤집어서 처리한다
     if (l.Direction.y >= 0.0f)
     {
@@ -284,7 +299,7 @@ void ComputeDirectionalLight(Material m, DirectionalLight l, float4 sunColor, fl
             temp *= 0.2f;
         }
 
-        light = light  * -1.0f;
+        light = light * -1.0f;
     }
 
     float3 nightLightColor = sunColor.rgb + temp;
@@ -299,12 +314,12 @@ void ComputeDirectionalLight(Material m, DirectionalLight l, float4 sunColor, fl
     {
         diffuse = diffuseFactor * m.Diffuse * l.Diffuse;
 
-        
         float3 r = reflect(-light, normal);
-        
+
         float specularFactor = 0;
         specularFactor = saturate(dot(r, toEye));
         specularFactor = pow(specularFactor, m.Specular.a);
+        specularFactor = pow(specularFactor, l.Specular.a);
         specular = specularFactor * m.Specular * l.Specular;
     }
 }
@@ -339,7 +354,7 @@ void ComputePointLight(Material m, PointLight l, float3 position, float3 normal,
 
     float3 light = l.Position - position;
     float dist = length(light);
-    
+
     if (dist > l.Range)
         return;
 
@@ -354,13 +369,12 @@ void ComputePointLight(Material m, PointLight l, float3 position, float3 normal,
         diffuse = diffuseFactor * m.Diffuse * l.Diffuse;
 
         float3 r = reflect(-light, normal);
-        
+
         float specularFactor = 0;
         specularFactor = saturate(dot(r, toEye));
         specularFactor = pow(specularFactor, m.Specular.a);
         specular = specularFactor * m.Specular * l.Specular;
     }
-
 
     float attenuate = 1.0f / dot(l.Attenuation, float3(1.0f, dist, dist * dist));
 
@@ -413,13 +427,12 @@ void ComputeSpotLight(Material m, SpotLight l, float3 position, float3 normal, f
         diffuse = diffuseFactor * m.Diffuse * l.Diffuse;
 
         float3 r = reflect(-light, normal);
-        
+
         float specularFactor = 0;
         specularFactor = saturate(dot(r, toEye));
         specularFactor = pow(specularFactor, m.Specular.a);
         specular = specularFactor * m.Specular * l.Specular;
     }
-
 
     float spot = pow(max(dot(-light, l.Direction), 0.0f), l.Spot);
     float attenuate = spot / dot(l.Attenuation, float3(1.0f, dist, dist * dist));
@@ -450,7 +463,6 @@ float3 NormalSampleToWorldSpace(float3 normalMap, float3 normal, float3 tangent)
     return bumpedNormalW;
 }
 
-
 void DiffuseLighting(inout float4 color, float4 diffuse, float3 normal)
 {
     float intensity = saturate(dot(normal, -LightDirection));
@@ -474,7 +486,7 @@ void NormalMapping(inout float4 color, float4 normalMap, float3 normal, float3 t
     float3 N = normal; //Z축
     float3 T = normalize(tangent - dot(tangent, N) * N); //X축
     float3 B = cross(T, N); //Y축
-    
+
     //탄젠트공간 생성
     float3x3 TBN = float3x3(T, B, N);
 
@@ -484,13 +496,13 @@ void NormalMapping(inout float4 color, float4 normalMap, float3 normal, float3 t
     //음영식
     //float intensity = saturate(dot(bump, -LightDirection));
     //color = color * intensity;
-    
+
     float3 lightDir = LightDirection;
-    
+
     if (lightDir.y >= 0.0f)
         lightDir.y = lightDir.y * -1.0f;
 
     float intensity = saturate(dot(bump, -lightDir));
-    
+
     color = color * intensity;
 }

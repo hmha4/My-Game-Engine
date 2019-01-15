@@ -7,6 +7,7 @@
 struct VertexOutput
 {
     float4 Position : SV_POSITION0;
+    float3 wPosition : Position1;
     float2 Uv : TEXCOORD0;
     float3 Normal : NORMAL0;
     float3 Tangent : TANGENT0;
@@ -20,11 +21,12 @@ VertexOutput VS_Bone(VertexTextureNormalTangentBlend input)
 
     World = BoneWorld();
     output.Position = mul(input.Position, World);
+    output.wPosition = output.Position.xyz;
     output.Position = mul(output.Position, View);
     output.Position = mul(output.Position, Projection);
 
-    output.Normal = mul(input.Normal, (float3x3) World);
-    output.Tangent = mul(input.Tangent, (float3x3) World);
+    output.Normal = WorldNormal(input.Normal);
+    output.Tangent = WorldTangent(input.Tangent);
 
     output.Uv = input.Uv;
     
@@ -38,11 +40,12 @@ VertexOutput VS_Animation(VertexTextureNormalTangentBlend input)
 
     World = SkinWorld(input.BlendIndices, input.BlendWeights);
     output.Position = mul(input.Position, World);
+    output.wPosition = output.Position.xyz;
     output.Position = mul(output.Position, View);
     output.Position = mul(output.Position, Projection);
 
-    output.Normal = mul(input.Normal, (float3x3) World);
-    output.Tangent = mul(input.Tangent, (float3x3) World);
+    output.Normal = WorldNormal(input.Normal);
+    output.Tangent = WorldTangent(input.Tangent);
 
     output.Uv = input.Uv;
     
@@ -64,12 +67,69 @@ SamplerState Sampler
 
 float4 PS(VertexOutput input) : SV_TARGET
 {
-    float4 diffuse = DiffuseMap.Sample(Sampler, input.Uv);
-    float3 normal = normalize(input.Normal);
+    float3 normal = input.Normal;
 
-    float NdotL = dot(normal, -LightDirection);
+    float3 normalMap = NormalMap.Sample(Sampler, input.Uv);
+    if (normalMap.b > 0.0f)
+        normal = NormalSampleToWorldSpace(normalMap, input.Normal, input.Tangent);
 
-    return diffuse * NdotL;
+    float3 toEye = normalize(ViewPosition - input.wPosition);
+
+    float3 ambient = float3(0, 0, 0);
+    float3 diffuse = float3(0, 0, 0);
+    float3 specular = float3(0, 0, 0);
+
+    //float shadow = float3(1.0f, 1.0f, 1.0f);
+    //shadow = CalcShadowFactor(samShadow, ShadowMap, input.ShadowPos);
+
+    Material m = { Ambient, Diffuse, Specular, Shininess };
+    DirectionalLight l = { LightAmbient, LightDiffuse, LightSpecular, LightDirection };
+
+    float4 A, D, S;
+    float4 sunColor = float4(1, 1, 1, 1);
+    ComputeDirectionalLight(m, l, sunColor, normal, toEye, A, D, S);
+    ambient += A;
+    diffuse += /*shadow * */D;
+    specular += /*shadow * */S;
+    
+    float4 diffuseMap = DiffuseMap.Sample(Sampler, input.Uv);
+    if (diffuseMap.r > 0.0f)
+    {
+        ambient *= diffuseMap;
+        diffuse *= diffuseMap;
+        specular *= diffuseMap;
+    }
+
+    float3 specularMap = SpecularMap.Sample(Sampler, input.Uv);
+    if (specularMap.r > 0.0f)
+        specular *= specularMap;
+       
+
+    [unroll]
+    for (int i = 0; i < PointLightCount; i++)
+    {
+        ComputePointLight(m, PointLights[i], input.wPosition, normal, toEye, A, D, S);
+
+        ambient += A;
+        diffuse += D;
+        specular += S;
+    }
+    
+    [unroll]
+    for (i = 0; i < SpotLightCount; i++)
+    {
+        ComputeSpotLight(m, SpotLights[i], input.wPosition, normal, toEye, A, D, S);
+
+        ambient += A;
+        diffuse += D;
+        specular += S;
+    }
+    
+    float4 color = float4(ambient + diffuse + specular, 1);
+    
+   
+
+    return color;
 }
 
 
