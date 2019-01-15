@@ -3,6 +3,7 @@
 // --------------------------------------------------------------------- //
 float3 PixelPosition;
 
+static const float PI = 3.14159265f;
 static const int N = 32;
 static const float PixelSize = 2049;
 
@@ -18,20 +19,22 @@ RWTexture2D<float4> Output;
 [numthreads(N, N, 1)]
 void CS_Brush(int3 groupThreadId : SV_GroupThreadId, int3 dispatchThreadId : SV_DispatchThreadId)
 {
- 
+    int width, height;
+    HeightTexture.GetDimensions(width, height);
+
     PixelPosition.z = (PixelSize - 1) - PixelPosition.z;
 
     int2 resUv;
 
     [flatten]
-    if (dispatchThreadId.x > 2048)
-        resUv.x = 2048;
+    if (dispatchThreadId.x > width - 1)
+        resUv.x = width - 1;
     else
         resUv.x = dispatchThreadId.x;
 
     [flatten]
-    if (dispatchThreadId.y > 2048)
-        resUv.y = 2048;
+    if (dispatchThreadId.y > height - 1)
+        resUv.y = height - 1;
     else
         resUv.y = dispatchThreadId.y;
 
@@ -51,7 +54,7 @@ void CS_Brush(int3 groupThreadId : SV_GroupThreadId, int3 dispatchThreadId : SV_
         BrushPower = BrushPower * -1;
     }
 
-    [flatten]
+    //[flatten]
     if (BrushType == 1)
     {
         if ((resUv.x >= (PixelPosition.x - (BrushRange * 2))) &&
@@ -63,7 +66,7 @@ void CS_Brush(int3 groupThreadId : SV_GroupThreadId, int3 dispatchThreadId : SV_
         }
 
     }
-    else if (BrushType = 2)
+    if (BrushType == 2)
     {
         float dx = resUv.x - PixelPosition.x;
         float dy = resUv.y - PixelPosition.z;
@@ -75,9 +78,53 @@ void CS_Brush(int3 groupThreadId : SV_GroupThreadId, int3 dispatchThreadId : SV_
             color.r += BrushPower / 255.0f;
         }
     }
+    if (BrushType == 3)
+    {
+        float dx = resUv.x - PixelPosition.x;
+        float dy = resUv.y - PixelPosition.z;
+
+        float dist = sqrt(dx * dx + dy * dy);
+        if (dist <= BrushRange * 2)
+        {
+            dist = ((BrushRange * 2) - dist) / (float) (BrushRange * 2) * (PI / 2.0f);
+
+        
+            color.r += (BrushPower / 255.0f) * sin(dist);
+        }
+    }
+    if (BrushType == 4)
+    {
+        int count = 0;
+        float average = 0.0f;
+
+        for (int x = resUv.x - 1; x <= resUv.x + 1; x++)
+        {
+            for (int y = resUv.y - 1; y <= resUv.y + 1; y++)
+            {
+                if (x < 0 || x > width || y < 0 || y > height)
+                    continue;
+
+                count++;
+                average += HeightTexture[int2(x, y)];
+            }
+        }
+
+        if (count > 0)
+        {
+            if ((resUv.x >= (PixelPosition.x - (BrushRange * 2))) &&
+            (resUv.x <= (PixelPosition.x + (BrushRange * 2))) &&
+            (resUv.y >= (PixelPosition.z - (BrushRange * 2))) &&
+            (resUv.y <= (PixelPosition.z + (BrushRange * 2))))
+            {
+                color.r = average / (float) count;
+            }
+        }
+            
+    }
+
 
     Output[resUv] = color;
-}
+    }
 
 // --------------------------------------------------------------------- //
 //  Technique
