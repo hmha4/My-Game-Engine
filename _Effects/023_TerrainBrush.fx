@@ -122,9 +122,11 @@ void CS_Brush(int3 groupThreadId : SV_GroupThreadId, int3 dispatchThreadId : SV_
             
     }
 
+    if (color.r <= 0)
+        color.r = 0.0f;
 
     Output[resUv] = color;
-    }
+}
 
 // --------------------------------------------------------------------- //
 //  Technique

@@ -71,9 +71,11 @@ struct PixelInput
     float3 oPosition : POSITION1;
 };
 
+
 struct PixelCloudInput
 {
     float4 Position : SV_POSITION;
+    float4 wPosition : Position1;
     float2 Uv : UV0;
     float2 oUv : UV1;
 };
@@ -346,6 +348,19 @@ float4 PS_MoonGlow(PixelInput input) : SV_TARGET
 //    float NoiseTime;
 //}
 
+static const float cloudscale = 10.1;
+static const float speed = 0.03;
+static const float clouddark = 0.5;
+static const float cloudlight = 0.3;
+static const float cloudcover = 0.2;
+static const float cloudalpha = 8.0;
+static const float skytint = 0.5;
+static const float3 skycolour1 = float3(0.2, 0.4, 0.6);
+static const float3 skycolour2 = float3(0.4, 0.7, 1.0);
+
+static const float2x2 m = float2x2(1.6, 1.2, -1.2, 1.6);
+
+
 static const float CloudCover = -0.1;
 static const float CloudSharpness = 0.125;
 
@@ -359,6 +374,7 @@ PixelCloudInput VS_Cloud(VertexTexture input)
     PixelCloudInput output;
     
     output.Position = mul(input.Position, World);
+    output.wPosition = output.Position;
     output.Position = mul(output.Position, View);
     output.Position = mul(output.Position, Projection);
     output.Uv = (input.Uv * NumTiles);
@@ -367,7 +383,123 @@ PixelCloudInput VS_Cloud(VertexTexture input)
     return output;
 }
 
+float2 Hash2(float2 p)
+{
+    p = float2(dot(p, float2(127.1, 311.7)), dot(p, float2(269.5, 183.3)));
+    return -1.0 + 2.0 * frac(sin(p) * 43758.5453123);
+}
 
+
+float Noise2(in float2 p)
+{
+    const float K1 = 0.366025404f; // (sqrt(3)-1)/2;
+    const float K2 = 0.211324865f; // (3-sqrt(3))/6;
+
+    float2 integer = 0;
+    integer.x = floor(p.x + (p.x + p.y) * K1);
+    integer.y = floor(p.y + (p.x + p.y) * K1);
+
+    float2 a = 0;
+    a.x = p.x - integer.x + (integer.x + integer.y) * K2;
+    a.y = p.y - integer.y + (integer.x + integer.y) * K2;
+
+    //vec2 of = 0.5 + 0.5*vec2(sign(a.x-a.y), sign(a.y-a.x));
+    float2 o = 0;
+    o.x = (a.x > a.y) ? 1.0f : 0.0f;
+    o.y = (a.x > a.y) ? 0.0f : 1.0f;
+
+    float2 b = a - o + K2;
+
+    float2 c = a - 1.0 + 2.0 * K2;
+
+    float3 h = max(0.5 - float3(dot(a, a), dot(b, b), dot(c, c)), 0.0);
+
+    float3 n = h * h * h * h;
+    n.x *= dot(a, Hash2(integer + 0.0f));
+    n.y *= dot(b, Hash2(integer + o));
+    n.z *= dot(c, Hash2(integer + 1.0f));
+   
+    return dot(n, float3(70.0, 70.0, 70.0));
+}
+
+float Fbm(float2 n)
+{
+    float total = 0.0, amplitude = 0.1;
+    for (int i = 0; i < 7; i++)
+    {
+        total += Noise2(n) * amplitude;
+        n = mul(n, m);
+        amplitude *= 0.4;
+    }
+    return total;
+}
+
+float2 iResolution = float2(900, 600);
+
+float4 mainImage(PixelCloudInput input) : SV_Target
+{
+    float2 uv = input.oUv;
+    float time = Time * speed;
+    float q = Fbm(uv * cloudscale * 0.5);
+    
+    //ridged noise shape
+    float r = 0.0;
+    float f = 0.0;
+    uv *= cloudscale;
+    uv -= q - time;
+    float weightR = 0.8;
+    float weightF = 0.7;
+    for (int i = 0; i < 7; i++)
+    {
+        r += abs(weightR * Noise2(uv));
+        f += weightF * Noise2(uv);
+
+        uv = mul(uv, m) + time;
+
+        weightR *= 0.7;
+        weightF *= 0.6;
+    }
+
+    f *= r + f;
+
+    //noise colour
+    float c = 0.0;
+    float c1 = 0.0;
+    time = Time * speed * 2.0;
+    uv = input.oUv;
+    uv *= cloudscale * 2.0;
+    uv -= q - time;
+    float weight = 0.4;
+    for (int k = 0; k < 7; k++)
+    {
+        c += weight * Noise2(uv);
+        c1 += abs(weight * Noise2(uv));
+
+        uv = mul(uv, m) + time;
+
+        weight *= 0.6;
+    }
+    c += c1;
+    
+    float4 skycolour = float4(1, 1, 1, 0);
+    float4 cloudcolour = float4(float3(1.1, 1.1, 0.9) * clamp((clouddark + cloudlight * c), 0.0, 1.0), 1.0f);
+   
+    f = cloudcover + cloudalpha * f * r;
+    
+    float4 result = lerp(skycolour, clamp(skytint * skycolour + cloudcolour, 0.0, 1.0), clamp(f + c, 0.0, 1.0));
+    
+    float uvX = abs(0.5f - input.oUv.x) + 0.5f;
+    float uvY = abs(0.5f - input.oUv.y) + 0.5f;
+    
+    float alpha1 = uvX > 0.8 ? lerp(0.0f, result.a, (1 - uvX) / 0.2f) : result.a;
+    float alpha2 = uvY > 0.8 ? lerp(0.0f, result.a, (1 - uvY) / 0.2f) : result.a;
+
+    float alpha = alpha1 * alpha2;
+
+    result.a = result.a * alpha1 * alpha2;
+
+    return result * SunColor;
+}
 
 static const float ONE = 0.00390625;
 static const float ONEHALF = 0.001953125;
@@ -478,6 +610,7 @@ technique11 T0
         SetBlendState(BlendOn, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xFFFFFFFF);
         SetVertexShader(CompileShader(vs_5_0, VS_Cloud()));
         SetGeometryShader(NULL);
-        SetPixelShader(CompileShader(ps_5_0, PS_Cloud()));
+        //SetPixelShader(CompileShader(ps_5_0, PS_Cloud()));
+        SetPixelShader(CompileShader(ps_5_0, mainImage()));
     }
 };

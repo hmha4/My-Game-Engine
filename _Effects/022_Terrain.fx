@@ -54,7 +54,7 @@ float3 BrushColor(float3 location)
     if (Type == 0)
         return float3(0, 0, 0);
     //사각형일때
-    if (Type == 1)
+    if (Type == 1 || Type == 4)
     {
         if ((location.x >= (Location.x - Range)) &&
             (location.x <= (Location.x + Range)) &&
@@ -65,7 +65,7 @@ float3 BrushColor(float3 location)
         }
     }
     //원일때
-    if (Type == 2)
+    if (Type == 2 || Type == 3)
     {
         float dx = location.x - Location.x;
         float dy = location.z - Location.z;
@@ -165,21 +165,6 @@ float CalcTessFactor(float3 position)
     return pow(2, lerp(MaxTessellation, MinTessellation, s));
 }
 
-bool AabbBehindPlaneTest(float3 center, float3 extents, float4 plane)
-{
-    float3 n = abs(plane.xyz);
-   
-   // This is always positive.
-    float r = dot(extents, n);
-   
-   // signed distance from center point to plane.
-    float s = dot(float4(center, 1.0f), plane);
-   
-   // If the center point of the box is a distance of e or more behind the
-   // plane (in which case s is negative since it is behind the plane),
-   // then the box is completely in the negative half space of the plane.
-    return (s + r) < 0.0f;
-}
 
 bool AabbOutsideFrustumTest(float3 center, float3 extents)
 {
@@ -416,6 +401,7 @@ SamplerState Sampler
     Filter = MIN_MAG_MIP_LINEAR;
     AddressU = Wrap;
     AddressV = Wrap;
+    AddressW = Wrap;
 };
 
 struct PixelTargetOutput
@@ -499,7 +485,7 @@ PixelTargetOutput PS(DomainOutput input, uniform bool fogEnabled) : SV_TARGET
 
     float depth = input.pPosition.z / input.pPosition.w;
     float2 zValue = float2(1, 1);
-
+    
     [branch]
     if (depth > DetailValue) //0.999
     {
@@ -521,9 +507,14 @@ PixelTargetOutput PS(DomainOutput input, uniform bool fogEnabled) : SV_TARGET
     float4 A, D, S;
 
     float4 diffuseColor = DiffuseMap.Sample(Sampler, zValue);
+    float gamma = 2.2f;
+    float3 power = 1.0f / gamma;
+    diffuseColor.rgb = pow(diffuseColor.rgb, gamma);
+
     float4 color = diffuseColor;
 
     float4 specularColor = SpecularMap.Sample(Sampler, zValue);
+    float sFactor = dot(specularColor, 1.0f);
 
     float4 detailMap = DetailMap.Sample(Sampler, zValue);
 
@@ -542,9 +533,11 @@ PixelTargetOutput PS(DomainOutput input, uniform bool fogEnabled) : SV_TARGET
             normalValue = normalW;
     }
  
-    if (specularColor.r != 0)
+    if (sFactor > 0)
     {
-        SpecularLighting(color, specularColor, normalValue, -ViewDirection);
+        float4 spec;
+        SpecularLighting(spec, specularColor, normalValue, -ViewDirection);
+        color += spec;
     }
 
     if (detailMap.r != 0)
@@ -554,10 +547,12 @@ PixelTargetOutput PS(DomainOutput input, uniform bool fogEnabled) : SV_TARGET
     
     
     // Sample layers in texture array.
-    
     float4 c0 = LayerMapArray.Sample(Sampler, float3(zValue, 0));
+    c0.rgb = pow(c0.rgb, gamma);
     float4 c1 = LayerMapArray.Sample(Sampler, float3(zValue, 1));
+    c1.rgb = pow(c1.rgb, gamma);
     float4 c2 = LayerMapArray.Sample(Sampler, float3(zValue, 2));
+    c2.rgb = pow(c2.rgb, gamma);
     
     // Sample the blend map.
     float4 t = BlendMap.Sample(Sampler, input.Uv);
@@ -572,7 +567,7 @@ PixelTargetOutput PS(DomainOutput input, uniform bool fogEnabled) : SV_TARGET
         color = BlendLerpHelper(color, c2, pRate, BlendPositionRate[2], 0.01f, 0.01f);
     
     float shadow = 1.0f;
-    shadow = CalcShadowFactor(samShadow, ShadowMap, input.ShadowPos);
+    shadow = CalcShadowFactor(samShadow, ShadowMap, input.ShadowPos, input.wPosition);
    
     ambient = float3(0, 0, 0);
     diffuse = float3(0, 0, 0);
@@ -582,13 +577,15 @@ PixelTargetOutput PS(DomainOutput input, uniform bool fogEnabled) : SV_TARGET
     DirectionalLight l2 = { LightAmbient, LightDiffuse, LightSpecular, LightDirection };
     
     ComputeDirectionalLight(m2, l2, SunColor, normalW, eye, A, D, S);
+    
+    color.rgb = pow(color.rgb, power);
 
     ambient += A * color;
     diffuse += D * color * shadow;
     specular += S * color * shadow;
 
     float4 result2 = float4(saturate(ambient + diffuse + specular), 1.0f);
-
+        
     [flatten]
     if (fogEnabled == true)
     {
@@ -597,6 +594,7 @@ PixelTargetOutput PS(DomainOutput input, uniform bool fogEnabled) : SV_TARGET
         result2 = lerp(result2, SunColor, fogFactor);
     }
 
+    
 
     output.tColor = result2 + float4(input.BrushColor, 1);
     output.tColor = output.tColor + float4(Line(input.wPosition), 0);

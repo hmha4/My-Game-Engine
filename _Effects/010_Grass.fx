@@ -3,11 +3,15 @@
 // --------------------------------------------------------------------- //
 //  Constant Buffers
 // --------------------------------------------------------------------- //
+
+float4 FrustumPlanes[6];
+
 float MinWidth;
 float MinHeight;
 
 float2 TimeVector;
 float2 WindVector;
+float2 WindAccel;
 
 // Our constants
 float3 LightPosition = float3(0, 200, 10);
@@ -46,45 +50,38 @@ BlendState Blend
 //  Vertex Shader
 // --------------------------------------------------------------------- //
 
+
+
+bool AabbOutsideFrustumTest(float3 center, float3 extents)
+{
+    [unroll]
+    for (int i = 0; i < 6; ++i)
+    {
+		// If the box is completely behind any of the frustum planes
+		// then it is outside the frustum.
+        [flatten]
+        if (AabbBehindPlaneTest(center, extents, FrustumPlanes[i]))
+        {
+            return true;
+        }
+    }
+	
+    return false;
+}
+
+struct VertexInput
+{
+    float4 Position : POSITION0;
+    float4 iPosition : INSTANCE0;
+    float2 Uv : INSTANCE1;
+    float3 Normal : INSTANCE2;
+};
+
 struct GeometryInput
 {
     float4 Position : POSITION0;
     float3 Normal : NORMAL0;
-    //int Cull : Cull0;
 };
-
-//bool AabbBehindPlaneTest(float3 center, float3 extents, float4 plane)
-//{
-//    float3 n = abs(plane.xyz);
-	
-//	// This is always positive.
-//    float r = dot(extents, n);
-	
-//	// signed distance from center point to plane.
-//    float s = dot(float4(center, 1.0f), plane);
-	
-//	// If the center point of the box is a distance of e or more behind the
-//	// plane (in which case s is negative since it is behind the plane),
-//	// then the box is completely in the negative half space of the plane.
-//    return (s + r) < 0.0f;
-//}
-
-//bool AabbOutsideFrustumTest(float3 center, float3 extents)
-//{
-//    [unroll]
-//    for (int i = 0; i < 6; ++i)
-//    {
-//		// If the box is completely behind any of the frustum planes
-//		// then it is outside the frustum.
-//        [flatten]
-//        if (AabbBehindPlaneTest(center, extents, FrustumPlanes[i]))
-//        {
-//            return true;
-//        }
-//    }
-	
-//    return false;
-//}
 
 GeometryInput VS_Grass(VertexTextureNormal input)
 {
@@ -106,7 +103,7 @@ GeometryInput VS_Flower(VertexTextureNormal input)
     float cameraDistance = length(ViewPosition.xz - input.Position.xz);
 
 	// Properties of the grass blade
-    float minHeight = 3.5f;
+    float minHeight = 10.5f;
     float sizeY = minHeight + (random / 5);
 
     output.Position = input.Position + float4(0, sizeY * 0.5f, 0, 0);
@@ -128,6 +125,7 @@ struct GeometryOutput
     float3 VertexToCamera : NORMAL2;
     float Random : NORMAL4;
     float4 ShadowTransform : UV1;
+    //uint InstancedId : InstanceID0;
 };
 
 GeometryOutput createGEO_OUT_Grass()
@@ -142,17 +140,27 @@ GeometryOutput createGEO_OUT_Grass()
     output.VertexToCamera = float3(0, 0, 0);
     output.Random = 0;
     output.ShadowTransform = float4(0, 0, 0, 0);
+    //output.InstancedId = 0;
 
     return output;
 }
 
 [maxvertexcount(4)]
-void GS_Grass(point GeometryInput points[1], inout TriangleStream<GeometryOutput> stream)
+void GS_Grass(point GeometryInput points[1], uint PrimitiveID : SV_PrimitiveID, inout TriangleStream<GeometryOutput> stream)
 {
-    //if (points[0].Cull == 1)
-    //    return;
-
     float4 root = points[0].Position;
+
+    float minY = root.y - 1.0f;
+    float maxY = root.y + 1.0f;
+
+    float3 minV = float3(root.x - 1.0f, minY, root.z - 1.0f);
+    float3 maxV = float3(root.x + 1.0f, maxY, root.z + 1.0f);
+
+    float3 boxCenter = (minV + maxV) * 0.5f;
+    float3 boxExtents = (maxV - minV) * 0.5f;
+
+    if (AabbOutsideFrustumTest(boxCenter, boxExtents))
+        return;
 
     LightPosition = -LightDirection * 200;
     
@@ -163,8 +171,8 @@ void GS_Grass(point GeometryInput points[1], inout TriangleStream<GeometryOutput
     float cameraDistance = length(ViewPosition.xz - root.xz);
 
 	// Properties of the grass blade
-    float minHeight = 3.5;
-    float minWidth = 0.02f + (cameraDistance * 0.0001);
+    float minHeight = 10.5;
+    float minWidth = 0.1f + (cameraDistance * 0.0001);
     float sizeX = minWidth + (random / 50);
     float sizeY = minHeight + (random / 5);
     
@@ -263,7 +271,7 @@ void GS_Grass(point GeometryInput points[1], inout TriangleStream<GeometryOutput
         v[i].Position = float4(v[i].Position.x + root.x, v[i].Position.y + root.y, v[i].Position.z + root.z, 1);
 
 		// Wind
-        float2 windVec = WindVector;
+        float2 windVec = WindVector + (WindAccel * Time);
         windVec.x += (sin(Time.x + root.x / 25) + sin((Time.x + root.x / 15) + 50)) * 0.5;
         windVec.y += cos(Time.x + root.z / 80);
         windVec *= lerp(0.7, 1.0, 1.0 - random);
@@ -367,7 +375,7 @@ void GS_Flower(point GeometryInput input[1], inout TriangleStream<GeometryOutput
     float random = sin(kHalfPi * frac(input[0].Position.x) + kHalfPi * frac(input[0].Position.z));
 
     // Wind
-    float2 windVec = WindVector;
+    float2 windVec = WindVector + (WindAccel * Time);
     windVec.x += (sin(Time.x + input[0].Position.x / 25) + sin((Time.x + input[0].Position.x / 15) + 50)) * 0.5;
     windVec.y += cos(Time.x + input[0].Position.z / 80);
     windVec *= lerp(0.7, 1.0, 1.0 - random);
@@ -488,7 +496,7 @@ float4 PS_Grass(in GeometryOutput input) : SV_TARGET
     float shininess = 100;
     
     float shadow = float3(1.0f, 1.0f, 1.0f);
-    shadow = CalcShadowFactor(samShadow, ShadowMap, input.ShadowTransform);
+    shadow = CalcShadowFactor(samShadow, ShadowMap, input.ShadowTransform, input.wPosition.xyz);
     
     float ambientLight = 0.1;
     float diffuseLight = saturate(dot(input.VertexToLight, input.Normal.xyz)) * shadow;
@@ -537,6 +545,12 @@ float4 PS_Flower(in GeometryOutput_Flower input) : SV_TARGET
     
     float4 color = float4(ambient + diffuse + specular, 1.0f);
     color *= flower;
+
+    float4 specularColor = 1;
+    
+    SpecularLighting(specularColor, normal, toEye);
+    
+    color.rgb += (specularColor.rgb * flower.rgb);
 
     return color;
 }

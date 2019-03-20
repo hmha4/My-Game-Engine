@@ -16,7 +16,8 @@ float3 HSVtoRGB(in float3 HSV)
 
 
 float4 WorldFrustumPlanes[6];
-
+float FogStart;
+float FogRange;
 
 // --------------------------------------------------------------------- //
 //  Vertex Shader
@@ -25,11 +26,11 @@ struct VertexInput
 {
     float4 Position : POSITION0;
     
-    matrix TransWorld : INSTANCE0;
-    matrix DeTransWorld : INSTANCE4;
-    matrix RotateWorld : INSTANCE8;
-    float2 Size : INSTANCE12;
-    uint TextureNumber : INSTANCE13;
+    float3 TransPosition : INSTANCE0;
+    matrix DeTransWorld : INSTANCE1;
+    matrix RotateWorld : INSTANCE5;
+    float2 Size : INSTANCE9;
+    uint TextureNumber : INSTANCE10;
 
     uint InstanceId : SV_INSTANCEID0;
 };
@@ -48,7 +49,7 @@ VertexOutput VS(VertexInput input)
 {
     VertexOutput output;
 
-    output.Center = mul(input.Position, input.TransWorld);
+    output.Center = float4(input.TransPosition, 1);
 
     output.Size = input.Size;
     output.TextureNumber = input.TextureNumber;
@@ -117,7 +118,7 @@ void GS(point VertexOutput input[1], uint PrimitiveID : SV_PrimitiveID, inout Tr
     look.y = 0.0f;
     look = normalize(look);
 
-    float3 right = cross(up, look); 
+    float3 right = cross(up, look);
 
     
     float3 boxExtents = (halfWidth + halfHeight) * 0.5f;
@@ -132,25 +133,6 @@ void GS(point VertexOutput input[1], uint PrimitiveID : SV_PrimitiveID, inout Tr
     v[1] = float4(input[0].Center.xyz + halfWidth * right + halfHeight * up, 1.0f);
     v[2] = float4(input[0].Center.xyz - halfWidth * right - halfHeight * up, 1.0f);
     v[3] = float4(input[0].Center.xyz - halfWidth * right + halfHeight * up, 1.0f);
-
-
-    float3 up2 = float3(0, 1, 0);
-    float3 lightPos = -LightDirection * 500.0f;
-    float3 look2 = lightPos - input[0].Center.xyz;
-    look2.y = 0.0f;
-    look2 = normalize(look2);
-
-    float3 right2 = cross(up, look);
-
-    //  4 정점 계산
-    float4 v2[4];
-
-    v2[0] = float4(input[0].Center.xyz + halfWidth * right2 - halfHeight * up, 1.0f);
-    v2[1] = float4(input[0].Center.xyz + halfWidth * right2 + halfHeight * up, 1.0f);
-    v2[2] = float4(input[0].Center.xyz - halfWidth * right2 - halfHeight * up, 1.0f);
-    v2[3] = float4(input[0].Center.xyz - halfWidth * right2 + halfHeight * up, 1.0f);
-
-    
 
     GeometryOutput output;
 
@@ -253,15 +235,21 @@ float4 PS(GeometryOutput input) : SV_TARGET
     //번호 0번 0번그림 = > TextureNumber
     //번호 1번 1번그림
     
-    float4 flower = Map.Sample(Sampler, float3(input.Uv, input.TextureNumber % 4));
+    float4 flower = Map.Sample(Sampler, float3(input.Uv, input.TextureNumber % 7));
 
-    float3 toEye = normalize(ViewPosition - input.wPosition);
+    float3 toEye = ViewPosition - input.wPosition;
+    float distanceToEye = length(toEye);
+    
+    toEye = normalize(toEye);
+
     float3 ambient = float3(0, 0, 0);
     float3 diffuse = float3(0, 0, 0);
     float3 specular = float3(0, 0, 0);
 
     float shadow = float3(1.0f, 1.0f, 1.0f);
     shadow = CalcShadowFactor(samShadow, ShadowMap, input.ShadowTransform);
+
+    shadow = min(0.5f, shadow);
 
     Material m = { Ambient, Diffuse, Specular, Shininess };
     DirectionalLight l = { LightAmbient, LightDiffuse, LightSpecular, LightDirection };
@@ -276,7 +264,11 @@ float4 PS(GeometryOutput input) : SV_TARGET
     
     float4 color = float4(ambient + diffuse + specular, 1.0f);
     color *= flower;
+
     clip(color.a - 0.5f);
+    float fogFactor = saturate((distanceToEye - FogStart) / FogRange);
+
+    color = lerp(color, SunColor, fogFactor);
 
     return color;
 }

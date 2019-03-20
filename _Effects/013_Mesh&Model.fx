@@ -96,7 +96,7 @@ float4 PS(VertexOutput input) : SV_TARGET
     float3 specular = float3(0, 0, 0);
 
     float shadow = float3(1.0f, 1.0f, 1.0f);
-    shadow = CalcShadowFactor(samShadow, ShadowMap, input.ShadowPos);
+    shadow = CalcShadowFactor(samShadow, ShadowMap, input.ShadowPos, input.wPosition);
 
     Material m = { Ambient, Diffuse, Specular, Shininess };
     DirectionalLight l = { LightAmbient, LightDiffuse, LightSpecular, LightDirection };
@@ -107,7 +107,7 @@ float4 PS(VertexOutput input) : SV_TARGET
     ComputeDirectionalLight(m, l, SunColor, normal, toEye, A, D, S);
     ambient += A;
     diffuse += shadow * D;
-    specular += shadow * S;
+    specular += /*shadow * */S;
     
     if (specularMap.r > 0.0f)
         specular *= specularMap;

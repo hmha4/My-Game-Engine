@@ -54,7 +54,7 @@ float4 Color;
 float3 Origin;
 
 float3 Size;
-float RainTime;
+//float RainTime;
 
 // --------------------------------------------------------------------- //
 //  States

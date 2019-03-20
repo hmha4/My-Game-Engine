@@ -88,7 +88,7 @@ struct VertexOutputDepth
 
 RasterizerState ShadowDepth
 {
-    DepthBias = 10000;
+    DepthBias = 50000;
     DepthBiasClamp = 0.0f;
     SlopeScaledDepthBias = 1.0f;
 };
@@ -143,7 +143,46 @@ float CalcShadowFactor(SamplerComparisonState samShadow,
             shadowPosH.xy + offsets[i], depth).r;
     }
 
-    return percentLit /= 9.0f;
+    percentLit /= 9.0f;
+    
+    return percentLit;
+}
+
+float CalcShadowFactor(SamplerComparisonState samShadow,
+                       Texture2D shadowMap,
+                       float4 shadowPosH, float3 wPosition)
+{
+    // Complete projection by doing division by w.
+    shadowPosH.xyz /= shadowPosH.w;
+
+    // Depth in NDC space.
+    float depth = shadowPosH.z;
+
+    // Texel size.
+    const float dx = SMAP_DX;
+
+    float percentLit = 0.0f;
+    const float2 offsets[9] =
+    {
+        float2(-dx, -dx), float2(0.0f, -dx), float2(dx, -dx),
+        float2(-dx, 0.0f), float2(0.0f, 0.0f), float2(dx, 0.0f),
+        float2(-dx, +dx), float2(0.0f, +dx), float2(dx, +dx)
+    };
+
+    [unroll]
+    for (int i = 0; i < 9; ++i)
+    {
+        percentLit += shadowMap.SampleCmpLevelZero(samShadow,
+            shadowPosH.xy + offsets[i], depth).r;
+    }
+
+    percentLit /= 9.0f;
+    
+    float range = length(float3(0, 0, 0) - wPosition);
+    if (range > 100)
+        percentLit = 1.0f;
+    
+    return percentLit;
 }
 
 // --------------------------------------------------------------------- //
@@ -270,6 +309,32 @@ struct Material
 };
 
 //-----------------
+// Edge Lighting
+//-----------------
+float DetectEdge(float3 normal, float3 viewDir)
+{
+    //  법선 벡터와 ViewDirection과의 각도가 
+    //  90 이하(0 > dot(v, n)) 이면 앞쪽
+    //  90 와 같으면(0 == dot(v, n)) 외곽
+    //  90 이상 이면(0 < dot(v, n)) 뒤쪽
+    return (dot(viewDir, normal) > 0.3f) ? 1 : 0;
+}
+
+float RimLighting(float3 normal, float3 viewDir)
+{
+    float power = 0.3f;
+
+    //  법선 벡터와 ViewDirection과의 각도가 
+    //  90 이하(0 > dot(v, n)) 이면 앞쪽
+    //  90 와 같으면(0 == dot(v, n)) 외곽
+    //  90 이상 이면(0 < dot(v, n)) 뒤쪽
+    float dotView = dot(viewDir, normal);
+
+    return smoothstep(1.0f - power, 1.0f, 1.0f - max(0, dotView));
+}
+
+
+//-----------------
 // Directional Lighting
 //-----------------
 struct DirectionalLight
@@ -302,11 +367,14 @@ void ComputeDirectionalLight(Material m, DirectionalLight l, float4 sunColor, fl
         light = light * -1.0f;
     }
 
-    float3 nightLightColor = sunColor.rgb + temp;
-    light *= saturate(nightLightColor);
+    float3 nightLightColor = saturate(sunColor.rgb + temp);
+    //light *= nightLightColor;
 
     ambient = m.Ambient * l.Ambient;
 
+    //  Theta = 90 : 0
+    //  Theta < 90 : +
+    //  Theta > 90 : -
     float diffuseFactor = dot(light, normal);
 
     [flatten]
@@ -317,10 +385,14 @@ void ComputeDirectionalLight(Material m, DirectionalLight l, float4 sunColor, fl
         float3 r = reflect(-light, normal);
 
         float specularFactor = 0;
-        specularFactor = saturate(dot(r, toEye));
-        specularFactor = pow(specularFactor, m.Specular.a);
+        const float kEnergyConservation = (8.0f + l.Specular.a) / (8.0f * 3.14159265f);
+        float3 halfWayDir = normalize(light + toEye);
+        specularFactor = saturate(dot(halfWayDir, normal));
         specularFactor = pow(specularFactor, l.Specular.a);
-        specular = specularFactor * m.Specular * l.Specular;
+        specular = kEnergyConservation * specularFactor * l.Specular;
+        //specularFactor = saturate(dot(r, toEye));
+        //specularFactor = pow(specularFactor, l.Specular.a);
+        //specular = specularFactor * l.Specular;
     }
 }
 
@@ -458,7 +530,7 @@ float3 NormalSampleToWorldSpace(float3 normalMap, float3 normal, float3 tangent)
     float3x3 TBN = float3x3(T, B, N);
 
 	// Transform from tangent space to world space.
-    float3 bumpedNormalW = mul(normalT, TBN);
+    float3 bumpedNormalW = normalize(mul(normalT, TBN));
 
     return bumpedNormalW;
 }
@@ -473,12 +545,36 @@ void DiffuseLighting(inout float4 color, float4 diffuse, float3 normal)
 
 void SpecularLighting(inout float4 color, float4 specularMap, float3 normal, float3 viewDirection)
 {
-    float3 reflection = reflect(LightDirection, normal);
-    float intensity = saturate(dot(reflection, viewDirection));
-    float specular = pow(intensity, 1);
+    const float kEnergyConservation = (8.0f + Specular.a) / (8.0f * 3.14159265f);
+    float3 halfWayDir = normalize(-LightDirection + viewDirection);
+    float intensity = saturate(dot(halfWayDir, normal));
+    intensity = pow(intensity, Specular.a);
+    float4 specular = kEnergyConservation * intensity * Specular;
 
-    color = color + Specular * specular * specularMap;
-    //color = color +specular * specularMap;
+    color = specular * specularMap * SunColor;
+
+    //float3 reflection = reflect(LightDirection, normal);
+    //float intensity = saturate(dot(reflection, viewDirection));
+    //float specular = pow(intensity, Specular.a);
+    //
+    //color = color + /*Specular.a * */specular * Specular * specularMap;
+}
+
+void SpecularLighting(inout float4 color, float3 normal, float3 viewDirection)
+{
+    const float kEnergyConservation = (8.0f + Specular.a) / (8.0f * 3.14159265f);
+    float3 halfWayDir = normalize(-LightDirection + viewDirection);
+    float intensity = saturate(dot(halfWayDir, normal));
+    intensity = pow(intensity, Specular.a);
+    float4 specular = kEnergyConservation * intensity * Specular;
+
+    color = specular * SunColor;
+
+    //float3 reflection = reflect(LightDirection, normal);
+    //float intensity = saturate(dot(reflection, viewDirection));
+    //float specular = pow(intensity, Specular.a);
+    //
+    //color.rgb = color.rgb + specular * Specular.rgb;
 }
 
 void NormalMapping(inout float4 color, float4 normalMap, float3 normal, float3 tangent)
