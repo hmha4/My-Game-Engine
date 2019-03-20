@@ -328,3 +328,875 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+_Assets/ALan Tree/AlanTree.fbx
+_Assets/ALan Tree/BroadleafBark.tga
+_Assets/ALan Tree/SampleLeaves_2.tga
+_Assets/Armor/BodyArmor_D180612.FBX
+_Assets/Cliff/ForestRoad.fbx
+_Assets/Cliff/RHEF_GenericCliffA.fbx
+_Assets/Cliff/RHEF_GenericCliffB.fbx
+_Assets/Ely/ely_k_atienza.fbx
+_Assets/Ely/Idle.fbx
+_Assets/Fernando/Ability_01_Idle.FBX
+_Assets/Fernando/Fernando.FBX
+_Assets/Fernando/SKL_PC_Knight_Skin0_3p.FBX
+_Assets/Ganfaul/ganfaul.fbm/Ganfaul_diffuse.png
+_Assets/Ganfaul/ganfaul.fbm/Ganfaul_glow.png
+_Assets/Ganfaul/ganfaul.fbm/Ganfaul_normal.png
+_Assets/Ganfaul/ganfaul.fbm/Ganfaul_specular.png
+_Assets/Ganfaul/ganfaul.fbx
+_Assets/Grass_free_fbx/free grass by adam127.fbx
+_Assets/Grass_free_fbx/free grass.png
+_Assets/Grover/Grover.FBX
+_Assets/Grover/Grover_Idle.FBX
+_Assets/House/Pref_BrickHouse_C.fbx
+_Assets/Konstantinov/pirate_p_konstantinov.fbm/void_ambientocclusion.png
+_Assets/Konstantinov/pirate_p_konstantinov.fbm/void_diffuse.png
+_Assets/Konstantinov/pirate_p_konstantinov.fbm/void_normal.png
+_Assets/Konstantinov/pirate_p_konstantinov.fbm/void_specular.png
+_Assets/Konstantinov/pirate_p_konstantinov.fbx
+_Assets/MapleTree/Maple_468Poly.FBX
+_Assets/MapleTree/Materials/bark2.mat
+_Assets/MapleTree/Materials/bark2.png
+_Assets/MapleTree/Materials/bark2_NRM.png
+_Assets/MapleTree/Materials/barkSpec.tga
+_Assets/MapleTree/Materials/Klen_AT.mat
+_Assets/MapleTree/Materials/Klen_AT.tga
+_Assets/MapleTree/Materials/Klen_AT2.tga
+_Assets/MapleTree/Materials/Klen_AT3.tga
+_Assets/MapleTree/Materials/Klen_AT_NRM.png
+_Assets/MountainScene/RHEF_MountainScene.fbx
+_Assets/nemesis_tank_by_merytaten_tasherit-d7wdci1/Nemesis Tank.fbm/T_VH_Nemesis_D.tga
+_Assets/nemesis_tank_by_merytaten_tasherit-d7wdci1/Nemesis Tank.fbm/T_VH_Nemesis_N.tga
+_Assets/nemesis_tank_by_merytaten_tasherit-d7wdci1/Nemesis Tank.fbm/T_VH_Nemesis_SP.tga
+_Assets/nemesis_tank_by_merytaten_tasherit-d7wdci1/Nemesis Tank.FBX
+_Assets/Pack_arvores/2.fbm/bark01.dds
+_Assets/Pack_arvores/2.fbm/beech leaf.dds
+_Assets/Pack_arvores/2.fbx
+_Assets/Pack_arvores/Pack arvores/normais/1/1.fbm/bark04.dds
+_Assets/Pack_arvores/Pack arvores/normais/1/1.fbm/birch leaf.dds
+_Assets/Pack_arvores/Pack arvores/normais/1/1.fbx
+_Assets/Pack_arvores/Pack arvores/normais/10/10.fbx
+_Assets/Pack_arvores/Pack arvores/normais/11/11.fbx
+_Assets/Pack_arvores/Pack arvores/normais/12/12.fbx
+_Assets/Pack_arvores/Pack arvores/normais/13/13.fbx
+_Assets/Pack_arvores/Pack arvores/normais/14/14.fbx
+_Assets/Pack_arvores/Pack arvores/normais/15/15.fbx
+_Assets/Pack_arvores/Pack arvores/normais/16/16.fbx
+_Assets/Pack_arvores/Pack arvores/normais/17/17.fbx
+_Assets/Pack_arvores/Pack arvores/normais/18/18.fbx
+_Assets/Pack_arvores/Pack arvores/normais/19/19.fbx
+_Assets/Pack_arvores/Pack arvores/normais/2/2.fbm/bark01.dds
+_Assets/Pack_arvores/Pack arvores/normais/2/2.fbm/beech leaf.dds
+_Assets/Pack_arvores/Pack arvores/normais/2/2.fbx
+_Assets/Pack_arvores/Pack arvores/normais/20/20.fbx
+_Assets/Pack_arvores/Pack arvores/normais/21/1.fbx
+_Assets/Pack_arvores/Pack arvores/normais/22/3.fbx
+_Assets/Pack_arvores/Pack arvores/normais/3/3.fbx
+_Assets/Pack_arvores/Pack arvores/normais/4/4.fbm/acacia leaf.dds
+_Assets/Pack_arvores/Pack arvores/normais/4/4.fbm/bark06.dds
+_Assets/Pack_arvores/Pack arvores/normais/4/4.fbx
+_Assets/Pack_arvores/Pack arvores/normais/4/tex/acacia leaf.jpg
+_Assets/Pack_arvores/Pack arvores/normais/4/tex/acacia leaf_n.jpg
+_Assets/Pack_arvores/Pack arvores/normais/4/tex/acacia leaf_sss.jpg
+_Assets/Pack_arvores/Pack arvores/normais/5/5.fbx
+_Assets/Pack_arvores/Pack arvores/normais/6/6.fbm/bark03.dds
+_Assets/Pack_arvores/Pack arvores/normais/6/6.fbm/elm leaf.dds
+_Assets/Pack_arvores/Pack arvores/normais/6/6.fbx
+_Assets/Pack_arvores/Pack arvores/normais/6/tex/bark06.jpg
+_Assets/Pack_arvores/Pack arvores/normais/6/tex/birch leaf.jpg
+_Assets/Pack_arvores/Pack arvores/normais/6/tex/birch leaf_sss.jpg
+_Assets/Pack_arvores/Pack arvores/normais/7/7.fbx
+_Assets/Pack_arvores/Pack arvores/normais/8/8.fbm/acacia leaf.dds
+_Assets/Pack_arvores/Pack arvores/normais/8/8.fbm/bark06.dds
+_Assets/Pack_arvores/Pack arvores/normais/8/8.fbx
+_Assets/Pack_arvores/Pack arvores/normais/9/9.fbx
+_Assets/Pack_arvores/Pack arvores/normais/textures/bark04.jpg
+_Assets/Pack_arvores/Pack arvores/normais/textures/bark04_n.jpg
+_Assets/Pack_arvores/Pack arvores/normais/textures/bark04_s.jpg
+_Assets/Pack_arvores/Pack arvores/normais/textures/bark06.jpg
+_Assets/Pack_arvores/Pack arvores/normais/textures/bark06_n.jpg
+_Assets/Pack_arvores/Pack arvores/normais/textures/bark06_s.jpg
+_Assets/Pack_arvores/Pack arvores/normais/textures/birch leaf.jpg
+_Assets/Pack_arvores/Pack arvores/normais/textures/birch leaf_n.jpg
+_Assets/Pack_arvores/Pack arvores/normais/textures/birch leaf_s.dds
+_Assets/Pack_arvores/Pack arvores/normais/textures/birch leaf_s.jpg
+_Assets/Pack_arvores/Pack arvores/normais/textures/birch leaf_sss.jpg
+_Assets/Pack_arvores/Pack arvores/palmeiras/1/1.fbx
+_Assets/Pack_arvores/Pack arvores/palmeiras/2/2.fbx
+_Assets/Pack_arvores/Pack arvores/palmeiras/3/3.fbx
+_Assets/Pack_arvores/Pack arvores/palmeiras/4/4.fbx
+_Assets/Pack_arvores/Pack arvores/palmeiras/5/5.fbx
+_Assets/Pack_arvores/Pack arvores/palmeiras/6/6.fbx
+_Assets/Pack_arvores/Pack arvores/palmeiras/textures/curly palm leaf.jpg
+_Assets/Pack_arvores/Pack arvores/palmeiras/textures/curly palm leaf_n.jpg
+_Assets/Pack_arvores/Pack arvores/palmeiras/textures/curly palm leaf_s.jpg
+_Assets/Pack_arvores/Pack arvores/palmeiras/textures/curly palm leaf_sss.jpg
+_Assets/Pack_arvores/Pack arvores/palmeiras/textures/palm01.jpg
+_Assets/Pack_arvores/Pack arvores/palmeiras/textures/Palm01_n.jpg
+_Assets/Pack_arvores/Pack arvores/palmeiras/textures/Palm01_s.jpg
+_Assets/Pack_arvores/Pack arvores/Pedras/textures/TexturesCom_RockLayered_2x2_1024_albedo.jpg
+_Assets/Pack_arvores/Pack arvores/Pedras/textures/TexturesCom_RockLayered_2x2_1024_height.jpg
+_Assets/Pack_arvores/Pack arvores/Pedras/textures/TexturesCom_RockLayered_2x2_1024_normal.tif
+_Assets/Pack_arvores/Pack arvores/pinheiros/1/1.fbm/bark06.dds
+_Assets/Pack_arvores/Pack arvores/pinheiros/1/1.fbm/spruce leaf.dds
+_Assets/Pack_arvores/Pack arvores/pinheiros/1/1.fbx
+_Assets/Pack_arvores/Pack arvores/pinheiros/2/2.fbm/bark06.dds
+_Assets/Pack_arvores/Pack arvores/pinheiros/2/2.fbm/spruce leaf.dds
+_Assets/Pack_arvores/Pack arvores/pinheiros/2/2.fbx
+_Assets/Pack_arvores/Pack arvores/pinheiros/3/3.fbm/bark06.dds
+_Assets/Pack_arvores/Pack arvores/pinheiros/3/3.fbm/juniper leaf.dds
+_Assets/Pack_arvores/Pack arvores/pinheiros/3/3.fbx
+_Assets/Pack_arvores/Pack arvores/pinheiros/4/4.fbm/bark06.dds
+_Assets/Pack_arvores/Pack arvores/pinheiros/4/4.fbm/juniper leaf.dds
+_Assets/Pack_arvores/Pack arvores/pinheiros/4/4.fbx
+_Assets/Pack_arvores/Pack arvores/pinheiros/texture/acacia_leaf.BMP
+_Assets/Pack_arvores/Pack arvores/pinheiros/texture/acacia_leaf_n.BMP
+_Assets/Pack_arvores/Pack arvores/pinheiros/texture/acacia_leaf_s.BMP
+_Assets/Pack_arvores/Pack arvores/pinheiros/texture/acacia_leaf_sss.BMP
+_Assets/Pack_arvores/Pack arvores/pinheiros/texture/bark06.jpg
+_Assets/Pack_arvores/Pack arvores/pinheiros/texture/bark06_n.jpg
+_Assets/Pack_arvores/Pack arvores/pinheiros/texture/bark06_s.jpg
+_Assets/Paladin/Attack1.fbx
+_Assets/Paladin/Attack2.fbx
+_Assets/Paladin/Idle.fbx
+_Assets/Paladin/Idle2.fbx
+_Assets/Paladin/Idle_Alart.fbx
+_Assets/Paladin/paladin_j_nordstrom.fbm/Paladin_diffuse.png
+_Assets/Paladin/paladin_j_nordstrom.fbm/Paladin_normal.png
+_Assets/Paladin/paladin_j_nordstrom.fbm/Paladin_specular.png
+_Assets/Paladin/paladin_j_nordstrom.fbx
+_Assets/Paladin/Run.fbx
+_Assets/Paladin/Walk.fbx
+_Assets/Paladin/Walk_Back.fbx
+_Assets/Paladin/Walk_Left.fbx
+_Assets/Paladin/Walk_Right.fbx
+_Assets/PineTree/Pine_4m.fbx
+_Assets/PineTree/pine_realistic.fbx
+_Assets/PumpkinHulk/pumpkinhulk_l_shaw.fbm/pumpkinHulk_diffuse.png
+_Assets/PumpkinHulk/pumpkinhulk_l_shaw.fbm/pumpkinHulk_normal.png
+_Assets/PumpkinHulk/pumpkinhulk_l_shaw.fbx
+_Assets/RockFace/150k.fbx
+_Assets/Rocks/MountainRocks01.FBX
+_Assets/Rocks/MountainRocks01_A.FBX
+_Assets/Rocks/MountainRocks01_B.FBX
+_Assets/Rocks/MountainRocks01_C.FBX
+_Assets/Rocks/MountainRocks01_D.FBX
+_Assets/Rocks/MountainRocks02.FBX
+_Assets/Rocks/MountainRocks02_A.FBX
+_Assets/Rocks/MountainRocks02_B.FBX
+_Assets/Rocks/MountainsRocks01_MountainsRocks01_Albedo.tga
+_Assets/Rocks/MountainsRocks01_MountainsRocks01_Metallic.tga
+_Assets/Rocks/MountainsRocks01_MountainsRocks01_Normal.tga
+_Assets/Rocks/MountainsRocks01_MountainsRocks01_Occlusion.tga
+_Assets/Rocks/MountainsRocks02_MountainsRocks02_Albedo.tga
+_Assets/Rocks/MountainsRocks02_MountainsRocks02_Metallic.tga
+_Assets/Rocks/MountainsRocks02_MountainsRocks02_Normal.tga
+_Assets/Rocks/MountainsRocks02_MountainsRocks02_Occlusion.tga
+_Assets/Rocks/MountainsRocks03.FBX
+_Assets/Rocks/MountainsRocks03_RockMoutain03_Albedo.tga
+_Assets/Rocks/MountainsRocks03_RockMoutain03_Metallic.tga
+_Assets/Rocks/MountainsRocks03_RockMoutain03_Normal.tga
+_Assets/Rocks/MountainsRocks03_RockMoutain03_Occlusion.tga
+_Assets/Rocks/Rock1A.fbx
+_Assets/Rocks/Rock1B.fbx
+_Assets/Rocks/Rock1C.fbx
+_Assets/Rocks/Rock1D.fbx
+_Assets/Rocks/Rock1E.fbx
+_Assets/Rocks/Rock2.fbx
+_Assets/Rocks/Rock5A.fbx
+_Assets/Rocks/Rock6A.fbx
+_Assets/Rocks/Rock6C.fbx
+_Assets/Soldier/demo_combat_idle.FBX
+_Assets/Soldier/demo_soldier_512.tga
+_Assets/Soldier/demo_weapon.tga
+_Assets/Soldier/Looking Around.fbx
+_Assets/Soldier/Soldier_demo.fbx
+_Assets/Soldier/Soldier_demo_unRigged.FBX
+_Assets/Sword/Caliburn.fbx
+_Assets/Sword/Longclaw.fbm/i_001.jpg
+_Assets/Sword/Longclaw.fbm/metal_8.jpg
+_Assets/Sword/Longclaw.fbm/paper50.jpeg
+_Assets/Sword/Longclaw.fbm/uzunpence.jpg
+_Assets/Sword/Longclaw.FBX
+_Assets/Sword/Scottish Sword.FBX
+_Assets/Sword/Sword.fbx
+_Assets/Sword/sword_fbx.FBX
+_Assets/Sword/sword_old.FBX
+_Assets/Titanfall/Rigged_atlas.fbx
+_Assets/Titanfall/rigged_atlas.pmx
+_Assets/Titanfall/Rigged_atlas_combined_material_id1_9497741027_BaseColor.png
+_Assets/Titanfall/Rigged_atlas_combined_material_id1_9497741027_MetallicSmoothness.png
+_Assets/Titanfall/Rigged_atlas_combined_material_id1_9497741027_Normal.png
+_Assets/Titanfall/Rigged_atlas_combined_material_id1_9497741027_OcclusionRoughnessMetallic.png
+_Assets/Tree_FBX/Tree_FBX.fbm/leaf_Bump.jpg
+_Assets/Tree_FBX/Tree_FBX.fbm/leaf_Dif.jpg
+_Assets/Tree_FBX/Tree_FBX.fbm/leaf_Spec.jpg
+_Assets/Tree_FBX/Tree_FBX.fbm/Trunk.jpg
+_Assets/Tree_FBX/Tree_FBX.fbm/Trunk_Bump.jpg
+_Assets/Tree_FBX/Tree_FBX.FBX
+_Assets/Tree_V4_FBX/Tree_V4.fbx
+_Assets/XPSCrystallDragon/crystald_ar.png
+_Assets/XPSCrystallDragon/crystald_ar_n.png
+_Assets/XPSCrystallDragon/crystald_ar_s.png
+_Assets/XPSCrystallDragon/crystald_b.png
+_Assets/XPSCrystallDragon/crystald_cry.png
+_Assets/XPSCrystallDragon/crystald_cry_s.png
+_Assets/XPSCrystallDragon/crystald_cryn.png
+_Assets/XPSCrystallDragon/crystald_n.png
+_Assets/XPSCrystallDragon/crystald_s.png
+_Assets/XPSCrystallDragon/crystalldragon.FBX
+_Assets/XPSCrystallDragon/default.pose
+_Assets/XPSCrystallDragon/Generic_Item.mesh
+_Assets/XPSCrystallDragon/Generic_Item.mesh.ascii
+_Assets/XPSCrystallDragon/xps.xps
+_Libraries/assimp-vc140-mt.dll
+_Libraries/assimp/.editorconfig
+_Libraries/assimp/ai_assert.h
+_Libraries/assimp/anim.h
+_Libraries/assimp/assimp-vc140-mt.dll
+_Libraries/assimp/assimp-vc140-mt.lib
+_Libraries/assimp/BaseImporter.h
+_Libraries/assimp/Bitmap.h
+_Libraries/assimp/BlobIOSystem.h
+_Libraries/assimp/ByteSwapper.h
+_Libraries/assimp/camera.h
+_Libraries/assimp/cexport.h
+_Libraries/assimp/cfileio.h
+_Libraries/assimp/cimport.h
+_Libraries/assimp/color4.h
+_Libraries/assimp/color4.inl
+_Libraries/assimp/Compiler/poppack1.h
+_Libraries/assimp/Compiler/pstdint.h
+_Libraries/assimp/Compiler/pushpack1.h
+_Libraries/assimp/config.h
+_Libraries/assimp/config.h.in
+_Libraries/assimp/CreateAnimMesh.h
+_Libraries/assimp/DefaultIOStream.h
+_Libraries/assimp/DefaultIOSystem.h
+_Libraries/assimp/DefaultLogger.hpp
+_Libraries/assimp/Defines.h
+_Libraries/assimp/defs.h
+_Libraries/assimp/Exceptional.h
+_Libraries/assimp/Exporter.hpp
+_Libraries/assimp/fast_atof.h
+_Libraries/assimp/GenericProperty.h
+_Libraries/assimp/Hash.h
+_Libraries/assimp/Importer.hpp
+_Libraries/assimp/importerdesc.h
+_Libraries/assimp/IOStream.hpp
+_Libraries/assimp/IOStreamBuffer.h
+_Libraries/assimp/IOSystem.hpp
+_Libraries/assimp/irrXMLWrapper.h
+_Libraries/assimp/light.h
+_Libraries/assimp/LineSplitter.h
+_Libraries/assimp/LogAux.h
+_Libraries/assimp/Logger.hpp
+_Libraries/assimp/LogStream.hpp
+_Libraries/assimp/Macros.h
+_Libraries/assimp/material.h
+_Libraries/assimp/material.inl
+_Libraries/assimp/MathFunctions.h
+_Libraries/assimp/matrix3x3.h
+_Libraries/assimp/matrix3x3.inl
+_Libraries/assimp/matrix4x4.h
+_Libraries/assimp/matrix4x4.inl
+_Libraries/assimp/MemoryIOWrapper.h
+_Libraries/assimp/mesh.h
+_Libraries/assimp/metadata.h
+_Libraries/assimp/NullLogger.hpp
+_Libraries/assimp/ParsingUtils.h
+_Libraries/assimp/pbrmaterial.h
+_Libraries/assimp/port/AndroidJNI/AndroidJNIIOSystem.h
+_Libraries/assimp/postprocess.h
+_Libraries/assimp/Profiler.h
+_Libraries/assimp/ProgressHandler.hpp
+_Libraries/assimp/qnan.h
+_Libraries/assimp/quaternion.h
+_Libraries/assimp/quaternion.inl
+_Libraries/assimp/RemoveComments.h
+_Libraries/assimp/scene.h
+_Libraries/assimp/SceneCombiner.h
+_Libraries/assimp/SGSpatialSort.h
+_Libraries/assimp/SkeletonMeshBuilder.h
+_Libraries/assimp/SmoothingGroups.h
+_Libraries/assimp/SmoothingGroups.inl
+_Libraries/assimp/SpatialSort.h
+_Libraries/assimp/StandardShapes.h
+_Libraries/assimp/StreamReader.h
+_Libraries/assimp/StreamWriter.h
+_Libraries/assimp/StringComparison.h
+_Libraries/assimp/StringUtils.h
+_Libraries/assimp/Subdivision.h
+_Libraries/assimp/texture.h
+_Libraries/assimp/TinyFormatter.h
+_Libraries/assimp/types.h
+_Libraries/assimp/vector2.h
+_Libraries/assimp/vector2.inl
+_Libraries/assimp/vector3.h
+_Libraries/assimp/vector3.inl
+_Libraries/assimp/version.h
+_Libraries/assimp/Vertex.h
+_Libraries/assimp/XMLTools.h
+_Models/150k/150k.material
+_Models/150k/150k.mesh
+_Models/150k/Tex4k.001.png
+_Models/AM165_001_Scanline/AM165_001_color.jpg
+_Models/AM165_001_Scanline/AM165_001_Scanline.material
+_Models/AM165_001_Scanline/AM165_001_Scanline.mesh
+_Models/AM165_001_Scanline/AM165_001_spec.jpg
+_Models/AM165_076_Scanline/AM165_076_color.jpg
+_Models/AM165_076_Scanline/AM165_076_Scanline.material
+_Models/AM165_076_Scanline/AM165_076_Scanline.mesh
+_Models/AM165_076_Scanline/AM165_rubble_rock.jpg
+_Models/bmr_356/bmr_356.material
+_Models/bmr_356/bmr_356.mesh
+_Models/BodyArmor_D180612/BodyArmor_D180612.material
+_Models/BodyArmor_D180612/BodyArmor_D180612.mesh
+_Models/Brute/Attack.anim
+_Models/Brute/Brute.material
+_Models/Brute/Brute.mesh
+_Models/Brute/Idle.anim
+_Models/Brute/MaleBruteA_Hair_normal.png
+_Models/Brute/MaleBruteA_Moustache_normal.png
+_Models/Brute/trail_02.png
+_Models/Brute/trail_02_normal.png
+_Models/Caliburn/Caliburn.material
+_Models/Caliburn/Caliburn.mesh
+_Models/Caliburn/Caliburn_SF_A.tga
+_Models/Caliburn/Caliburn_SF_G.tga
+_Models/Caliburn/Caliburn_SF_M.tga
+_Models/Caliburn/Caliburn_SF_N.tga
+_Models/chris/chris.material
+_Models/chris/chris.mesh
+_Models/crystalldragon/crystald_ar.png
+_Models/crystalldragon/crystald_ar_n.png
+_Models/crystalldragon/crystald_ar_s.png
+_Models/crystalldragon/crystald_b.png
+_Models/crystalldragon/crystald_cry.png
+_Models/crystalldragon/crystald_cry_s.png
+_Models/crystalldragon/crystald_cryn.png
+_Models/crystalldragon/crystald_n.png
+_Models/crystalldragon/crystald_s.png
+_Models/crystalldragon/crystalldragon.material
+_Models/crystalldragon/crystalldragon.mesh
+_Models/Cube/Cube.material
+_Models/Cube/Cube.mesh
+_Models/ely_k_atienza/05_Rifle Aim Run.anim
+_Models/ely_k_atienza/ely_k_atienza.material
+_Models/ely_k_atienza/ely_k_atienza.mesh
+_Models/ely_k_atienza/Idle.anim
+_Models/Fernando/Ability_01_Idle.anim
+_Models/Fernando/Ability_Fernando_Charge.tga
+_Models/Fernando/Ability_Fernando_Fireball.tga
+_Models/Fernando/Ability_Fernando_FlameLance.tga
+_Models/Fernando/Ability_Fernando_Immortal.tga
+_Models/Fernando/Ability_Fernando_Shield.tga
+_Models/Fernando/black_mask.tga
+_Models/Fernando/BLK_MSK.tga
+_Models/Fernando/BLK_MSK_2.tga
+_Models/Fernando/CubemapFace0.tga
+_Models/Fernando/CubemapFace1.tga
+_Models/Fernando/CubemapFace2.tga
+_Models/Fernando/CubemapFace3.tga
+_Models/Fernando/CubemapFace4.tga
+_Models/Fernando/CubemapFace5.tga
+_Models/Fernando/Fernando.material
+_Models/Fernando/Fernando.mesh
+_Models/Fernando/ItemIcon_Cassie_Emote.tga
+_Models/Fernando/Knight_Skin3_DIF.tga
+_Models/Fernando/Knight_Skin3_DIF_1p.tga
+_Models/Fernando/Knight_Skin3_Lobby_DIF.tga
+_Models/Fernando/Knight_Skin3_Lobby_SPC.tga
+_Models/Fernando/Knight_Skin3_SPC.tga
+_Models/Fernando/Knight_Skin3_SPC_1p.tga
+_Models/Fernando/MergedDiffuseMap.tga
+_Models/Fernando/MergedNormalMap.tga
+_Models/Fernando/MergedSpecularMap.tga
+_Models/Fernando/Mount_Default.tga
+_Models/Fernando/SKL_PC_Knight_Arms_Skin0_1p_DIF.tga
+_Models/Fernando/SKL_PC_Knight_Arms_Skin0_1p_MSK.tga
+_Models/Fernando/SKL_PC_Knight_Arms_Skin0_1p_MSK2.tga
+_Models/Fernando/SKL_PC_Knight_Arms_Skin0_1p_NRM.tga
+_Models/Fernando/SKL_PC_Knight_Arms_Skin0_1p_SPC.tga
+_Models/Fernando/T_ACC_Fernando_FlashingLights_Skin04A_MSK01.tga
+_Models/Fernando/T_ACC_Fernando_Mastery_MSK01.tga
+_Models/Fernando/T_ACC_Fernando_Skin00A_DIFF.tga
+_Models/Fernando/T_ACC_Fernando_Skin00A_MSK01.tga
+_Models/Fernando/T_ACC_Fernando_Skin00A_MSK02.tga
+_Models/Fernando/T_ACC_Fernando_Skin00A_NRM.tga
+_Models/Fernando/T_ACC_Fernando_Skin00A_SPC.tga
+_Models/Fernando/T_ACC_Fernando_Skin00C_DIFF.tga
+_Models/Fernando/T_ACC_Fernando_Skin00C_spc.tga
+_Models/Fernando/T_ACC_Fernando_Skin00D_DIFF.tga
+_Models/Fernando/T_ACC_Fernando_Skin00D_spc.tga
+_Models/Fernando/T_ACC_Fernando_Skin00E_DIFF.tga
+_Models/Fernando/T_ACC_Fernando_Skin00E_SPC.tga
+_Models/Fernando/T_ACC_Fernando_Skin01A_DIFF.tga
+_Models/Fernando/T_ACC_Fernando_Skin01A_MSK01.tga
+_Models/Fernando/T_ACC_Fernando_Skin01A_MSK02.tga
+_Models/Fernando/T_ACC_Fernando_Skin01A_NRM.tga
+_Models/Fernando/T_ACC_Fernando_Skin01A_SPC.tga
+_Models/Fernando/T_ACC_Fernando_Skin02A_DIFF.tga
+_Models/Fernando/T_ACC_Fernando_Skin02A_MSK01.tga
+_Models/Fernando/T_ACC_Fernando_Skin02A_MSK02.tga
+_Models/Fernando/T_ACC_Fernando_Skin02A_NRM.tga
+_Models/Fernando/T_ACC_Fernando_Skin02A_SPC.tga
+_Models/Fernando/T_ACC_Fernando_Skin03A_DIFF.tga
+_Models/Fernando/T_ACC_Fernando_Skin03A_MSK01.tga
+_Models/Fernando/T_ACC_Fernando_Skin03A_MSK02.tga
+_Models/Fernando/T_ACC_Fernando_Skin03A_NRM.tga
+_Models/Fernando/T_ACC_Fernando_Skin03A_SPC.tga
+_Models/Fernando/T_ACC_Fernando_Skin03B_DIFF.tga
+_Models/Fernando/T_ACC_Fernando_Skin03B_SPC.tga
+_Models/Fernando/T_ACC_Fernando_Skin04A_DIFF.tga
+_Models/Fernando/T_ACC_Fernando_Skin04A_MSK01.tga
+_Models/Fernando/T_ACC_Fernando_Skin04A_MSK02.tga
+_Models/Fernando/T_ACC_Fernando_Skin04A_NRM.tga
+_Models/Fernando/T_ACC_Fernando_Skin04A_SPC.tga
+_Models/Fernando/T_ACC_Fernando_Skin05A_DIFF.tga
+_Models/Fernando/T_ACC_Fernando_Skin05A_MSK01.tga
+_Models/Fernando/T_ACC_Fernando_Skin05A_MSK02.tga
+_Models/Fernando/T_ACC_Fernando_Skin05A_NRM.tga
+_Models/Fernando/T_ACC_Fernando_Skin05A_SPC.tga
+_Models/Fernando/T_ACC_Fernando_Skin06A_DIFF.tga
+_Models/Fernando/T_ACC_Fernando_Skin06A_MSK01.tga
+_Models/Fernando/T_ACC_Fernando_Skin06A_NRM.tga
+_Models/Fernando/T_ACC_Fernando_Skin06A_SPC.tga
+_Models/Fernando/T_ACC_Fernando_Tencent_Skin04A_DIFF.tga
+_Models/Fernando/T_ACC_Knight_Skin00F_DIFF.tga
+_Models/Fernando/T_ACC_Knight_Skin00F_MSK01.tga
+_Models/Fernando/T_ACC_Knight_Skin00F_MSK02.tga
+_Models/Fernando/T_ACC_Knight_Skin00F_NRM.tga
+_Models/Fernando/T_ACC_Knight_Skin00F_SPC.tga
+_Models/Fernando/T_CautionTape_A.tga
+_Models/Fernando/T_CrystalPrism_DIFF.tga
+_Models/Fernando/T_FernandoMech_D.tga
+_Models/Fernando/T_Gen_Chains_A_NRM.tga
+_Models/Fernando/T_Knight_MSK.tga
+_Models/Fernando/T_Knight_MSK2.tga
+_Models/Fernando/T_Knight_Shield_Grid_A.tga
+_Models/Fernando/T_MaskTemplate_MSK03.tga
+_Models/Fernando/T_MasterTextureSamples_Diffuse.tga
+_Models/Fernando/T_MasterTextureSamples_Msk2.tga
+_Models/Fernando/T_MasterTextureSamples_Norm.tga
+_Models/Fernando/T_MasterTextureSamples_Norm_UnComp.tga
+_Models/Fernando/T_MasterTextureSamples_Spec.tga
+_Models/Fernando/T_Mech_C.tga
+_Models/Fernando/T_Mech_E.tga
+_Models/Fernando/T_PC_Fernando_Arms_Mastery_MSK01.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin00C_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin00D_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin00E_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin00E_SPC.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin03A_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin03A_SPC.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin04A_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin04A_MSK01.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin04A_MSK02.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin04A_NRM.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin04A_SPC.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin05A_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin06A_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin06A_MSK01.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin06A_MSK02.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin06A_NRM.tga
+_Models/Fernando/T_PC_Fernando_Arms_Skin06A_SPC.tga
+_Models/Fernando/T_PC_Fernando_Mastery_MSK01.tga
+_Models/Fernando/T_PC_Fernando_Shield_Mastery_MSK01.tga
+_Models/Fernando/T_PC_Fernando_Shield_Skin00C_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Shield_Skin00D_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Shield_Skin00E_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Shield_Skin04A_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Shield_Skin04A_MSK01.tga
+_Models/Fernando/T_PC_Fernando_Shield_Skin04A_NRM.tga
+_Models/Fernando/T_PC_Fernando_Shield_Skin04A_SPC.tga
+_Models/Fernando/T_PC_Fernando_Shield_Skin05A_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Shield_Skin05A_SPC.tga
+_Models/Fernando/T_PC_Fernando_Skin00A_Shield_MSK.tga
+_Models/Fernando/T_PC_Fernando_Skin00A_Shield_MSK02.tga
+_Models/Fernando/T_PC_Fernando_Skin00C_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Skin00C_SPC.tga
+_Models/Fernando/T_PC_Fernando_Skin00D_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Skin00D_spc.tga
+_Models/Fernando/T_PC_Fernando_Skin00E_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Skin00E_SPC.tga
+_Models/Fernando/T_PC_Fernando_Skin01A_1P_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Skin01A_1P_MSK01.tga
+_Models/Fernando/T_PC_Fernando_Skin01A_1P_MSK02.tga
+_Models/Fernando/T_PC_Fernando_Skin01A_1P_NRM.tga
+_Models/Fernando/T_PC_Fernando_Skin01A_1P_SPC.tga
+_Models/Fernando/T_PC_Fernando_Skin02A_1P_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Skin02A_1P_MSK01.tga
+_Models/Fernando/T_PC_Fernando_Skin02A_1P_MSK02.tga
+_Models/Fernando/T_PC_Fernando_Skin02A_1P_NRM.tga
+_Models/Fernando/T_PC_Fernando_Skin02A_1P_SPC.tga
+_Models/Fernando/T_PC_Fernando_Skin02A_MSK1.tga
+_Models/Fernando/T_PC_Fernando_Skin02A_MSK2.tga
+_Models/Fernando/T_PC_Fernando_Skin03A_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Skin03A_MSK01.tga
+_Models/Fernando/T_PC_Fernando_Skin03A_MSK02.tga
+_Models/Fernando/T_PC_Fernando_Skin03A_NRM.tga
+_Models/Fernando/T_PC_Fernando_Skin03A_SPC.tga
+_Models/Fernando/T_PC_Fernando_Skin04A_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Skin04A_MSK01.tga
+_Models/Fernando/T_PC_Fernando_Skin04A_MSK02.tga
+_Models/Fernando/T_PC_Fernando_Skin04A_NRM.tga
+_Models/Fernando/T_PC_Fernando_Skin04A_SPC.tga
+_Models/Fernando/T_PC_Fernando_Skin05A_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Skin05A_MSK01.tga
+_Models/Fernando/T_PC_Fernando_Skin05A_MSK02.tga
+_Models/Fernando/T_PC_Fernando_Skin05A_NRM.tga
+_Models/Fernando/T_PC_Fernando_Skin05A_SPC.tga
+_Models/Fernando/T_PC_Fernando_Skin06A_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Skin06A_MSK01.tga
+_Models/Fernando/T_PC_Fernando_Skin06A_MSK02.tga
+_Models/Fernando/T_PC_Fernando_Skin06A_NRM.tga
+_Models/Fernando/T_PC_Fernando_Skin06A_SPC.tga
+_Models/Fernando/T_PC_Fernando_Tencent_Skin06A_DIFF.tga
+_Models/Fernando/T_PC_Fernando_Tencent_Skin06A_SPC.tga
+_Models/Fernando/T_PC_Gauntlet_Skin00A_DIFF.tga
+_Models/Fernando/T_PC_Gauntlet_Skin00A_MSK01.tga
+_Models/Fernando/T_PC_Gauntlet_Skin00A_MSK02.tga
+_Models/Fernando/T_PC_Gauntlet_Skin00A_NRM.tga
+_Models/Fernando/T_PC_Gauntlet_Skin00A_SPC.tga
+_Models/Fernando/T_PC_Knight_Hex.tga
+_Models/Fernando/T_PC_Knight_Skin01A_MSK01.tga
+_Models/Fernando/T_PC_Knight_Skin01A_MSK02.tga
+_Models/Fernando/T_PC_Knight_Skin03A_DIFF.tga
+_Models/Fernando/T_PC_Knight_Skin03A_MSK01.tga
+_Models/Fernando/T_PC_Knight_Skin03A_NRM.tga
+_Models/Fernando/T_PC_Knight_Skin03A_SPC.tga
+_Models/Fernando/T_PC_Knight_Skin1_UV2_DIF.tga
+_Models/Fernando/T_PC_Knight_Skin1_UV2_NRM.tga
+_Models/Fernando/T_PC_Knight_Skin1_UV2_SPC.tga
+_Models/Fernando/T_PC_Knight_Skin2_DIF.tga
+_Models/Fernando/T_PC_Knight_Skin2_NRM.tga
+_Models/Fernando/T_PC_Knight_Skin2_SPC.tga
+_Models/Fernando/T_PC_Knight_V2_Shield_DIF.tga
+_Models/Fernando/T_PC_Knight_V2_Shield_MSK.tga
+_Models/Fernando/T_PC_Knight_V2_Shield_NRM.tga
+_Models/Fernando/T_PC_Knight_V2_Shield_SPC.tga
+_Models/Fernando/T_Ramp.tga
+_Models/Fernando/T_Rose_DIF.tga
+_Models/Fernando/T_Rose_MSK.tga
+_Models/Fernando/T_Rose_NRM.tga
+_Models/Fernando/T_Scorch_A.tga
+_Models/Fernando/T_Star_A.tga
+_Models/Fernando/T_WEP_Fernando_Mastery_MSK01.tga
+_Models/Fernando/T_WEP_Fernando_Skin00A_MSK01.tga
+_Models/Fernando/Warrior_LanceV3_diffuse.tga
+_Models/Fernando/Warrior_LanceV3_normal.tga
+_Models/ForestRoad/Cliff1_AO.jpg
+_Models/ForestRoad/Cliff1_Normal2.jpg
+_Models/ForestRoad/Cliff1_NRM1.jpg
+_Models/ForestRoad/Cliff1_SPEC.jpg
+_Models/ForestRoad/ForestRoad.material
+_Models/ForestRoad/ForestRoad.mesh
+_Models/ForestRoad/RHEFGenericCliffA_Diffuse.png
+_Models/ForestRoad/RHEFGenericCliffB_Diffuse.png
+_Models/free grass by adam127/free grass by adam127.material
+_Models/free grass by adam127/free grass by adam127.mesh
+_Models/free grass by adam127/free grass.png
+_Models/ganfaul/ganfaul.material
+_Models/ganfaul/ganfaul.mesh
+_Models/ganfaul/Ganfaul_diffuse.png
+_Models/ganfaul/Ganfaul_normal.png
+_Models/ganfaul/Ganfaul_specular.png
+_Models/Grass_free_fbx/free grass.png
+_Models/Grass_free_fbx/Grass_free_fbx.material
+_Models/Grass_free_fbx/Grass_free_fbx.mesh
+_Models/Grover/Grover.material
+_Models/Grover/Grover.mesh
+_Models/Grover/Grover_Idle.anim
+_Models/Grover/T_PC_Grover_ID1_Skin00A_DIFF.tga
+_Models/Grover/T_PC_Grover_ID1_Skin00A_SPC.tga
+_Models/Grover/T_PC_Grover_ID2_Skin00A_DIFF.tga
+_Models/Grover/T_PC_Grover_ID2_Skin00A_SPC.tga
+_Models/Kachujin.zip
+_Models/Kachujin/Kachujin.material
+_Models/Kachujin/Kachujin.mesh
+_Models/Kachujin/Kachujin1.material
+_Models/Kachujin/Kachujin1.mesh
+_Models/Kachujin/Running.anim
+_Models/Kachujin/Samba_Dancing.anim
+_Models/Kachujin/Taunt.anim
+_Models/Lamborghini_Aventador/Lamborghini_Aventador.material
+_Models/Lamborghini_Aventador/Lamborghini_Aventador.mesh
+_Models/leonout/leon_hair_d.tga
+_Models/leonout/leon_hair_n.tga
+_Models/leonout/leon_hair_s.tga
+_Models/leonout/leonhead_d.tga
+_Models/leonout/leonhead_n.tga
+_Models/leonout/leonhead_s.tga
+_Models/leonout/leonlegs_d.tga
+_Models/leonout/leonlegs_n.tga
+_Models/leonout/leonlegs_s.tga
+_Models/leonout/leonout.material
+_Models/leonout/leonout.mesh
+_Models/leonout/leontorso_d.tga
+_Models/leonout/leontorso_n.tga
+_Models/leonout/leontorso_s.tga
+_Models/leonout/skin_tr.tga
+_Models/Longclaw/i_001.jpg
+_Models/Longclaw/Longclaw.material
+_Models/Longclaw/Longclaw.mesh
+_Models/Longclaw/uzunpence.jpg
+_Models/Maple_468Poly/bark2.png
+_Models/Maple_468Poly/bark2_NRM.png
+_Models/Maple_468Poly/barkSpec.tga
+_Models/Maple_468Poly/Klen_AT.tga
+_Models/Maple_468Poly/Klen_AT2.tga
+_Models/Maple_468Poly/Klen_AT3.tga
+_Models/Maple_468Poly/Klen_AT_NRM.png
+_Models/Maple_468Poly/Maple_468Poly.material
+_Models/Maple_468Poly/Maple_468Poly.mesh
+_Models/MountainRocks01/MountainRocks01.material
+_Models/MountainRocks01/MountainRocks01.mesh
+_Models/MountainRocks01/MountainsRocks01_MountainsRocks01_Albedo.tga
+_Models/MountainRocks01/MountainsRocks01_MountainsRocks01_Metallic.tga
+_Models/MountainRocks01/MountainsRocks01_MountainsRocks01_Normal.tga
+_Models/MountainRocks01/MountainsRocks01_MountainsRocks01_Occlusion.tga
+_Models/MountainRocks01_A/MountainRocks01_A.material
+_Models/MountainRocks01_A/MountainRocks01_A.mesh
+_Models/MountainRocks01_A/MountainsRocks01_MountainsRocks01_Albedo.tga
+_Models/MountainRocks01_A/MountainsRocks01_MountainsRocks01_Metallic.tga
+_Models/MountainRocks01_A/MountainsRocks01_MountainsRocks01_Normal.tga
+_Models/MountainRocks01_A/MountainsRocks01_MountainsRocks01_Occlusion.tga
+_Models/MountainRocks01_B/MountainRocks01_B.material
+_Models/MountainRocks01_B/MountainRocks01_B.mesh
+_Models/MountainRocks01_B/MountainsRocks01_MountainsRocks01_Albedo.tga
+_Models/MountainRocks01_B/MountainsRocks01_MountainsRocks01_Metallic.tga
+_Models/MountainRocks01_B/MountainsRocks01_MountainsRocks01_Normal.tga
+_Models/MountainRocks01_B/MountainsRocks01_MountainsRocks01_Occlusion.tga
+_Models/MountainRocks01_C/MountainRocks01_C.material
+_Models/MountainRocks01_C/MountainRocks01_C.mesh
+_Models/MountainRocks01_C/MountainsRocks01_MountainsRocks01_Albedo.tga
+_Models/MountainRocks01_C/MountainsRocks01_MountainsRocks01_Metallic.tga
+_Models/MountainRocks01_C/MountainsRocks01_MountainsRocks01_Normal.tga
+_Models/MountainRocks01_C/MountainsRocks01_MountainsRocks01_Occlusion.tga
+_Models/MountainRocks01_D/MountainRocks01_D.material
+_Models/MountainRocks01_D/MountainRocks01_D.mesh
+_Models/MountainRocks01_D/MountainsRocks01_MountainsRocks01_Albedo.tga
+_Models/MountainRocks01_D/MountainsRocks01_MountainsRocks01_Metallic.tga
+_Models/MountainRocks01_D/MountainsRocks01_MountainsRocks01_Normal.tga
+_Models/MountainRocks01_D/MountainsRocks01_MountainsRocks01_Occlusion.tga
+_Models/MountainRocks02/MountainRocks02.material
+_Models/MountainRocks02/MountainRocks02.mesh
+_Models/MountainRocks02/MountainsRocks02_MountainsRocks02_Albedo.tga
+_Models/MountainRocks02/MountainsRocks02_MountainsRocks02_Metallic.tga
+_Models/MountainRocks02/MountainsRocks02_MountainsRocks02_Normal.tga
+_Models/MountainRocks02/MountainsRocks02_MountainsRocks02_Occlusion.tga
+_Models/MountainRocks02_A/MountainRocks02_A.material
+_Models/MountainRocks02_A/MountainRocks02_A.mesh
+_Models/MountainRocks02_A/MountainsRocks02_MountainsRocks02_Albedo.tga
+_Models/MountainRocks02_A/MountainsRocks02_MountainsRocks02_Metallic.tga
+_Models/MountainRocks02_A/MountainsRocks02_MountainsRocks02_Normal.tga
+_Models/MountainRocks02_A/MountainsRocks02_MountainsRocks02_Occlusion.tga
+_Models/MountainRocks02_B/MountainRocks02_B.material
+_Models/MountainRocks02_B/MountainRocks02_B.mesh
+_Models/MountainRocks02_B/MountainsRocks02_MountainsRocks02_Albedo.tga
+_Models/MountainRocks02_B/MountainsRocks02_MountainsRocks02_Metallic.tga
+_Models/MountainRocks02_B/MountainsRocks02_MountainsRocks02_Normal.tga
+_Models/MountainRocks02_B/MountainsRocks02_MountainsRocks02_Occlusion.tga
+_Models/mutant/mutant.material
+_Models/mutant/mutant.mesh
+_Models/Nemesis Tank/Nemesis Tank.material
+_Models/Nemesis Tank/Nemesis Tank.mesh
+_Models/Nemesis Tank/T_VH_Nemesis_D.tga
+_Models/Nemesis Tank/T_VH_Nemesis_N.tga
+_Models/Nemesis Tank/T_VH_Nemesis_SP.tga
+_Models/Pack_arvores/Tree2.material
+_Models/Pack_arvores/Tree2.mesh
+_Models/paladin_j_nordstrom/Attack1.anim
+_Models/paladin_j_nordstrom/Attack2.anim
+_Models/paladin_j_nordstrom/Idle.anim
+_Models/paladin_j_nordstrom/Idle2.anim
+_Models/paladin_j_nordstrom/Idle_Alart.anim
+_Models/paladin_j_nordstrom/Paladin_diffuse.png
+_Models/paladin_j_nordstrom/paladin_j_nordstrom.material
+_Models/paladin_j_nordstrom/paladin_j_nordstrom.mesh
+_Models/paladin_j_nordstrom/Paladin_normal.png
+_Models/paladin_j_nordstrom/Paladin_specular.png
+_Models/paladin_j_nordstrom/Run.anim
+_Models/paladin_j_nordstrom/Walk.anim
+_Models/paladin_j_nordstrom/Walk_Back.anim
+_Models/paladin_j_nordstrom/Walk_Left.anim
+_Models/paladin_j_nordstrom/Walk_Right.anim
+_Models/Pine_4m/Pine_4m.material
+_Models/Pine_4m/Pine_4m.mesh
+_Models/PineTree/PineTree.material
+_Models/pirate_p_konstantinov/pirate_p_konstantinov.material
+_Models/pirate_p_konstantinov/pirate_p_konstantinov.mesh
+_Models/pirate_p_konstantinov/void_diffuse.png
+_Models/pirate_p_konstantinov/void_normal.png
+_Models/pirate_p_konstantinov/void_specular.png
+_Models/Pref_BrickHouse_C/Pref_BrickHouse_C.material
+_Models/Pref_BrickHouse_C/Pref_BrickHouse_C.mesh
+_Models/pumpkinhulk_l_shaw/pumpkinHulk_diffuse.png
+_Models/pumpkinhulk_l_shaw/pumpkinhulk_l_shaw.material
+_Models/pumpkinhulk_l_shaw/pumpkinhulk_l_shaw.mesh
+_Models/pumpkinhulk_l_shaw/pumpkinHulk_normal.png
+_Models/RHEF_GenericCliffA/RHEF_GenericCliffA.material
+_Models/RHEF_GenericCliffA/RHEF_GenericCliffA.mesh
+_Models/RHEF_GenericCliffB/RHEF_GenericCliffB.material
+_Models/RHEF_GenericCliffB/RHEF_GenericCliffB.mesh
+_Models/RHEF_GenericCliffB/RHEFGenericCliffB_AO.png
+_Models/RHEF_GenericCliffB/RHEFGenericCliffB_Diffuse.png
+_Models/RHEF_GenericCliffB/RHEFGenericCliffB_DiffuseMobile.png
+_Models/RHEF_GenericCliffB/RHEFGenericCliffB_Specular.tif
+_Models/RHEF_MountainScene/RHEF_MountainScene.material
+_Models/RHEF_MountainScene/RHEF_MountainScene.mesh
+_Models/Rigged_atlas/Rigged_atlas.material
+_Models/Rigged_atlas/Rigged_atlas.mesh
+_Models/Rigged_atlas/Rigged_atlas_combined_material_id1_9497741027_BaseColor.png
+_Models/Rigged_atlas/Rigged_atlas_combined_material_id1_9497741027_Normal.png
+_Models/Rock1A/Rock1.tif
+_Models/Rock1A/Rock1_nmp.tif
+_Models/Rock1A/Rock1A.material
+_Models/Rock1A/Rock1A.mesh
+_Models/Rock1B/Rock1.tif
+_Models/Rock1B/Rock1_nmp.tif
+_Models/Rock1B/Rock1B.material
+_Models/Rock1B/Rock1B.mesh
+_Models/Rock1C/Rock1.tif
+_Models/Rock1C/Rock1_nmp.tif
+_Models/Rock1C/Rock1C.material
+_Models/Rock1C/Rock1C.mesh
+_Models/Rock1D/Rock1.tif
+_Models/Rock1D/Rock1_nmp.tif
+_Models/Rock1D/Rock1D.material
+_Models/Rock1D/Rock1D.mesh
+_Models/Rock1E/Rock1.tif
+_Models/Rock1E/Rock1_nmp.tif
+_Models/Rock1E/Rock1E.material
+_Models/Rock1E/Rock1E.mesh
+_Models/Rock2/Rock2.material
+_Models/Rock2/Rock2.mesh
+_Models/Rock2/Rock2.tif
+_Models/Rock2/Rock2_nmp.tif
+_Models/Rock2/Rock2_snow.tif
+_Models/Rock5A/Rock5.tif
+_Models/Rock5A/Rock5_nmp.tif
+_Models/Rock5A/Rock5A.material
+_Models/Rock5A/Rock5A.mesh
+_Models/Rock6A/Rock6.tif
+_Models/Rock6A/Rock6_nmp.tif
+_Models/Rock6A/Rock6A.material
+_Models/Rock6A/Rock6A.mesh
+_Models/Rock6C/Rock6.tif
+_Models/Rock6C/Rock6_nmp.tif
+_Models/Rock6C/Rock6C.material
+_Models/Rock6C/Rock6C.mesh
+_Models/Scottish Sword/PBR_Material _15_Base_Color.png
+_Models/Scottish Sword/PBR_Material _15_Height.png
+_Models/Scottish Sword/PBR_Material _15_Metallic.png
+_Models/Scottish Sword/PBR_Material _15_Mixed_AO.png
+_Models/Scottish Sword/PBR_Material _15_Normal_DirectX.png
+_Models/Scottish Sword/PBR_Material _15_Roughness.png
+_Models/Scottish Sword/Scottish Sword.material
+_Models/Scottish Sword/Scottish Sword.mesh
+_Models/Soldier/demo_combat_idle.anim
+_Models/Soldier/demo_soldier_512.tga
+_Models/Soldier/demo_weapon.tga
+_Models/Soldier/Looking Around.anim
+_Models/Soldier/Soldier.material
+_Models/Soldier/Soldier.mesh
+_Models/Soldier_demo/demo_soldier_512.tga
+_Models/Soldier_demo/demo_weapon.tga
+_Models/Soldier_demo/Looking Around.anim
+_Models/Soldier_demo/Soldier_demo.material
+_Models/Soldier_demo/Soldier_demo.mesh
+_Models/stanford-bunny/stanford-bunny.material
+_Models/stanford-bunny/stanford-bunny.mesh
+_Models/stanford-bunny/WoodDark_COLOR.png
+_Models/stanford-bunny/WoodDark_NRM.png
+_Models/stanford-bunny/WoodDark_SPEC.png
+_Models/stanford-bunny/WoodLight_COLOR.png
+_Models/stanford-bunny/WoodLight_NRM.png
+_Models/stanford-bunny/WoodLight_SPEC.png
+_Models/Sword/Sword.material
+_Models/Sword/Sword.mesh
+_Models/Sword/Sword_Sword_AlbedoTransparency.png
+_Models/Sword/Sword_Sword_AO.png
+_Models/Sword/Sword_Sword_MetallicSmoothness.png
+_Models/Sword/Sword_Sword_Normal.png
+_Models/sword_fbx/sword_fbx.material
+_Models/sword_fbx/sword_fbx.mesh
+_Models/sword_old/sword_bump_01.png
+_Models/sword_old/sword_difuse_01.png
+_Models/sword_old/sword_old.material
+_Models/sword_old/sword_old.mesh
+_Models/sword_old/sword_spec_01.png
+_Models/Tank/Tank.material
+_Models/Tank/Tank.mesh
+_Models/Tree_FBX/Tree_FBX.material
+_Models/Tree_FBX/Tree_FBX.mesh
+_Models/Tree_V4_FBX/Tree_V4_FBX.material
+_Textures/dead tree model03-texture.png
+_Textures/dead tree model04-texture.png
+_Textures/dead tree model05-texture.png
+_Textures/DryGround.png
+_Textures/DryGround_normal.png
+_Textures/DryGround_specular.png
+_Textures/flower1.png
+_Textures/flower2.png
+_Textures/Grass.png
+_Textures/GrassNDeadLeafs.png
+_Textures/GrassNDeadLeafs_normal.png
+_Textures/GrassNDeadLeafs_specular.png
+_Textures/GrassNRock.png
+_Textures/GrassNRock_normal.png
+_Textures/GrassNRock_specular.png
+_Textures/GreenGrass.jpg
+_Textures/GroundNMoss.png
+_Textures/GroundNMoss_detail.png
+_Textures/GroundNMoss_normal.png
+_Textures/GroundNMoss_specular.png
+_Textures/GroundNWeeds.png
+_Textures/GroundNWeeds_normal.png
+_Textures/GroundNWeeds_specular.png
+_Textures/HeightMap/heightmap.r16
+_Textures/HeightMap/MyTerrain.raw
+_Textures/mossy-ground1-albedo.png
+_Textures/mossy-ground1-ao.png
+_Textures/mossy-ground1-height.png
+_Textures/mossy-ground1-preview.png
+_Textures/plant.png
+_Textures/rocky1.png
+_Textures/rocky2.jpg
+_Textures/rocky3.jpg
+_Textures/Sandy.jpg
+_Textures/trail_02_normal.png
+_Textures/TrailAlpha.jpg
+_Textures/TrailAlpha1.jpg
+_Textures/WeaponTrail0.png
+_Textures/WeaponTrail1.png
+_Assets/Ely/ely_k_atienza.fbx
+_Models/bmr_356/bmr_356.material
+_Models/bmr_356/bmr_356.mesh
+_Models/Brute/Attack.anim
+_Models/Brute/Brute.material
+_Models/Brute/Brute.mesh
+_Models/Brute/Idle.anim
+_Models/chris/chris.material
+_Models/chris/chris.mesh
+_Models/Cube/Cube.material
+_Models/Cube/Cube.mesh
+_Models/ely_k_atienza/05_Rifle Aim Run.anim
+_Models/ely_k_atienza/ely_k_atienza.material
+_Models/ely_k_atienza/ely_k_atienza.mesh
+_Models/Kachujin/Kachujin.material
+_Models/Kachujin/Kachujin.mesh
+_Models/Kachujin/Running.anim
+_Models/Kachujin/Samba_Dancing.anim
+_Models/Kachujin/Taunt.anim
+_Models/Lamborghini_Aventador/Lamborghini_Aventador.material
+_Models/Lamborghini_Aventador/Lamborghini_Aventador.mesh
+_Models/leonout/leonout.material
+_Models/leonout/leonout.mesh
+_Models/mutant/mutant.material
+_Models/mutant/mutant.mesh
+_Models/Tank/Tank.material
+_Models/Tank/Tank.mesh
+_Textures/Grass.png
