@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="stdafx.h" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Editors\MapEditor.cpp">
+      <Filter>Editors\MapEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="Executes\TestMapEditor.cpp">
+      <Filter>Executes</Filter>
+    </ClCompile>
+    <ClCompile Include="Editors\ObjectEditor.cpp">
+      <Filter>Editors\ObjectEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\GameScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Editors\EditorManager.cpp">
+      <Filter>Editors</Filter>
+    </ClCompile>
+    <ClCompile Include="Executes\TestFrame.cpp">
+      <Filter>Executes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="Editors\MapEditor.h">
+      <Filter>Editors\MapEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Editors\EditorManager.h">
+      <Filter>Editors</Filter>
+    </ClInclude>
+    <ClInclude Include="Editors\GameEditor.h">
+      <Filter>Editors</Filter>
+    </ClInclude>
+    <ClInclude Include="Executes\TestMapEditor.h">
+      <Filter>Executes</Filter>
+    </ClInclude>
+    <ClInclude Include="Editors\ObjectEditor.h">
+      <Filter>Editors\ObjectEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\GameScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Executes\TestFrame.h">
+      <Filter>Executes</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Executes">
+      <UniqueIdentifier>{ccd94613-18bf-4b3f-bb3a-8d42d2044728}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editors">
+      <UniqueIdentifier>{3fd0c201-039f-47a1-9844-19b515fb85a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editors\MapEditor">
+      <UniqueIdentifier>{60c393f3-bf02-46d5-8771-ca6f7f9adbd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editors\ObjectEditor">
+      <UniqueIdentifier>{9af08dae-b074-4418-9f1d-dd1416a3ae9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{c488aca8-637c-4c64-91d9-6adb515c8afe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
