@@ -11,18 +11,114 @@
                 <Z>14.80055</Z>
             </Position>
             <Rotation>
-                <X>-1.0387746e-06</X>
+                <X>-1.0387735e-06</X>
                 <Y>2.6979623</Y>
-                <Z>1.6437552e-06</Z>
+                <Z>1.6437539e-06</Z>
             </Rotation>
             <Scale>
-                <X>3.000006</X>
+                <X>3.0000045</X>
                 <Y>3</Y>
-                <Z>3.000006</Z>
+                <Z>3.0000045</Z>
             </Scale>
         </PlayerSpec>
         <EnemySpecs>
-            <EnemyCount>0</EnemyCount>
+            <EnemyCount>6</EnemyCount>
+            <Enemy0>skeletonzombie_t_avelange.spec</Enemy0>
+            <Position>
+                <X>-29.561852</X>
+                <Y>1.7636852</Y>
+                <Z>-4.7770081</Z>
+            </Position>
+            <Rotation>
+                <X>0</X>
+                <Y>0</Y>
+                <Z>0</Z>
+            </Rotation>
+            <Scale>
+                <X>3</X>
+                <Y>3</Y>
+                <Z>3</Z>
+            </Scale>
+            <Enemy1>skeletonzombie_t_avelange.spec</Enemy1>
+            <Position>
+                <X>-19.631323</X>
+                <Y>5.8162079</Y>
+                <Z>-60.615566</Z>
+            </Position>
+            <Rotation>
+                <X>0</X>
+                <Y>0</Y>
+                <Z>0</Z>
+            </Rotation>
+            <Scale>
+                <X>3</X>
+                <Y>3</Y>
+                <Z>3</Z>
+            </Scale>
+            <Enemy2>skeletonzombie_t_avelange.spec</Enemy2>
+            <Position>
+                <X>-73.638138</X>
+                <Y>3.6401672</Y>
+                <Z>-3.3462491</Z>
+            </Position>
+            <Rotation>
+                <X>0</X>
+                <Y>0</Y>
+                <Z>0</Z>
+            </Rotation>
+            <Scale>
+                <X>3</X>
+                <Y>3</Y>
+                <Z>3</Z>
+            </Scale>
+            <Enemy3>skeletonzombie_t_avelange.spec</Enemy3>
+            <Position>
+                <X>-58.676624</X>
+                <Y>4.3327112</Y>
+                <Z>-37.704334</Z>
+            </Position>
+            <Rotation>
+                <X>0</X>
+                <Y>0</Y>
+                <Z>0</Z>
+            </Rotation>
+            <Scale>
+                <X>3</X>
+                <Y>3</Y>
+                <Z>3</Z>
+            </Scale>
+            <Enemy4>skeletonzombie_t_avelange.spec</Enemy4>
+            <Position>
+                <X>-92.709015</X>
+                <Y>5.1629844</Y>
+                <Z>-53.941288</Z>
+            </Position>
+            <Rotation>
+                <X>0</X>
+                <Y>0</Y>
+                <Z>0</Z>
+            </Rotation>
+            <Scale>
+                <X>3</X>
+                <Y>3</Y>
+                <Z>3</Z>
+            </Scale>
+            <Enemy5>skeletonzombie_t_avelange.spec</Enemy5>
+            <Position>
+                <X>-51.028912</X>
+                <Y>1.2651083</Y>
+                <Z>-86.063675</Z>
+            </Position>
+            <Rotation>
+                <X>0</X>
+                <Y>0</Y>
+                <Z>0</Z>
+            </Rotation>
+            <Scale>
+                <X>3</X>
+                <Y>3</Y>
+                <Z>3</Z>
+            </Scale>
         </EnemySpecs>
         <ObjectSpecs>
             <ObjectCount>45</ObjectCount>
@@ -273,13 +369,13 @@
                 <Z>20.886902</Z>
             </Position>
             <Rotation>
-                <X>0.11414887</X>
-                <Y>-7.8743547e-08</Y>
+                <X>0.114149</X>
+                <Y>-7.4993856e-08</Y>
                 <Z>0.065003052</Z>
             </Rotation>
             <Scale>
                 <X>30.913103</X>
-                <Y>30.913031</Y>
+                <Y>30.913033</Y>
                 <Z>30.912817</Z>
             </Scale>
             <Object16>Rock1C.spec</Object16>
@@ -481,9 +577,9 @@
                 <Z>-19.160206</Z>
             </Position>
             <Rotation>
-                <X>-0.071021311</X>
+                <X>-0.071021363</X>
                 <Y>2.6262434</Y>
-                <Z>-0.027974447</Z>
+                <Z>-0.027974432</Z>
             </Rotation>
             <Scale>
                 <X>290.27219</X>
@@ -513,7 +609,7 @@
                 <Z>-132.17902</Z>
             </Position>
             <Rotation>
-                <X>-1.1762247e-05</X>
+                <X>-1.1762245e-05</X>
                 <Y>2.9176769</Y>
                 <Z>8.6159853e-05</Z>
             </Rotation>
@@ -529,9 +625,9 @@
                 <Z>-20.534668</Z>
             </Position>
             <Rotation>
-                <X>0.00028328146</X>
-                <Y>0.61833972</Y>
-                <Z>7.7796809e-05</Z>
+                <X>0.00028328149</X>
+                <Y>0.61833978</Y>
+                <Z>7.7796649e-05</Z>
             </Rotation>
             <Scale>
                 <X>294.28339</X>
@@ -545,13 +641,13 @@
                 <Z>-136.91548</Z>
             </Position>
             <Rotation>
-                <X>-0.13026395</X>
-                <Y>0.14661883</Y>
-                <Z>-0.059461929</Z>
+                <X>-0.13026409</X>
+                <Y>0.1466189</Y>
+                <Z>-0.059461862</Z>
             </Rotation>
             <Scale>
-                <X>688.77875</X>
-                <Y>393.6069</Y>
+                <X>688.77905</X>
+                <Y>393.60696</Y>
                 <Z>393.60986</Z>
             </Scale>
             <Object33>Rock5A.spec</Object33>
@@ -593,7 +689,7 @@
                 <Z>-145.7489</Z>
             </Position>
             <Rotation>
-                <X>7.964029e-07</X>
+                <X>7.9640279e-07</X>
                 <Y>2.5443096</Y>
                 <Z>-1.5048361e-06</Z>
             </Rotation>
@@ -641,14 +737,14 @@
                 <Z>9.7029963</Z>
             </Position>
             <Rotation>
-                <X>0.20584655</X>
-                <Y>1.9028168e-09</Y>
+                <X>0.20584665</X>
+                <Y>-7.6112689e-09</Y>
                 <Z>0.17246909</Z>
             </Rotation>
             <Scale>
                 <X>116.88613</X>
                 <Y>116.88613</Y>
-                <Z>116.88624</Z>
+                <Z>116.88625</Z>
             </Scale>
             <Object39>Rock6C.spec</Object39>
             <Position>
@@ -679,7 +775,7 @@
             </Rotation>
             <Scale>
                 <X>148.58505</X>
-                <Y>148.59087</Y>
+                <Y>148.59068</Y>
                 <Z>148.59084</Z>
             </Scale>
             <Object41>Rock6C.spec</Object41>
@@ -705,14 +801,14 @@
                 <Z>42.565208</Z>
             </Position>
             <Rotation>
-                <X>-0.036351122</X>
+                <X>-0.036351137</X>
                 <Y>-3.1415884</Y>
-                <Z>-0.038469106</Z>
+                <Z>-0.038469132</Z>
             </Rotation>
             <Scale>
-                <X>64.97995</X>
+                <X>64.980042</X>
                 <Y>65</Y>
-                <Z>65.080322</Z>
+                <Z>65.080414</Z>
             </Scale>
             <Object43>Rock6C.spec</Object43>
             <Position>
@@ -721,28 +817,28 @@
                 <Z>-137.10153</Z>
             </Position>
             <Rotation>
-                <X>-0.22229265</X>
+                <X>-0.2222925</X>
                 <Y>2.8268597</Y>
-                <Z>-1.7583896e-05</Z>
+                <Z>-1.7545701e-05</Z>
             </Rotation>
             <Scale>
-                <X>252.22997</X>
-                <Y>252.22484</Y>
-                <Z>252.23257</Z>
+                <X>252.22968</X>
+                <Y>252.2249</Y>
+                <Z>252.23227</Z>
             </Scale>
             <Object44>Scottish Sword.spec</Object44>
             <Position>
-                <X>34.928917</X>
-                <Y>11.725479</Y>
-                <Z>15.502878</Z>
+                <X>55.846062</X>
+                <Y>29.261946</Y>
+                <Z>-42.67971</Z>
             </Position>
             <Rotation>
-                <X>-1.0387746e-06</X>
-                <Y>2.6979623</Y>
-                <Z>1.6437551e-06</Z>
+                <X>-2.983033e-06</X>
+                <Y>-2.5631921</Y>
+                <Z>1.6149436e-06</Z>
             </Rotation>
             <Scale>
-                <X>2.9999361</X>
+                <X>2.9999359</X>
                 <Y>3.0000312</Y>
                 <Z>3.0001695</Z>
             </Scale>

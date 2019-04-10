@@ -5,14 +5,14 @@
         <MoonMap></MoonMap>
         <GlowMap></GlowMap>
         <CloudMap></CloudMap>
-        <Leans>0</Leans>
+        <Leans>9.6000004</Leans>
         <TimeFactor>9.9999997e-05</TimeFactor>
         <SampleCount>20</SampleCount>
         <WaveLength>
-            <WaveLengthX>0.60887098</WaveLengthX>
-            <WaveLengthY>0.41087705</WaveLengthY>
-            <WaveLengthZ>0.3633585</WaveLengthZ>
+            <WaveLengthX>0.58870971</WaveLengthX>
+            <WaveLengthY>0.44420823</WaveLengthY>
+            <WaveLengthZ>0.36794358</WaveLengthZ>
         </WaveLength>
-        <StartTheta>1.74</StartTheta>
+        <StartTheta>1.6339999</StartTheta>
     </Sky>
 </SkyDesc>

@@ -4,8 +4,139 @@
     <Name>paladin_j_nordstrom</Name>
     <Tag>Player</Tag>
     <Colliders>
-        <ColliderCount>0</ColliderCount>
+        <ColliderCount>3</ColliderCount>
+        <Name>Main Collider</Name>
+        <Type>1</Type>
+        <BoneIndex>-1</BoneIndex>
+        <RootMatrix>
+            <Position>
+                <X>0</X>
+                <Y>0.85000002</Y>
+                <Z>0</Z>
+            </Position>
+            <Rotation>
+                <X>0</X>
+                <Y>0</Y>
+                <Z>0</Z>
+            </Rotation>
+            <Scale>
+                <X>1</X>
+                <Y>1</Y>
+                <Z>1</Z>
+            </Scale>
+        </RootMatrix>
+        <Name>Skill3 Collider</Name>
+        <Type>1</Type>
+        <BoneIndex>-1</BoneIndex>
+        <RootMatrix>
+            <Position>
+                <X>0</X>
+                <Y>1.15</Y>
+                <Z>-1.4</Z>
+            </Position>
+            <Rotation>
+                <X>0</X>
+                <Y>0</Y>
+                <Z>0</Z>
+            </Rotation>
+            <Scale>
+                <X>0.60000002</X>
+                <Y>0.60000002</Y>
+                <Z>0.60000002</Z>
+            </Scale>
+        </RootMatrix>
+        <Name>Skill4 Collider</Name>
+        <Type>1</Type>
+        <BoneIndex>-1</BoneIndex>
+        <RootMatrix>
+            <Position>
+                <X>0</X>
+                <Y>0.85000002</Y>
+                <Z>0</Z>
+            </Position>
+            <Rotation>
+                <X>0</X>
+                <Y>0</Y>
+                <Z>0</Z>
+            </Rotation>
+            <Scale>
+                <X>2</X>
+                <Y>2</Y>
+                <Z>2</Z>
+            </Scale>
+        </RootMatrix>
     </Colliders>
+    <Trails>
+        <TrailCount>2</TrailCount>
+        <BoneIndex>34</BoneIndex>
+        <LifeTime>0.11</LifeTime>
+        <DiffuseMap>White.png</DiffuseMap>
+        <AlphaMap>WeaponTrail1.png</AlphaMap>
+        <Position>
+            <X>-8</X>
+            <Y>-2.2</Y>
+            <Z>-106</Z>
+        </Position>
+        <Rotation>
+            <X>0</X>
+            <Y>0</Y>
+            <Z>0</Z>
+        </Rotation>
+        <Scale>
+            <X>1</X>
+            <Y>1</Y>
+            <Z>1</Z>
+        </Scale>
+        <Position>
+            <X>-8</X>
+            <Y>-2.2</Y>
+            <Z>-9.3000002</Z>
+        </Position>
+        <Rotation>
+            <X>0</X>
+            <Y>0</Y>
+            <Z>0</Z>
+        </Rotation>
+        <Scale>
+            <X>1</X>
+            <Y>1</Y>
+            <Z>1</Z>
+        </Scale>
+        <BoneIndex>34</BoneIndex>
+        <LifeTime>0.30000001</LifeTime>
+        <DiffuseMap>trail_02.png</DiffuseMap>
+        <AlphaMap>Flame.png</AlphaMap>
+        <Position>
+            <X>-8</X>
+            <Y>-2.2</Y>
+            <Z>-106</Z>
+        </Position>
+        <Rotation>
+            <X>0</X>
+            <Y>0</Y>
+            <Z>0</Z>
+        </Rotation>
+        <Scale>
+            <X>1</X>
+            <Y>1</Y>
+            <Z>1</Z>
+        </Scale>
+        <Position>
+            <X>-8</X>
+            <Y>-2.2</Y>
+            <Z>-9.3000002</Z>
+        </Position>
+        <Rotation>
+            <X>0</X>
+            <Y>0</Y>
+            <Z>0</Z>
+        </Rotation>
+        <Scale>
+            <X>1</X>
+            <Y>1</Y>
+            <Z>1</Z>
+        </Scale>
+    </Trails>
     <IsChild>0</IsChild>
     <ParentBoneIndex>-1</ParentBoneIndex>
     <ParentName></ParentName>
@@ -25,7 +156,7 @@
         <Z>1</Z>
     </Scale>
     <ClipNames>
-        <ClipCount>10</ClipCount>
+        <ClipCount>15</ClipCount>
         <ClipName>Idle</ClipName>
         <ClipName>Walk</ClipName>
         <ClipName>Run</ClipName>
@@ -36,6 +167,11 @@
         <ClipName>Idle2</ClipName>
         <ClipName>Attack1</ClipName>
         <ClipName>Attack2</ClipName>
+        <ClipName>Skill1</ClipName>
+        <ClipName>Skill2</ClipName>
+        <ClipName>Skill3</ClipName>
+        <ClipName>Skill4</ClipName>
+        <ClipName>Hit</ClipName>
     </ClipNames>
     <FilePath>paladin_j_nordstrom</FilePath>
     <BTName>Player 1</BTName>
@@ -47,16 +183,38 @@
             <Name>Selector</Name>
         </Child>
         <Selector>Selector</Selector>
-        <ChildCount>3</ChildCount>
+        <ChildCount>5</ChildCount>
         <Child>
+            <Type>Sequence</Type>
+            <Name>Sequence</Name>
             <Type>Task</Type>
-            <Name>ActionAttack1</Name>
+            <Name>ActionSkill</Name>
+            <Type>Task</Type>
+            <Name>ActionAttack</Name>
             <Type>Task</Type>
             <Name>ActionMove</Name>
             <Type>Sequence</Type>
             <Name>Sequence</Name>
         </Child>
-        <Task>ActionAttack1</Task>
+        <Sequence>Sequence</Sequence>
+        <ChildCount>2</ChildCount>
+        <Child>
+            <Type>Condition</Type>
+            <Name>FunctionCollision</Name>
+            <Check>1</Check>
+            <Type>Task</Type>
+            <Name>ActionHit</Name>
+        </Child>
+        <Condition>FunctionCollision</Condition>
+        <ChildCount>0</ChildCount>
+        <Child/>
+        <Task>ActionHit</Task>
+        <ChildCount>0</ChildCount>
+        <Child/>
+        <Task>ActionSkill</Task>
+        <ChildCount>0</ChildCount>
+        <Child/>
+        <Task>ActionAttack</Task>
         <ChildCount>0</ChildCount>
         <Child/>
         <Task>ActionMove</Task>

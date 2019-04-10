@@ -275,23 +275,34 @@ float4 PS(GeometryOutput input) : SV_TARGET
 
 void PS_Depth(GeometryOutput input)
 {
-    float4 color = Map.Sample(Sampler, float3(input.Uv, input.TextureNumber % 4));
-
-    // Phong
-    //float3 r = normalize(reflect(input.VertexToLight, input.Normal));
-    //float shininess = 100;
-
-    //float ambientLight = 0.1;
-    //float diffuseLight = saturate(dot(input.VertexToLight, input.Normal));
-    //float specularLight = saturate(dot(-input.VertexToCamera, r));
-    //specularLight = saturate(pow(specularLight, shininess));
-	
-    //float light = ambientLight + (diffuseLight * 1.55)+(specularLight * 0.5);
-	
-    //float3 grassColorRGB = HSVtoRGB(grassColorHSV);
-
+    float4 color = Map.Sample(Sampler, float3(input.Uv, input.TextureNumber % 7));
+    
     clip(color.a - 0.5f);
 }
+
+PixelOutPut PS_GB(GeometryOutput input)
+{
+    PixelOutPut output;
+
+    float4 diffuseMap = Map.Sample(Sampler, float3(input.Uv, input.TextureNumber % 7));
+    float3 normalMap = NormalMap.Sample(Sampler, input.Uv);
+    float4 specularMap = SpecularMap.Sample(Sampler, input.Uv);
+    float normalFactor = saturate(dot(normalMap, 1));
+    
+    specularMap.rgb *= Specular.rgb;
+    diffuseMap.rgb *= Diffuse.rgb;
+    specularMap.a = Specular.a;
+
+    clip(diffuseMap.a - 0.5f);
+
+    output.Position = float4(input.wPosition, 1.0f);
+    output.Normal = float4(normalMap, 1.0f);
+    output.Diffuse = diffuseMap;
+    output.Specular = specularMap;
+
+    return output;
+}
+
 
 // --------------------------------------------------------------------- //
 //  Techniques
@@ -312,16 +323,25 @@ technique11 T1
     {
         SetVertexShader(CompileShader(vs_5_0, VS()));
         SetGeometryShader(CompileShader(gs_5_0, GS_Depth()));
+        SetPixelShader(CompileShader(ps_5_0, PS_Depth()));
+    }
+    pass P1
+    {
+        SetVertexShader(CompileShader(vs_5_0, VS()));
+        SetGeometryShader(CompileShader(gs_5_0, GS_Depth()));
         //SetPixelShader(CompileShader(ps_5_0, PS_Depth_Alpha()));
         SetPixelShader(NULL);
 
         SetRasterizerState(ShadowDepth);
     }
+}
 
-    pass P1
+technique11 T2
+{
+    pass P0
     {
         SetVertexShader(CompileShader(vs_5_0, VS()));
-        SetGeometryShader(CompileShader(gs_5_0, GS_Depth()));
-        SetPixelShader(CompileShader(ps_5_0, PS_Depth()));
+        SetGeometryShader(CompileShader(gs_5_0, GS()));
+        SetPixelShader(CompileShader(ps_5_0, PS_GB()));
     }
 }

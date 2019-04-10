@@ -633,6 +633,87 @@ float4 PS_WireFrame(DomainOutput input) : SV_Target
     return color;
 }
 
+PixelOutPut PS_GB(DomainOutput input)
+{
+    PixelOutPut output;
+
+    float2 left = input.Uv + float2(-TexelCellSpaceU, 0.0f);
+    float2 right = input.Uv + float2(TexelCellSpaceU, 0.0f);
+    float2 top = input.Uv + float2(0.0f, -TexelCellSpaceV);
+    float2 bottom = input.Uv + float2(0.0f, TexelCellSpaceV);
+
+    float leftY = HeightMap.SampleLevel(HeightMapSampler, left, 0).r;
+    float rightY = HeightMap.SampleLevel(HeightMapSampler, right, 0).r;
+    float topY = HeightMap.SampleLevel(HeightMapSampler, top, 0).r;
+    float bottomY = HeightMap.SampleLevel(HeightMapSampler, bottom, 0).r;
+
+    float3 tangent = normalize(float3(WorldCellSpace * 2.0f, rightY - leftY, 0.0f));
+    float3 biTangent = normalize(float3(0.0f, bottomY - topY, WorldCellSpace * -2.0f));
+    float3 normalW = cross(tangent, biTangent);
+
+    float depth = input.pPosition.z / input.pPosition.w;
+    float2 zValue = float2(1, 1);
+    
+    [branch]
+    if (depth > DetailValue) //0.999
+    {
+        zValue = input.TiledUv * 0.25f;
+    }
+    else
+    {
+        zValue = input.TiledUv;
+    }
+
+    float4 diffuseMap = DiffuseMap.Sample(Sampler, zValue);
+    float4 color = diffuseMap;
+    float3 normalMap = NormalMap.Sample(Sampler, zValue);
+    float4 specularMap = SpecularMap.Sample(Sampler, zValue);
+    float4 detailMap = DetailMap.Sample(Sampler, zValue);
+    float3 normalValue;
+    
+    if (depth <= DetailValue)
+    {
+        if (normalMap.r != 0)
+        {
+            normalValue = NormalSampleToWorldSpace(normalMap.xyz, normalW, tangent);
+        }
+        else
+            normalValue = normalW;
+    }
+    if (detailMap.r != 0)
+    {
+        color = color * detailMap * DetailIntensity;
+    }
+
+     // Sample layers in texture array.
+    float4 c0 = LayerMapArray.Sample(Sampler, float3(zValue, 0));
+    float4 c1 = LayerMapArray.Sample(Sampler, float3(zValue, 1));
+    float4 c2 = LayerMapArray.Sample(Sampler, float3(zValue, 2));
+
+    // Sample the blend map.
+    float4 t = BlendMap.Sample(Sampler, input.Uv);
+    
+    float pRate = input.wPosition.y / MaxHeight;
+    
+    if (ActiveBlend.x == 1)
+        color = BlendLerpHelper(color, c0, pRate, BlendPositionRate[0], 0.05f, 0.05f);
+    if (ActiveBlend.y == 1)
+        color = BlendLerpHelper(color, c1, pRate, BlendPositionRate[1], 0.15f, 0.15f);
+    if (ActiveBlend.z == 1)
+        color = BlendLerpHelper(color, c2, pRate, BlendPositionRate[2], 0.01f, 0.01f);
+
+    specularMap.rgb *= Specular.rgb;
+    specularMap.a = Specular.a;
+    color.rgb *= Diffuse.rgb;
+
+    output.Position = float4(input.wPosition, 1.0f);
+    output.Normal = float4(normalValue, 1.0f);
+    output.Diffuse = color;
+    output.Specular = specularMap;
+
+    return output;
+}
+
 // --------------------------------------------------------------------- //
 //  Technique
 // --------------------------------------------------------------------- //
@@ -683,5 +764,16 @@ technique11 T1
         SetHullShader(CompileShader(hs_5_0, HS_Depth()));
         SetDomainShader(CompileShader(ds_5_0, DS_Depth()));
         SetPixelShader(CompileShader(ps_5_0, PS_Depth_Alpha()));
+    }
+}
+
+technique11 T2
+{
+    pass P0
+    {
+        SetVertexShader(CompileShader(vs_5_0, VS()));
+        SetHullShader(CompileShader(hs_5_0, HS()));
+        SetDomainShader(CompileShader(ds_5_0, DS()));
+        SetPixelShader(CompileShader(ps_5_0, PS_GB()));
     }
 }

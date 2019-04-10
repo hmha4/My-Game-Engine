@@ -378,7 +378,7 @@ float4 PS(VertexOutput input) : SV_TARGET
     color += temp;
     
     color.rgb = pow(color.rgb, power);
-    //clip(diffuse.a - 0.15f);
+
     return color;
 }
 
@@ -388,6 +388,35 @@ void PS_Depth_Alpha(VertexOutputDepth input)
 
     // Don't write transparent pixels to the shadow map.
     clip(diffuse.a - 0.15f);
+}
+
+PixelOutPut PS_GB(VertexOutput input)
+{
+    PixelOutPut output;
+
+    float4 diffuseMap = DiffuseMap.Sample(Sampler, input.Uv);
+    float3 normalMap = NormalMap.Sample(Sampler, input.Uv);
+    float4 specularMap = SpecularMap.Sample(Sampler, input.Uv);
+    float normalFactor = saturate(dot(normalMap, 1));
+    
+    float3 normal = input.Normal;
+
+    if (normalFactor > 0.0f)
+        normal = NormalSampleToWorldSpace(normalMap, input.Normal, input.Tangent);
+    
+    specularMap.rgb *= Specular.rgb;
+    specularMap.a = Specular.a;
+    diffuseMap.rgb *= Diffuse.rgb;
+    diffuseMap.r += 0.1f;
+    diffuseMap.g += 0.1f;
+    diffuseMap.b += 0.1f;
+
+    output.Position = float4(input.wPosition, 1.0f);
+    output.Normal = float4(normal, 1.0f);
+    output.Diffuse = float4(diffuseMap.rgb, 1.0f);
+    output.Specular = specularMap;
+
+    return output;
 }
 
 //-----------------------------------------------------------------------------
@@ -431,5 +460,16 @@ technique11 T1
         SetPixelShader(CompileShader(ps_5_0, PS_Depth_Alpha()));
 
         SetRasterizerState(ShadowDepth);
+    }
+}
+
+technique11 T2
+{
+    pass P0
+    {
+        SetVertexShader(CompileShader(vs_5_0, VS()));
+        SetPixelShader(CompileShader(ps_5_0, PS_GB()));
+
+        SetRasterizerState(Cull);
     }
 }

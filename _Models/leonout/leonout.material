@@ -2,62 +2,97 @@
 <Materials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Material>
         <Name>0</Name>
+        <DiffuseFile>leon_hair_d.tga</DiffuseFile>
+        <SpecularFile>leon_hair_s.tga</SpecularFile>
+        <NormalFile>leon_hair_n.tga</NormalFile>
         <Diffuse>
             <R>0.80000001</R>
             <G>0.80000001</G>
             <B>0.80000001</B>
-            <B>1</B>
+            <A>1</A>
         </Diffuse>
-        <DiffuseFile>0</DiffuseFile>
-        <NormalFile></NormalFile>
-        <SpecularFile></SpecularFile>
+        <Specular>
+            <R>0.2</R>
+            <G>0.2</G>
+            <B>0.2</B>
+            <A>1</A>
+        </Specular>
+        <SpecularExp>20</SpecularExp>
     </Material>
     <Material>
         <Name>1</Name>
+        <DiffuseFile>leonhead_d.tga</DiffuseFile>
+        <SpecularFile>leonhead_s.tga</SpecularFile>
+        <NormalFile>leonhead_n.tga</NormalFile>
         <Diffuse>
             <R>0.80000001</R>
             <G>0.80000001</G>
             <B>0.80000001</B>
-            <B>1</B>
+            <A>1</A>
         </Diffuse>
-        <DiffuseFile>1</DiffuseFile>
-        <NormalFile></NormalFile>
-        <SpecularFile></SpecularFile>
+        <Specular>
+            <R>0.2</R>
+            <G>0.2</G>
+            <B>0.2</B>
+            <A>1</A>
+        </Specular>
+        <SpecularExp>20</SpecularExp>
     </Material>
     <Material>
         <Name>2</Name>
+        <DiffuseFile>leonlegs_d.tga</DiffuseFile>
+        <SpecularFile>leonlegs_s.tga</SpecularFile>
+        <NormalFile>leonlegs_n.tga</NormalFile>
         <Diffuse>
             <R>0.80000001</R>
             <G>0.80000001</G>
             <B>0.80000001</B>
-            <B>1</B>
+            <A>1</A>
         </Diffuse>
-        <DiffuseFile>2</DiffuseFile>
-        <NormalFile></NormalFile>
-        <SpecularFile></SpecularFile>
+        <Specular>
+            <R>0.2</R>
+            <G>0.2</G>
+            <B>0.2</B>
+            <A>1</A>
+        </Specular>
+        <SpecularExp>20</SpecularExp>
     </Material>
     <Material>
         <Name>3</Name>
+        <DiffuseFile>leontorso_d.tga</DiffuseFile>
+        <SpecularFile>leontorso_s.tga</SpecularFile>
+        <NormalFile>leontorso_n.tga</NormalFile>
         <Diffuse>
             <R>0.80000001</R>
             <G>0.80000001</G>
             <B>0.80000001</B>
-            <B>1</B>
+            <A>1</A>
         </Diffuse>
-        <DiffuseFile>3</DiffuseFile>
-        <NormalFile></NormalFile>
-        <SpecularFile></SpecularFile>
+        <Specular>
+            <R>0.2</R>
+            <G>0.2</G>
+            <B>0.2</B>
+            <A>1</A>
+        </Specular>
+        <SpecularExp>20</SpecularExp>
     </Material>
     <Material>
         <Name>4</Name>
+        <DiffuseFile>skin_tr.tga</DiffuseFile>
+        <SpecularFile></SpecularFile>
+        <NormalFile></NormalFile>
         <Diffuse>
             <R>0.80000001</R>
             <G>0.80000001</G>
             <B>0.80000001</B>
-            <B>1</B>
+            <A>1</A>
         </Diffuse>
-        <DiffuseFile>4</DiffuseFile>
-        <NormalFile></NormalFile>
-        <SpecularFile></SpecularFile>
+        <Specular>
+            <R>0.2</R>
+            <G>0.2</G>
+            <B>0.2</B>
+            <A>1</A>
+        </Specular>
+        <SpecularExp>20</SpecularExp>
     </Material>
 </Materials>

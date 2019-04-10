@@ -2,14 +2,21 @@
 <Materials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Material>
         <Name>kachujin_MAT</Name>
+        <DiffuseFile>Kachujin_diffuse.png</DiffuseFile>
+        <SpecularFile>Kachujin_specular.png</SpecularFile>
+        <NormalFile>Kachujin_normal.png</NormalFile>
         <Diffuse>
             <R>1</R>
             <G>1</G>
             <B>1</B>
-            <B>0.80000001</B>
+            <A>0.80000001</A>
         </Diffuse>
-        <DiffuseFile>Kachujin_diffuse.png</DiffuseFile>
-        <NormalFile>Kachujin_normal.png</NormalFile>
-        <SpecularFile>Kachujin_specular.png</SpecularFile>
+        <Specular>
+            <R>0.5</R>
+            <G>0.5</G>
+            <B>0.5</B>
+            <A>20</A>
+        </Specular>
+        <SpecularExp>20</SpecularExp>
     </Material>
 </Materials>

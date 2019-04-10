@@ -1,5 +1,13 @@
 #include "000_Header.fx"
 //=====================================================//
+// Globals
+//=====================================================//
+float SliceAmount = 0.0f;
+float BurnSize = 0.15f;
+float4 BurnColor = float4(1, 1, 1, 1);
+float EmissionAmount = 2.0f;
+
+//=====================================================//
 // States
 //=====================================================//
 BlendState BlendOn
@@ -65,6 +73,11 @@ SamplerState TrailSampler
     AddressU = Wrap;
     AddressV = Wrap;
 };
+
+Texture2D SliceGuide;
+Texture2D BurnMap;
+Texture2D BurnRamp;
+
 float4 PS(VertexOutput input) : SV_TARGET
 {
   
@@ -72,7 +85,15 @@ float4 PS(VertexOutput input) : SV_TARGET
     float4 alpha = AlphaMap.Sample(TrailSampler, input.Uv);
     float4 color = float4(diffuse.rgb, alpha.r);
 
+    half test = SliceGuide.Sample(TrailSampler, input.Uv).rgb - SliceAmount;
+    clip(test);
 
+    //float4 temp;
+    //if (test < BurnSize && SliceAmount > 0)
+    //{
+    //    temp = BurnRamp.Sample(TrailSampler, float2(test * (1 / BurnSize), 0)) * BurnColor * EmissionAmount;
+    //}
+    
     return color/* * 2*/;
 }
 

@@ -6,6 +6,9 @@
     <Colliders>
         <ColliderCount>0</ColliderCount>
     </Colliders>
+  <Trails>
+    <TrailCount>0</TrailCount>
+  </Trails>
     <IsChild>false</IsChild>
     <ParentBoneIndex>-1</ParentBoneIndex>
     <ClipNames>

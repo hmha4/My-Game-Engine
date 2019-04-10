@@ -153,7 +153,8 @@ float4 PS(VertexOutput input) : SV_TARGET
     float4 diffuse = 0;
     float4 specular = 0;
 
-    float shadow = CalcShadowFactor(samShadow, ShadowMap, input.ShadowPos, input.wPosition);
+    float shadow = float3(1.0f, 1.0f, 1.0f);
+    shadow = CalcShadowFactor(samShadow, ShadowMap, input.ShadowPos, input.wPosition);
 
     Material m = { Ambient, Diffuse, Specular, Shininess };
     DirectionalLight l = { LightAmbient, LightDiffuse, LightSpecular, LightDirection };
@@ -236,6 +237,37 @@ void PS_Depth_Alpha(VertexOutputDepth input)
     clip(diffuse.a - 0.15f);
 }
 
+PixelOutPut PS_GB(VertexOutput input)
+{
+    PixelOutPut output;
+
+    float4 diffuseMap = DiffuseMap.Sample(Sampler, input.Uv);
+    float3 normalMap = NormalMap.Sample(Sampler, input.Uv);
+    float4 specularMap = SpecularMap.Sample(Sampler, input.Uv);
+    float normalFactor = saturate(dot(normalMap, 1));
+    
+    float3 normal = input.Normal;
+
+    if (normalFactor > 0.0f)
+        normal = NormalSampleToWorldSpace(normalMap, input.Normal, input.Tangent);
+    
+    specularMap.rgb *= Specular.rgb;
+    specularMap.a = Specular.a;
+    diffuseMap.rgb *= Diffuse.rgb;
+    diffuseMap.r += 0.00001f;
+    diffuseMap.g += 0.00001f;
+    diffuseMap.b += 0.00001f;
+
+    clip(diffuseMap.a - 0.15f);
+
+    output.Position = float4(input.wPosition, 1.0f);
+    output.Normal = float4(normal, 1.0f);
+    output.Diffuse = diffuseMap;
+    output.Specular = specularMap;
+
+    return output;
+}
+
 //-----------------------------------------------------------------------------
 // Techinques
 //-----------------------------------------------------------------------------
@@ -278,5 +310,16 @@ technique11 T1
         SetPixelShader(CompileShader(ps_5_0, PS_Depth_Alpha()));
 
         SetRasterizerState(ShadowDepth);
+    }
+}
+
+technique11 T2
+{
+    pass P0
+    {
+        SetVertexShader(CompileShader(vs_5_0, VS()));
+        SetPixelShader(CompileShader(ps_5_0, PS_GB()));
+
+        SetRasterizerState(Cull);
     }
 }

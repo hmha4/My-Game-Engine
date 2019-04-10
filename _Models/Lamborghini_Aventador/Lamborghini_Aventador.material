@@ -2,38 +2,59 @@
 <Materials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Material>
         <Name>Lamborginhi_base_phong</Name>
+        <DiffuseFile>Lamborginhi Aventador_diffuse.jpeg</DiffuseFile>
+        <SpecularFile>Lamborginhi Aventador_spec.jpeg</SpecularFile>
+        <NormalFile></NormalFile>
         <Diffuse>
             <R>1</R>
             <G>1</G>
             <B>1</B>
-            <B>0.80000001</B>
+            <A>0.80000001</A>
         </Diffuse>
-        <DiffuseFile>Lamborginhi Aventador_diffuse.jpeg</DiffuseFile>
-        <NormalFile></NormalFile>
-        <SpecularFile>Lamborginhi Aventador_spec.jpeg</SpecularFile>
+        <Specular>
+            <R>0.5</R>
+            <G>0.5</G>
+            <B>0.5</B>
+            <A>1</A>
+        </Specular>
+        <SpecularExp>20</SpecularExp>
     </Material>
     <Material>
         <Name>Lamborginhi_glass_phong</Name>
+        <DiffuseFile></DiffuseFile>
+        <SpecularFile></SpecularFile>
+        <NormalFile></NormalFile>
         <Diffuse>
             <R>0</R>
             <G>0</G>
             <B>0</B>
-            <B>0.80000001</B>
+            <A>0.80000001</A>
         </Diffuse>
-        <DiffuseFile></DiffuseFile>
-        <NormalFile></NormalFile>
-        <SpecularFile></SpecularFile>
+        <Specular>
+            <R>0.70086211</R>
+            <G>0.70086211</G>
+            <B>0.70086211</B>
+            <A>1</A>
+        </Specular>
+        <SpecularExp>6.3117909</SpecularExp>
     </Material>
     <Material>
         <Name>Lamborginhi_collider_lambert</Name>
+        <DiffuseFile></DiffuseFile>
+        <SpecularFile></SpecularFile>
+        <NormalFile></NormalFile>
         <Diffuse>
             <R>0.5</R>
             <G>0.5</G>
             <B>0.5</B>
-            <B>0.80000001</B>
+            <A>0.80000001</A>
         </Diffuse>
-        <DiffuseFile></DiffuseFile>
-        <NormalFile></NormalFile>
-        <SpecularFile></SpecularFile>
+        <Specular>
+            <R>-4.3160208e+08</R>
+            <G>-4.3160208e+08</G>
+            <B>-4.3160208e+08</B>
+            <A>-4.3160208e+08</A>
+        </Specular>
+        <SpecularExp>-4.3160208e+08</SpecularExp>
     </Material>
 </Materials>

@@ -3,7 +3,6 @@
 // --------------------------------------------------------------------- //
 //  Constant Buffers
 // --------------------------------------------------------------------- //
-
 float4 FrustumPlanes[6];
 
 float MinWidth;
@@ -171,7 +170,7 @@ void GS_Grass(point GeometryInput points[1], uint PrimitiveID : SV_PrimitiveID, 
     float cameraDistance = length(ViewPosition.xz - root.xz);
 
 	// Properties of the grass blade
-    float minHeight = 10.5;
+    float minHeight = 10.5f;
     float minWidth = 0.1f + (cameraDistance * 0.0001);
     float sizeX = minWidth + (random / 50);
     float sizeY = minHeight + (random / 5);
@@ -239,8 +238,7 @@ void GS_Grass(point GeometryInput points[1], uint PrimitiveID : SV_PrimitiveID, 
     //float x = asin(-R._32);
     //float y = atan2(R._31, R._33);
     //float z = atan2(R._12, R._22);
-
-	
+    
 	// Transform into projection space and calculate vectors needed for light calculation
 	[unroll]
     for (uint i = 0; i < vertexCount; i++)

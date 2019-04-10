@@ -2,10 +2,33 @@
 <GameCharacterSpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <ModelType>1</ModelType>
     <Name>Scottish Sword</Name>
-    <Tag></Tag>
+    <Tag>Weapon</Tag>
     <Colliders>
-        <ColliderCount>0</ColliderCount>
+        <ColliderCount>1</ColliderCount>
+        <Name>Main Collider Weapon</Name>
+        <Type>1</Type>
+        <BoneIndex>-1</BoneIndex>
+        <RootMatrix>
+            <Position>
+                <X>0</X>
+                <Y>0.2</Y>
+                <Z>-0.89999998</Z>
+            </Position>
+            <Rotation>
+                <X>0</X>
+                <Y>0</Y>
+                <Z>0</Z>
+            </Rotation>
+            <Scale>
+                <X>0.2</X>
+                <Y>0.2</Y>
+                <Z>0.2</Z>
+            </Scale>
+        </RootMatrix>
     </Colliders>
+    <Trails>
+        <TrailCount>0</TrailCount>
+    </Trails>
     <IsChild>1</IsChild>
     <ParentBoneIndex>34</ParentBoneIndex>
     <ParentName>paladin_j_nordstrom</ParentName>

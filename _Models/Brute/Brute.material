@@ -2,122 +2,173 @@
 <Materials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Material>
         <Name>phong2</Name>
+        <DiffuseFile>trail_02.png</DiffuseFile>
+        <SpecularFile/>
+        <NormalFile>trail_02_normal.png</NormalFile>
         <Diffuse>
             <R>0.22555886</R>
             <G>0.22555886</G>
             <B>0.22555886</B>
-            <B>0.80000001</B>
+            <A>0.80000001</A>
         </Diffuse>
-        <DiffuseFile></DiffuseFile>
-        <NormalFile></NormalFile>
-        <SpecularFile></SpecularFile>
+        <Specular>
+            <R>0.20300603</R>
+            <G>0.20300603</G>
+            <B>0.20300603</B>
+            <A>2</A>
+        </Specular>
+        <SpecularExp>2</SpecularExp>
     </Material>
     <Material>
         <Name>blinn5</Name>
-        <Diffuse>
-            <R>1</R>
-            <G>1</G>
-            <B>1</B>
-            <B>0.80000001</B>
-        </Diffuse>
         <DiffuseFile>axe_DIF2.png</DiffuseFile>
-        <NormalFile>axe_NM2.png</NormalFile>
         <SpecularFile>axe_SPEC.png</SpecularFile>
-    </Material>
-    <Material>
-        <Name>MaleBruteA_Hair4</Name>
+        <NormalFile>axe_NM2.png</NormalFile>
         <Diffuse>
             <R>1</R>
             <G>1</G>
             <B>1</B>
-            <B>0.80000001</B>
+            <A>0.80000001</A>
         </Diffuse>
-        <DiffuseFile>MaleBruteA_Hair_diffuse.png</DiffuseFile>
-        <NormalFile></NormalFile>
-        <SpecularFile>MaleBruteA_Hair_specular.png</SpecularFile>
+        <Specular>
+            <R>0.5</R>
+            <G>0.5</G>
+            <B>0.5</B>
+            <A>2.1524804</A>
+        </Specular>
+        <SpecularExp>2.1524804</SpecularExp>
     </Material>
     <Material>
         <Name>MaleBruteA_Bottom3</Name>
+        <DiffuseFile>MaleBruteA_Bottom_diffuse.png</DiffuseFile>
+        <SpecularFile>MaleBruteA_Bottom_specular.png</SpecularFile>
+        <NormalFile>MaleBruteA_Bottom_normal.png</NormalFile>
         <Diffuse>
             <R>1</R>
             <G>1</G>
             <B>1</B>
-            <B>0.80000001</B>
+            <A>0.80000001</A>
         </Diffuse>
-        <DiffuseFile>MaleBruteA_Bottom_diffuse.png</DiffuseFile>
-        <NormalFile>MaleBruteA_Bottom_normal.png</NormalFile>
-        <SpecularFile>MaleBruteA_Bottom_specular.png</SpecularFile>
+        <Specular>
+            <R>0.5</R>
+            <G>0.5</G>
+            <B>0.5</B>
+            <A>2.0599999</A>
+        </Specular>
+        <SpecularExp>2.0599999</SpecularExp>
     </Material>
     <Material>
         <Name>MaleBruteA_Shoes4</Name>
-        <Diffuse>
-            <R>1</R>
-            <G>1</G>
-            <B>1</B>
-            <B>0.80000001</B>
-        </Diffuse>
         <DiffuseFile>MaleBruteA_Shoes_diffuse.png</DiffuseFile>
-        <NormalFile>MaleBruteA_Shoes_normal.png</NormalFile>
         <SpecularFile>MaleBruteA_Shoes_specular.png</SpecularFile>
-    </Material>
-    <Material>
-        <Name>MaleBruteA_Moustache3</Name>
+        <NormalFile>MaleBruteA_Shoes_normal.png</NormalFile>
         <Diffuse>
             <R>1</R>
             <G>1</G>
             <B>1</B>
-            <B>0.80000001</B>
+            <A>0.80000001</A>
         </Diffuse>
-        <DiffuseFile>MaleBruteA_Moustache_diffuse.png</DiffuseFile>
-        <NormalFile></NormalFile>
-        <SpecularFile>MaleBruteA_Moustache_specular.png</SpecularFile>
+        <Specular>
+            <R>0.5</R>
+            <G>0.5</G>
+            <B>0.5</B>
+            <A>2.0599999</A>
+        </Specular>
+        <SpecularExp>2.0599999</SpecularExp>
     </Material>
     <Material>
         <Name>EyeSpec_MAT2</Name>
-        <Diffuse>
-            <R>1</R>
-            <G>1</G>
-            <B>1</B>
-            <B>0.80000001</B>
-        </Diffuse>
         <DiffuseFile>MaleBruteA_Body_diffuse.png</DiffuseFile>
+        <SpecularFile/>
         <NormalFile>MaleBruteA_StdNM.png</NormalFile>
-        <SpecularFile></SpecularFile>
-    </Material>
-    <Material>
-        <Name>Lashes_MAT2</Name>
         <Diffuse>
             <R>1</R>
             <G>1</G>
             <B>1</B>
-            <B>0.80000001</B>
+            <A>0.80000001</A>
         </Diffuse>
-        <DiffuseFile>MaleBruteA_Body_diffuse.png</DiffuseFile>
-        <NormalFile></NormalFile>
-        <SpecularFile></SpecularFile>
+        <Specular>
+            <R>1</R>
+            <G>1</G>
+            <B>1</B>
+            <A>50.601627</A>
+        </Specular>
+        <SpecularExp>50.601627</SpecularExp>
     </Material>
     <Material>
         <Name>Body_MAT2</Name>
+        <DiffuseFile>MaleBruteA_Body_diffuse.png</DiffuseFile>
+        <SpecularFile/>
+        <NormalFile>MaleBruteA_StdNM.png</NormalFile>
         <Diffuse>
             <R>1</R>
             <G>1</G>
             <B>1</B>
-            <B>0.80000001</B>
+            <A>0.80000001</A>
         </Diffuse>
-        <DiffuseFile>MaleBruteA_Body_diffuse.png</DiffuseFile>
-        <NormalFile>MaleBruteA_StdNM.png</NormalFile>
-        <SpecularFile></SpecularFile>
+        <Specular>
+            <R>0.15384147</R>
+            <G>0.15384147</G>
+            <B>0.15384147</B>
+            <A>6.3117909</A>
+        </Specular>
+        <SpecularExp>6.3117909</SpecularExp>
     </Material>
     <Material>
-        <Name>EyeSpec_MAT2</Name>
+        <Name>MaleBruteA_Hair4</Name>
+        <DiffuseFile>MaleBruteA_Hair_diffuse.png</DiffuseFile>
+        <SpecularFile>MaleBruteA_Hair_specular.png</SpecularFile>
+        <NormalFile>MaleBruteA_Hair_normal.png</NormalFile>
         <Diffuse>
             <R>1</R>
             <G>1</G>
             <B>1</B>
-            <B>0.80000001</B>
+            <A>0.80000001</A>
         </Diffuse>
+        <Specular>
+            <R>0.5</R>
+            <G>0.5</G>
+            <B>0.5</B>
+            <A>58.119659</A>
+        </Specular>
+        <SpecularExp>58.119659</SpecularExp>
+    </Material>
+    <Material>
+        <Name>MaleBruteA_Moustache3</Name>
+        <DiffuseFile>MaleBruteA_Moustache_diffuse.png</DiffuseFile>
+        <SpecularFile>MaleBruteA_Moustache_specular.png</SpecularFile>
+        <NormalFile>MaleBruteA_Moustache_normal.png</NormalFile>
+        <Diffuse>
+            <R>1</R>
+            <G>1</G>
+            <B>1</B>
+            <A>0.80000001</A>
+        </Diffuse>
+        <Specular>
+            <R>0.5</R>
+            <G>0.5</G>
+            <B>0.5</B>
+            <A>46.393162</A>
+        </Specular>
+        <SpecularExp>46.393162</SpecularExp>
+    </Material>
+    <Material>
+        <Name>Lashes_MAT2</Name>
         <DiffuseFile>MaleBruteA_Body_diffuse.png</DiffuseFile>
+        <SpecularFile/>
         <NormalFile>MaleBruteA_StdNM.png</NormalFile>
-        <SpecularFile></SpecularFile>
+        <Diffuse>
+            <R>1</R>
+            <G>1</G>
+            <B>1</B>
+            <A>0.80000001</A>
+        </Diffuse>
+        <Specular>
+            <R>0.15384147</R>
+            <G>0.15384147</G>
+            <B>0.15384147</B>
+            <A>6.3117909</A>
+        </Specular>
+        <SpecularExp>6.3117909</SpecularExp>
     </Material>
 </Materials>

@@ -1,6 +1,6 @@
 //	1. IA : Input Assembly( 기초 데이터 세팅 )
 //	2. VS : Vertex Shader( Culling:vertex단위 )
-//	3. HS : Hul Shading
+//	3. HS : Hull Shading
 //	4. DS : Domain Shading
 //	5. GS : Geometry Shader
 //		- RS : Rasterizer State( 3D 에서 2D 로 변환, Backface Culling )
@@ -53,6 +53,14 @@ cbuffer CB_Material
     float4 Specular;
     float Shininess;
 }
+
+struct PixelOutPut
+{
+    float4 Position : SV_Target0;
+    float4 Normal : SV_Target1;
+    float4 Diffuse : SV_Target2;
+    float4 Specular : SV_Target3;
+};
 
 // --------------------------------------------------------------------- //
 //  Frustum
@@ -380,7 +388,7 @@ void ComputeDirectionalLight(Material m, DirectionalLight l, float4 sunColor, fl
     [flatten]
     if (diffuseFactor > 0.0f)
     {
-        diffuse = diffuseFactor * m.Diffuse * l.Diffuse;
+        diffuse = diffuseFactor * /*m.Diffuse **/ l.Diffuse;
 
         float3 r = reflect(-light, normal);
 
@@ -549,15 +557,15 @@ void SpecularLighting(inout float4 color, float4 specularMap, float3 normal, flo
     float3 halfWayDir = normalize(-LightDirection + viewDirection);
     float intensity = saturate(dot(halfWayDir, normal));
     intensity = pow(intensity, Specular.a);
-    float4 specular = kEnergyConservation * intensity * Specular;
+    float4 specular = kEnergyConservation * intensity * specularMap;
+    
+    color = specular * SunColor;
 
-    color = specular * specularMap * SunColor;
-
-    //float3 reflection = reflect(LightDirection, normal);
-    //float intensity = saturate(dot(reflection, viewDirection));
+    //float3 reflection = reflect(-LightDirection, normal);
+    //float intensity = saturate(dot(reflection, -viewDirection));
     //float specular = pow(intensity, Specular.a);
     //
-    //color = color + /*Specular.a * */specular * Specular * specularMap;
+    //color = /*Specular.a * */specular /** Specular*/ * specularMap;
 }
 
 void SpecularLighting(inout float4 color, float3 normal, float3 viewDirection)

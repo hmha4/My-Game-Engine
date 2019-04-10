@@ -2,14 +2,21 @@
 <Materials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Material>
         <Name>Default-Material</Name>
+        <DiffuseFile></DiffuseFile>
+        <SpecularFile></SpecularFile>
+        <NormalFile></NormalFile>
         <Diffuse>
             <R>1</R>
             <G>1</G>
             <B>1</B>
-            <B>1</B>
+            <A>1</A>
         </Diffuse>
-        <DiffuseFile></DiffuseFile>
-        <NormalFile></NormalFile>
-        <SpecularFile></SpecularFile>
+        <Specular>
+            <R>0.2</R>
+            <G>0.2</G>
+            <B>0.2</B>
+            <A>1</A>
+        </Specular>
+        <SpecularExp>20.000006</SpecularExp>
     </Material>
 </Materials>

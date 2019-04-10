@@ -152,6 +152,32 @@ void PS_Depth_Alpha(VertexOutputDepth input)
     clip(diffuse.a - 0.15f);
 }
 
+PixelOutPut PS_GB(VertexOutput input)
+{
+    PixelOutPut output;
+
+    float4 diffuseMap = DiffuseMap.Sample(Sampler, input.Uv);
+    float3 normalMap = NormalMap.Sample(Sampler, input.Uv);
+    float4 specularMap = SpecularMap.Sample(Sampler, input.Uv);
+    float normalFactor = saturate(dot(normalMap, 1));
+    
+    float3 normal = input.Normal;
+
+    if (normalFactor > 0.0f)
+        normal = NormalSampleToWorldSpace(normalMap, input.Normal, input.Tangent);
+    
+    specularMap.rgb *= Specular.rgb;
+    diffuseMap.rgb *= Diffuse.rgb;
+    specularMap.a = Specular.a;
+
+    output.Position = float4(input.wPosition, 1.0f);
+    output.Normal = float4(normal, 1.0f);
+    output.Diffuse = diffuseMap;
+    output.Specular = specularMap;
+
+    return output;
+}
+
 // --------------------------------------------------------------------- //
 //  Technique
 // --------------------------------------------------------------------- //
@@ -186,5 +212,20 @@ technique11 T1
         SetVertexShader(CompileShader(vs_5_0, VS_Depth()));
         SetGeometryShader(NULL);
         SetPixelShader(CompileShader(ps_5_0, PS_Depth_Alpha()));
+    }
+}
+
+technique11 T2
+{
+    pass P0
+    {
+        SetVertexShader(CompileShader(vs_5_0, VS()));
+        SetPixelShader(CompileShader(ps_5_0, PS_GB()));
+    }
+
+    pass P1
+    {
+        SetVertexShader(CompileShader(vs_5_0, VS_Model()));
+        SetPixelShader(CompileShader(ps_5_0, PS_GB()));
     }
 }

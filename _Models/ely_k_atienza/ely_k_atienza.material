@@ -2,14 +2,21 @@
 <Materials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Material>
         <Name>ely_vanguardsoldier_kerwinatienza_M</Name>
+        <DiffuseFile>ely-vanguardsoldier-kerwinatienza_diffuse.png</DiffuseFile>
+        <SpecularFile>ely-vanguardsoldier-kerwinatienza_specular.png</SpecularFile>
+        <NormalFile>ely-vanguardsoldier-kerwinatienza_normal.png</NormalFile>
         <Diffuse>
             <R>1</R>
             <G>1</G>
             <B>1</B>
-            <B>1</B>
+            <A>1</A>
         </Diffuse>
-        <DiffuseFile>ely-vanguardsoldier-kerwinatienza_diffuse.png</DiffuseFile>
-        <NormalFile>ely-vanguardsoldier-kerwinatienza_normal.png</NormalFile>
-        <SpecularFile>ely-vanguardsoldier-kerwinatienza_specular.png</SpecularFile>
+        <Specular>
+            <R>0.5</R>
+            <G>0.5</G>
+            <B>0.5</B>
+            <A>1</A>
+        </Specular>
+        <SpecularExp>20</SpecularExp>
     </Material>
 </Materials>
