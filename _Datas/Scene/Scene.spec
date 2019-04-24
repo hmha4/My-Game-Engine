@@ -121,7 +121,7 @@
             </Scale>
         </EnemySpecs>
         <ObjectSpecs>
-            <ObjectCount>45</ObjectCount>
+            <ObjectCount>46</ObjectCount>
             <Object0>Maple_468Poly.spec</Object0>
             <Position>
                 <X>8.9606123</X>
@@ -369,8 +369,8 @@
                 <Z>20.886902</Z>
             </Position>
             <Rotation>
-                <X>0.114149</X>
-                <Y>-7.4993856e-08</Y>
+                <X>0.11414909</X>
+                <Y>-7.1947234e-08</Y>
                 <Z>0.065003052</Z>
             </Rotation>
             <Scale>
@@ -625,9 +625,9 @@
                 <Z>-20.534668</Z>
             </Position>
             <Rotation>
-                <X>0.00028328149</X>
+                <X>0.00028328141</X>
                 <Y>0.61833978</Y>
-                <Z>7.7796649e-05</Z>
+                <Z>7.7796605e-05</Z>
             </Rotation>
             <Scale>
                 <X>294.28339</X>
@@ -641,9 +641,9 @@
                 <Z>-136.91548</Z>
             </Position>
             <Rotation>
-                <X>-0.13026409</X>
+                <X>-0.13026415</X>
                 <Y>0.1466189</Y>
-                <Z>-0.059461862</Z>
+                <Z>-0.059461806</Z>
             </Rotation>
             <Scale>
                 <X>688.77905</X>
@@ -775,7 +775,7 @@
             </Rotation>
             <Scale>
                 <X>148.58505</X>
-                <Y>148.59068</Y>
+                <Y>148.59059</Y>
                 <Z>148.59084</Z>
             </Scale>
             <Object41>Rock6C.spec</Object41>
@@ -806,9 +806,9 @@
                 <Z>-0.038469132</Z>
             </Rotation>
             <Scale>
-                <X>64.980042</X>
+                <X>64.980087</X>
                 <Y>65</Y>
-                <Z>65.080414</Z>
+                <Z>65.08046</Z>
             </Scale>
             <Object43>Rock6C.spec</Object43>
             <Position>
@@ -819,28 +819,44 @@
             <Rotation>
                 <X>-0.2222925</X>
                 <Y>2.8268597</Y>
-                <Z>-1.7545701e-05</Z>
+                <Z>-1.7526605e-05</Z>
             </Rotation>
             <Scale>
-                <X>252.22968</X>
+                <X>252.2294</X>
                 <Y>252.2249</Y>
-                <Z>252.23227</Z>
+                <Z>252.23206</Z>
             </Scale>
             <Object44>Scottish Sword.spec</Object44>
             <Position>
-                <X>55.846062</X>
-                <Y>29.261946</Y>
-                <Z>-42.67971</Z>
+                <X>34.928913</X>
+                <Y>11.725479</Y>
+                <Z>15.502877</Z>
             </Position>
             <Rotation>
-                <X>-2.983033e-06</X>
-                <Y>-2.5631921</Y>
-                <Z>1.6149436e-06</Z>
+                <X>-1.0387735e-06</X>
+                <Y>2.6979623</Y>
+                <Z>1.6437538e-06</Z>
             </Rotation>
             <Scale>
-                <X>2.9999359</X>
-                <Y>3.0000312</Y>
+                <X>2.9999998</X>
+                <Y>3</Y>
                 <Z>3.0001695</Z>
+            </Scale>
+            <Object45>griffin shield.spec</Object45>
+            <Position>
+                <X>31.373682</X>
+                <Y>11.725477</Y>
+                <Z>13.81335</Z>
+            </Position>
+            <Rotation>
+                <X>-1.0387733e-06</X>
+                <Y>2.6979623</Y>
+                <Z>1.6437536e-06</Z>
+            </Rotation>
+            <Scale>
+                <X>3</X>
+                <Y>3</Y>
+                <Z>3</Z>
             </Scale>
         </ObjectSpecs>
     </Scene>

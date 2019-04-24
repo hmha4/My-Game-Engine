@@ -5,7 +5,7 @@
         <MoonMap></MoonMap>
         <GlowMap></GlowMap>
         <CloudMap></CloudMap>
-        <Leans>9.6000004</Leans>
+        <Leans>4.4000001</Leans>
         <TimeFactor>9.9999997e-05</TimeFactor>
         <SampleCount>20</SampleCount>
         <WaveLength>
