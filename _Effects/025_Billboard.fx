@@ -16,6 +16,7 @@ float3 HSVtoRGB(in float3 HSV)
 
 
 float4 WorldFrustumPlanes[6];
+matrix ReflectionView;
 float FogStart;
 float FogRange;
 
@@ -217,6 +218,66 @@ void GS_Depth(point VertexOutput input[1], uint PrimitiveID : SV_PrimitiveID, in
 
 }
 
+[maxvertexcount(4)] //  최대 넘겨 보낼 버텍스 개수
+void GS_Reflection(point VertexOutput input[1], uint PrimitiveID : SV_PrimitiveID, inout TriangleStream<GeometryOutput> stream)
+{
+    float4 root = input[0].Center;
+
+    float cameraDistance = length(ViewPosition.xz - root.xz);
+
+    // Properties of the grass blade
+    float halfWidth = 0.5f * input[0].Size.x;
+    float halfHeight = 0.5f * input[0].Size.y;
+    
+	// Animation
+    float toTheLeft = sin(Time);
+
+
+    // Generating vertices
+    float3 up = float3(0, 1, 0);
+    float3 lightPos = -LightDirection * 500.0f;
+    float3 look = lightPos - input[0].Center.xyz;
+    look.y = 0.0f;
+    look = normalize(look);
+
+    float3 right = cross(up, look);
+
+    //  4 정점 계산
+    float4 v[4];
+
+    v[0] = float4(input[0].Center.xyz + halfWidth * right - halfHeight * up, 1.0f);
+    v[1] = float4(input[0].Center.xyz + halfWidth * right + halfHeight * up, 1.0f);
+    v[2] = float4(input[0].Center.xyz - halfWidth * right - halfHeight * up, 1.0f);
+    v[3] = float4(input[0].Center.xyz - halfWidth * right + halfHeight * up, 1.0f);
+
+
+    GeometryOutput output;
+    [unroll]
+    for (int i = 0; i < 4; ++i) //  ++i 가 i++ 보다 빠름
+    {
+        //output.Position = mul(v[i], LightView);
+        //output.Position = mul(output.Position, LightProjection);
+     
+        //output.Uv = TexCoord[i];
+        //output.BillboardNum = input[0].BillboardNum;
+
+        //stream.Append(output);
+
+        output.wPosition = v[i].xyz;
+        output.Position = mul(v[i], ReflectionView);
+        output.Position = mul(output.Position, Projection);
+
+        output.ShadowTransform = mul(v[i], ShadowTransform);
+        
+        output.Uv = TexCoord[i];
+        output.TextureNumber = input[0].TextureNumber;
+        output.InstanceId = input[0].InstanceId;
+
+        stream.Append(output);
+    }
+
+}
+
 // --------------------------------------------------------------------- //
 //  Pixel Shader
 // --------------------------------------------------------------------- //
@@ -290,8 +351,8 @@ PixelOutPut PS_GB(GeometryOutput input)
     float normalFactor = saturate(dot(normalMap, 1));
     
     specularMap.rgb *= Specular.rgb;
-    diffuseMap.rgb *= Diffuse.rgb;
     specularMap.a = Specular.a;
+    diffuseMap.rgb *= Diffuse.rgb;
 
     clip(diffuseMap.a - 0.5f);
 
@@ -343,5 +404,15 @@ technique11 T2
         SetVertexShader(CompileShader(vs_5_0, VS()));
         SetGeometryShader(CompileShader(gs_5_0, GS()));
         SetPixelShader(CompileShader(ps_5_0, PS_GB()));
+    }
+}
+
+technique11 T3
+{
+    pass P0
+    {
+        SetVertexShader(CompileShader(vs_5_0, VS()));
+        SetGeometryShader(CompileShader(gs_5_0, GS_Reflection()));
+        SetPixelShader(CompileShader(ps_5_0, PS()));
     }
 }

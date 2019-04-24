@@ -20,9 +20,10 @@ cbuffer CB_Terrain
 
     int TexScale;
     float CB_Terrain_Padding;
-
     float4 WorldFrustumPlanes[6];
 };
+
+matrix ReflectionView;
 
 float2 HeightMapSize; // HeightMap 가로/세로 크기
 float2 TerrainSize; // 지형맵 버텍스 실제 위치의 크기
@@ -263,6 +264,49 @@ ConstantOutput HS_Constant_Depth(InputPatch<VertexOutput, 4> input, uint patchId
     return output;
 }
 
+ConstantOutput HS_Constant_Reflection(InputPatch<VertexOutput, 4> input, uint patchId : SV_PrimitiveId)
+{
+    ConstantOutput output;
+
+    float minY = input[0].BoundsY.x;
+    float maxY = input[0].BoundsY.y;
+
+    float3 vMin = float3(input[2].Position.x, minY, input[2].Position.z);
+    float3 vMax = float3(input[1].Position.x, maxY, input[1].Position.z);
+
+    float3 boxCenter = (vMin + vMax) * 0.5f;
+    float3 boxExtents = (vMax - vMin) * 0.5f;
+
+    //if (AabbOutsideFrustumTest(boxCenter, boxExtents))
+    //{
+    //    output.Edges[0] = 0.0f;
+    //    output.Edges[1] = 0.0f;
+    //    output.Edges[2] = 0.0f;
+    //    output.Edges[3] = 0.0f;
+    //
+    //    output.Inside[0] = 0.0f;
+    //    output.Inside[1] = 0.0f;
+    //    
+    //    return output;
+    //}
+
+    float3 e0 = (input[0].Position + input[2].Position).xyz * 0.5f;
+    float3 e1 = (input[0].Position + input[1].Position).xyz * 0.5f;
+    float3 e2 = (input[1].Position + input[3].Position).xyz * 0.5f;
+    float3 e3 = (input[2].Position + input[3].Position).xyz * 0.5f;
+    float3 c = (input[0].Position + input[1].Position + input[2].Position + input[3].Position).xyz * 0.25f;
+
+    output.Edges[0] = CalcTessFactor(e0);
+    output.Edges[1] = CalcTessFactor(e1);
+    output.Edges[2] = CalcTessFactor(e2);
+    output.Edges[3] = CalcTessFactor(e3);
+
+    output.Inside[0] = CalcTessFactor(c);
+    output.Inside[1] = output.Inside[0];
+
+    return output;
+}
+
 struct HullOutput
 {
     float4 Position : SV_Position0;
@@ -298,6 +342,21 @@ HullOutput HS(InputPatch<VertexOutput, 4> input, uint pointID : SV_OutputControl
 [patchconstantfunc("HS_Constant_Depth")]
 [maxtessfactor(64.0f)] //  사용해도되고 안해도 되지만 사용하면 속도가 조금 빨라짐
 HullOutput HS_Depth(InputPatch<VertexOutput, 4> input, uint pointID : SV_OutputControlPointID, uint patchID : SV_PrimitiveId)
+{
+    HullOutput output;
+    output.Position = input[pointID].Position;
+    output.Uv = input[pointID].Uv;
+
+    return output;
+}
+
+[domain("quad")]
+[partitioning("fractional_even")]
+[outputtopology("triangle_cw")]
+[outputcontrolpoints(4)]
+[patchconstantfunc("HS_Constant_Reflection")]
+[maxtessfactor(64.0f)] //  사용해도되고 안해도 되지만 사용하면 속도가 조금 빨라짐
+HullOutput HS_Reflection(InputPatch<VertexOutput, 4> input, uint pointID : SV_OutputControlPointID, uint patchID : SV_PrimitiveId)
 {
     HullOutput output;
     output.Position = input[pointID].Position;
@@ -369,6 +428,35 @@ DomainOutput DS_Depth(ConstantOutput input, float2 uv : SV_DomainLocation, const
 
     output.Position = mul(float4(output.wPosition, 1), LightView);
     output.Position = mul(output.Position, LightProjection);
+    
+    output.pPosition = output.Position;
+    // Tile layer textures over terrain.
+    output.TiledUv = output.Uv * TexScale;
+
+    return output;
+}
+
+[domain("quad")]
+DomainOutput DS_Reflection(ConstantOutput input, float2 uv : SV_DomainLocation, const OutputPatch<HullOutput, 4> patch)
+{
+    DomainOutput output;
+    
+    float3 p1 = lerp(patch[0].Position.xyz, patch[1].Position.xyz, uv.x).xyz;
+    float3 p2 = lerp(patch[2].Position.xyz, patch[3].Position.xyz, uv.x).xyz;
+    
+    float2 uv1 = lerp(patch[0].Uv.xy, patch[1].Uv.xy, uv.x);
+    float2 uv2 = lerp(patch[2].Uv.xy, patch[3].Uv.xy, uv.x);
+    output.Uv = lerp(uv1, uv2, uv.y);
+
+    output.wPosition = lerp(p1, p2, uv.y);
+    output.wPosition.y = HeightMap.SampleLevel(HeightMapSampler, output.Uv, 0).r;
+
+    output.wPosition = mul(float4(output.wPosition, 1), World);
+    output.ShadowPos = mul(float4(output.wPosition, 1), ShadowTransform);
+    output.BrushColor = BrushColor(output.wPosition);
+
+    output.Position = mul(float4(output.wPosition, 1), ReflectionView);
+    output.Position = mul(output.Position, Projection);
     
     output.pPosition = output.Position;
     // Tile layer textures over terrain.
@@ -775,5 +863,17 @@ technique11 T2
         SetHullShader(CompileShader(hs_5_0, HS()));
         SetDomainShader(CompileShader(ds_5_0, DS()));
         SetPixelShader(CompileShader(ps_5_0, PS_GB()));
+    }
+}
+
+
+technique11 T3
+{
+    pass P0
+    {
+        SetVertexShader(CompileShader(vs_5_0, VS()));
+        SetHullShader(CompileShader(hs_5_0, HS_Reflection()));
+        SetDomainShader(CompileShader(ds_5_0, DS_Reflection()));
+        SetPixelShader(CompileShader(ps_5_0, PS(true)));
     }
 }

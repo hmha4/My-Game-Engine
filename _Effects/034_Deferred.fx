@@ -64,7 +64,7 @@ float4 PS(VertexOutput input) : SV_TARGET
 
     float shadow = float3(1.0f, 1.0f, 1.0f);
     shadow = CalcShadowFactor(samShadow, ShadowMap, shadowPos, position.xyz);
-
+   
     Specular.a = specularMap.a;
     Material m = { Ambient, Diffuse, Specular, Shininess };
     DirectionalLight l = { LightAmbient, LightDiffuse, LightSpecular, LightDirection };
@@ -72,16 +72,32 @@ float4 PS(VertexOutput input) : SV_TARGET
     float4 A, D, S;
     ComputeDirectionalLight(m, l, SunColor, normal, toEye, A, D, S);
     
-    A *= albedo;
-    D *= albedo;
-    S *= albedo;
+    ambient += A * (shadow + 0.8f);
+    diffuse += D * (shadow);
+    specular += S * (shadow);
 
-    ambient += A;
-    diffuse += shadow * D;
-    specular += shadow * S;
+    [unroll]
+    for (int i = 0; i < PointLightCount; i++)
+    {
+        ComputePointLight(m, PointLights[i], position.xyz, normal, toEye, A, D, S);
 
-    float4 color = float4(ambient + diffuse + specular);
+        ambient +=  A;
+        diffuse +=  D;
+        specular += S;
+    }
     
+    [unroll]
+    for (i = 0; i < SpotLightCount; i++)
+    {
+        ComputeSpotLight(m, SpotLights[i], position.xyz, normal, toEye, A, D, S);
+
+        ambient +=  A;
+        diffuse +=  D;
+        specular += S;
+    }
+
+    float3 light = float3(ambient.rgb + diffuse.rgb + specular.rgb);
+    float4 color = float4(light * albedo.rgb, albedo.a);
 
     float4 specularColor = 1;
     

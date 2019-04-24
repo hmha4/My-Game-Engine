@@ -39,6 +39,7 @@ struct VertexOutput
 {
     float4 Position : SV_POSITION;
     float4 wPosition : Position1;
+    float4 oPosition : Position2;
 
     float3 Normal : Normal0;
     float2 Uv : UV0;
@@ -54,6 +55,8 @@ VertexOutput VS(VertexTextureNormal input)
     output.Position = mul(output.Position, View);
     output.Position = mul(output.Position, Projection);
 
+    output.oPosition = input.Position;
+    
     output.Uv = input.Uv;
     output.Normal = input.Normal;
 
@@ -78,16 +81,46 @@ Texture2D SliceGuide;
 Texture2D BurnMap;
 Texture2D BurnRamp;
 
+Texture2D ScreenDepth;
+
 float4 PS(VertexOutput input) : SV_TARGET
 {
-  
-    float4 diffuse = TrailMap.Sample(TrailSampler, input.Uv);
-    float4 alpha = AlphaMap.Sample(TrailSampler, input.Uv);
-    float4 color = float4(diffuse.rgb, alpha.r);
+    float gamma = 2.2f;
+    float3 power = 1.0f / gamma;
 
     half test = SliceGuide.Sample(TrailSampler, input.Uv).rgb - SliceAmount;
     clip(test);
 
+    //float4 diffuse = TrailMap.Sample(TrailSampler, input.Uv);
+    //float4 alpha = AlphaMap.Sample(TrailSampler, input.Uv);
+    float4 color = 0;
+    float sceneZ = ScreenDepth.Load(int3(input.Position.xy, 0));
+
+    if (dot(sceneZ, 1.0f) != 0)
+    {
+        float4 clipPos = mul(input.oPosition, World);
+        clipPos = mul(clipPos, View);
+        clipPos = mul(clipPos, Projection);
+
+        clipPos.z /= clipPos.w;
+        if (clipPos.z < sceneZ)
+        {
+            float4 diffuse = TrailMap.Sample(TrailSampler, input.Uv);
+            float4 alpha = AlphaMap.Sample(TrailSampler, input.Uv);
+            color = float4(diffuse.rgb, alpha.r);
+            color.rgb = pow(color.rgb, gamma);
+        }
+    }
+    else
+    {
+        float4 diffuse = TrailMap.Sample(TrailSampler, input.Uv);
+        float4 alpha = AlphaMap.Sample(TrailSampler, input.Uv);
+        color = float4(diffuse.rgb, alpha.r);
+        color.rgb = pow(color.rgb, gamma);
+    }
+   
+    color.rgb = pow(color.rgb, power);
+    color.a *= 0.7f;
     //float4 temp;
     //if (test < BurnSize && SliceAmount > 0)
     //{
@@ -96,7 +129,6 @@ float4 PS(VertexOutput input) : SV_TARGET
     
     return color/* * 2*/;
 }
-
 
 //=====================================================//
 // technique

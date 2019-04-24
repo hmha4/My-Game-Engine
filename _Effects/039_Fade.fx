@@ -5,7 +5,7 @@ matrix World;
 matrix View;
 matrix Projection;
 
-
+float AlphaValue;
 
 // --------------------------------------------------------------------- //
 //  Vertex Shader
@@ -52,12 +52,21 @@ float4 PS(VertexOutput input) : SV_TARGET
 {
      //  W : 동촤 -> NDC화면 공간에 대한 비율
     float4 color = Map.Sample(Sampler, input.Uv);
+    color.a = AlphaValue;
 
     return color;
 }
+
+// --------------------------------------------------------------------- //
+//  States
+// --------------------------------------------------------------------- //
+DepthStencilState Depth
+{
+    DepthEnable = false;
+};
 BlendState Blend
 {
-    AlphaToCoverageEnable = true;
+    AlphaToCoverageEnable = false;
 
     BlendEnable[0] = true;
     RenderTargetWriteMask[0] = 1 | 2 | 4 | 8; // Write all colors R | G | B | A
@@ -70,14 +79,6 @@ BlendState Blend
     DestBlendAlpha[0] = Zero;
     BlendOpAlpha[0] = Add;
 };
-// --------------------------------------------------------------------- //
-//  States
-// --------------------------------------------------------------------- //
-DepthStencilState Depth
-{
-    DepthEnable = false;
-};
-
 // --------------------------------------------------------------------- //
 //  Technique
 // --------------------------------------------------------------------- //

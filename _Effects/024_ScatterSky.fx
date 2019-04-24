@@ -5,7 +5,7 @@ static const float PI = 3.14159265f;
 static const float InnerRadius = 6356.7523142; //  지구 반지름
 static const float OuterRadius = 6356.7523142 * 1.0157313; //  대기 반지름
 
-
+float4 FrustumPlanes[6];
 
 float ESun = 20.0f; //  태양의 밝기
 float Kr = 0.0025f; //  Rayleigh
@@ -28,6 +28,7 @@ int SampleCount;
 float3 InvWaveLength;
 float3 WaveLengthMie;
 //float4 SunColor;
+matrix ReflectionView;
 
 float MoonAlpha = 0.0f;
 
@@ -69,6 +70,7 @@ struct PixelInput
     float4 Position : SV_POSITION;
     float2 Uv : UV0;
     float3 oPosition : POSITION1;
+    float4 Clip : SV_CullDistance0; // VS에서 버텍스컬링하는 방법=>프러
 };
 
 
@@ -90,6 +92,25 @@ PixelInput VS_Scattering(VertexTexture input)
 
     output.oPosition = -input.Position.xyz;
     output.Uv = input.Uv;
+
+    output.Clip = 1;
+
+    return output;
+}
+
+
+PixelInput VS_Scattering_Reflection(VertexTexture input)
+{
+    PixelInput output;
+    
+    output.Position = mul(input.Position, World);
+    float3 wPosition = output.Position.xyz;
+    output.Position = mul(output.Position, ReflectionView);
+    output.Position = mul(output.Position, Projection);
+
+    output.oPosition = -input.Position.xyz;
+    output.Uv = input.Uv;
+    output.Clip = 1;
 
     return output;
 }
@@ -171,6 +192,7 @@ struct PixelTargetInput
 {
     float4 Position : SV_POSITION;
     float2 Uv : UV0;
+    float4 Clip : SV_CullDistance0; // VS에서 버텍스컬링하는 방법=>프러
 };
 
 
@@ -181,7 +203,34 @@ PixelTargetInput VS_Target(VertexTexture input)
     //  NDC 공간
     output.Position = input.Position;
     output.Uv = input.Uv;
+    output.Clip = 1;
     
+    return output;
+}
+
+PixelTargetInput VS_Target_Reflection(VertexTexture input)
+{
+    PixelTargetInput output;
+    
+    //  NDC 공간
+    output.Position = input.Position;
+    output.Position = mul(output.Position, ReflectionView);
+    output.Position = mul(output.Position, Projection);
+
+    output.Uv = input.Uv;
+    
+    //[unroll]
+    //for (int i = 0; i < 6; i++)
+    //{
+    //    if (AabbOutsideFrustumTest(input.Position.xyz, 0))
+    //    {
+    //        output.Clip = -1;
+    //    }
+    //    else
+    //        output.Clip = 1;
+    //}
+    output.Clip = 1;
+
     return output;
 }
 
@@ -313,11 +362,29 @@ PixelInput VS_Moon(VertexTexture input)
     PixelInput output;
     
     output.Position = mul(input.Position, World);
+    float3 wPosition = output.Position.xyz;
     output.Position = mul(output.Position, View);
     output.Position = mul(output.Position, Projection);
 
     output.oPosition = -input.Position.xyz;
     output.Uv = input.Uv;
+    output.Clip = 1;
+
+    return output;
+}
+
+PixelInput VS_Moon_Reflection(VertexTexture input)
+{
+    PixelInput output;
+    
+    output.Position = mul(input.Position, World);
+    float3 wPosition = output.Position.xyz;
+    output.Position = mul(output.Position, ReflectionView);
+    output.Position = mul(output.Position, Projection);
+
+    output.oPosition = -input.Position.xyz;
+    output.Uv = input.Uv;
+    output.Clip = 1;
 
     return output;
 }
@@ -376,6 +443,19 @@ PixelCloudInput VS_Cloud(VertexTexture input)
     output.Position = mul(input.Position, World);
     output.wPosition = output.Position;
     output.Position = mul(output.Position, View);
+    output.Position = mul(output.Position, Projection);
+    output.Uv = (input.Uv * NumTiles);
+    output.oUv = input.Uv;
+
+    return output;
+}
+PixelCloudInput VS_Cloud_Reflection(VertexTexture input)
+{
+    PixelCloudInput output;
+    
+    output.Position = mul(input.Position, World);
+    output.wPosition = output.Position;
+    output.Position = mul(output.Position, ReflectionView);
     output.Position = mul(output.Position, Projection);
     output.Uv = (input.Uv * NumTiles);
     output.oUv = input.Uv;
@@ -614,3 +694,54 @@ technique11 T0
         SetPixelShader(CompileShader(ps_5_0, mainImage()));
     }
 };
+
+technique11 T1
+{
+    pass P0
+    {
+        SetDepthStencilState(DepthOff, 0);
+        SetVertexShader(CompileShader(vs_5_0, VS_Scattering_Reflection()));
+        SetGeometryShader(NULL);
+        SetPixelShader(CompileShader(ps_5_0, PS_Scattering()));
+    }
+
+    pass P1
+    {
+        SetDepthStencilState(DepthOff, 0);
+        SetVertexShader(CompileShader(vs_5_0, VS_Target_Reflection()));
+        SetGeometryShader(NULL);
+        SetPixelShader(CompileShader(ps_5_0, PS_Target()));
+    }
+
+    // Moon
+    pass P2
+    {
+        SetDepthStencilState(DepthOff, 0);
+        SetBlendState(BlendOn, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xFFFFFFFF);
+        SetVertexShader(CompileShader(vs_5_0, VS_Moon_Reflection()));
+        SetGeometryShader(NULL);
+        SetPixelShader(CompileShader(ps_5_0, PS_Moon()));
+    }
+
+    // Moon Glow
+    pass P3
+    {
+        SetDepthStencilState(DepthOff, 0);
+        SetBlendState(BlendOn, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xFFFFFFFF);
+        SetVertexShader(CompileShader(vs_5_0, VS_Moon_Reflection()));
+        SetGeometryShader(NULL);
+        SetPixelShader(CompileShader(ps_5_0, PS_MoonGlow()));
+    }
+
+    pass P4
+    {
+        SetRasterizerState(CullModeOff);
+        SetDepthStencilState(DepthOff, 0);
+        SetBlendState(BlendOn, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xFFFFFFFF);
+        SetVertexShader(CompileShader(vs_5_0, VS_Cloud_Reflection()));
+        SetGeometryShader(NULL);
+        //SetPixelShader(CompileShader(ps_5_0, PS_Cloud()));
+        SetPixelShader(CompileShader(ps_5_0, mainImage()));
+    }
+};
+

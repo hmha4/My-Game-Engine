@@ -358,9 +358,13 @@ float3 HSVtoRGB(in float3 HSV)
     return ((RGB - 1) * HSV.y + 1) * HSV.z;
 }
 
+Texture2DArray Map;
+int TextureNumber;
+int MaxTextureCount;
+
 float4 PS_Grass(in GeometryOutput input) : SV_TARGET
 {
-    float4 textureColor = DiffuseMap.Sample(TextureSampler, input.Uv);
+    float4 textureColor = Map.Sample(TextureSampler, float3(input.Uv, TextureNumber % MaxTextureCount));
     clip(textureColor.a - 0.4f);
 
 	// Phong
@@ -387,19 +391,19 @@ PixelOutPut PS_Grass_GB(in GeometryOutput input)
 {
     PixelOutPut output;
 
-    float4 textureColor = DiffuseMap.Sample(TextureSampler, input.Uv);
-    clip(textureColor.a - 0.4f);
+    float4 textureColor = Map.Sample(TextureSampler, float3(input.Uv, TextureNumber % MaxTextureCount));
+    clip(textureColor.a - 0.9f);
 
 	// Phong
     float3 r = normalize(reflect(input.VertexToLight.xyz, input.Normal.xyz));
     float shininess = 100;
     
-    float shadow = float3(1.0f, 1.0f, 1.0f);
-    shadow = CalcShadowFactor(samShadow, ShadowMap, input.ShadowTransform, input.wPosition.xyz);
+    //float shadow = float3(1.0f, 1.0f, 1.0f);
+    //shadow = CalcShadowFactor(samShadow, ShadowMap, input.ShadowTransform, input.wPosition.xyz);
     
-    float ambientLight = 0.3f;
-    float diffuseLight = saturate(dot(input.VertexToLight, input.Normal.xyz)) * shadow;
-    float specularLight = saturate(dot(-input.VertexToCamera, r)) * shadow;
+    float ambientLight = 0.8f;
+    float diffuseLight = saturate(dot(input.VertexToLight, input.Normal.xyz));
+    float specularLight = saturate(dot(-input.VertexToCamera, r));
     specularLight = saturate(pow(specularLight, shininess));
 	
     float light = ambientLight + (diffuseLight * 1.55) + (specularLight * 0.5);
@@ -407,20 +411,21 @@ PixelOutPut PS_Grass_GB(in GeometryOutput input)
     float3 grassColorHSV = { 0.17 + (input.Random / 20), 0.17 + (input.Random / 20), 1 };
     float3 grassColorRGB = HSVtoRGB(grassColorHSV);
 
-    textureColor = float4(textureColor.rgb * grassColorRGB, textureColor.a);
+    textureColor = float4(light * textureColor.rgb * grassColorRGB, textureColor.a);
     
-    textureColor.rgb *= Diffuse.rgb;
+    //textureColor.rgb *= Diffuse.rgb;
     textureColor.r += 0.1f;
     textureColor.g += 0.1f;
     textureColor.b += 0.1f;
 
     output.Position = input.wPosition;
-    output.Normal = float4(input.Normal, 1.0f);
+    output.Normal = float4(input.Normal.xyz, 1.0f);
     output.Diffuse = float4(textureColor.rgb, 1.0f);
-    output.Specular = float4(0, 0, 0, 1);
+    output.Specular = float4(0, 0, 0, 1.0f);
 
     return output;
 }
+
 
 // --------------------------------------------------------------------- //
 //  Technique

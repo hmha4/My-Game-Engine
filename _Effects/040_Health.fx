@@ -5,7 +5,7 @@ matrix World;
 matrix View;
 matrix Projection;
 
-
+float AlphaValue;
 
 // --------------------------------------------------------------------- //
 //  Vertex Shader
@@ -47,14 +47,61 @@ SamplerState Sampler
 };
 
 Texture2D Map;
+Texture2D MapSecond;
+float UVx = -1;
+float UVy = -1;
+float Time;
+float4 Color;
 
 float4 PS(VertexOutput input) : SV_TARGET
 {
      //  W : 동촤 -> NDC화면 공간에 대한 비율
-    float4 color = Map.Sample(Sampler, input.Uv);
+    float4 color = 0;
+
+    if (UVy != -1)
+    {
+        if (input.Uv.y >= 1.0f - UVy)
+        {
+            color = Map.Sample(Sampler, input.Uv);
+            float2 uv = float2(input.Uv.x, (input.Uv.y + Time * 0.2f) % 1.0f);
+            float4 secondary = MapSecond.Sample(Sampler, uv);
+
+            color = float4(color.r * Color.r, color.g * Color.g, color.b * Color.b, color.a);
+            color.rgb *= secondary.rgb;
+        }
+    }
+    
+    if (UVx != -1)
+    {
+        if (input.Uv.x <= UVx)
+        {
+            color = Map.Sample(Sampler, input.Uv);
+
+            float x = input.Uv.x - Time * 0.2f;
+            x = abs(x) % 1.0f;
+            float2 uv = float2(x, input.Uv.y);
+            float4 secondary = MapSecond.Sample(Sampler, uv);
+
+            color = float4(color.r * Color.r, color.g * Color.g, color.b * Color.b, color.a);
+            color.rgb *= secondary.rgb;
+        }
+    }
+    //color.a = AlphaValue;
+
+    //color.rgb += float3(1, 0, 0);
+
+    
 
     return color;
 }
+
+// --------------------------------------------------------------------- //
+//  States
+// --------------------------------------------------------------------- //
+DepthStencilState Depth
+{
+    DepthEnable = false;
+};
 BlendState Blend
 {
     AlphaToCoverageEnable = true;
@@ -70,14 +117,6 @@ BlendState Blend
     DestBlendAlpha[0] = Zero;
     BlendOpAlpha[0] = Add;
 };
-// --------------------------------------------------------------------- //
-//  States
-// --------------------------------------------------------------------- //
-DepthStencilState Depth
-{
-    DepthEnable = false;
-};
-
 // --------------------------------------------------------------------- //
 //  Technique
 // --------------------------------------------------------------------- //

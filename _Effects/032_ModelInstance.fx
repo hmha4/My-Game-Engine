@@ -254,9 +254,9 @@ PixelOutPut PS_GB(VertexOutput input)
     specularMap.rgb *= Specular.rgb;
     specularMap.a = Specular.a;
     diffuseMap.rgb *= Diffuse.rgb;
-    diffuseMap.r += 0.00001f;
-    diffuseMap.g += 0.00001f;
-    diffuseMap.b += 0.00001f;
+    diffuseMap.r += 0.1f;
+    diffuseMap.g += 0.1f;
+    diffuseMap.b += 0.1f;
 
     clip(diffuseMap.a - 0.15f);
 

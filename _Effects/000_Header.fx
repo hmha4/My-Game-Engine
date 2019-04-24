@@ -81,6 +81,7 @@ bool AabbBehindPlaneTest(float3 center, float3 extents, float4 plane)
     return (s + r) < 0.0f;
 }
 
+
 // --------------------------------------------------------------------- //
 //  Shadow
 // --------------------------------------------------------------------- //
@@ -388,7 +389,7 @@ void ComputeDirectionalLight(Material m, DirectionalLight l, float4 sunColor, fl
     [flatten]
     if (diffuseFactor > 0.0f)
     {
-        diffuse = diffuseFactor * /*m.Diffuse **/ l.Diffuse;
+        diffuse = diffuseFactor * m.Diffuse * l.Diffuse;
 
         float3 r = reflect(-light, normal);
 
@@ -449,11 +450,23 @@ void ComputePointLight(Material m, PointLight l, float3 position, float3 normal,
         diffuse = diffuseFactor * m.Diffuse * l.Diffuse;
 
         float3 r = reflect(-light, normal);
-
         float specularFactor = 0;
-        specularFactor = saturate(dot(r, toEye));
+        float3 halfWayDir = normalize(light + toEye);
+       
+        float kEnergyConservation = (8.0f + m.Specular.a) / (8.0f * 3.14159265f);
+        specularFactor = saturate(dot(halfWayDir, normal));
         specularFactor = pow(specularFactor, m.Specular.a);
-        specular = specularFactor * m.Specular * l.Specular;
+        specular += kEnergyConservation * specularFactor * m.Specular;
+
+        kEnergyConservation = (8.0f + l.Specular.a) / (8.0f * 3.14159265f);
+        specularFactor = saturate(dot(halfWayDir, normal));
+        specularFactor = pow(specularFactor, l.Specular.a);
+        specular += kEnergyConservation * specularFactor * l.Specular;
+
+         //float specularFactor = 0;
+        //specularFactor = saturate(dot(r, toEye));
+        //specularFactor = pow(specularFactor, m.Specular.a);
+        //specular = specularFactor * m.Specular * l.Specular;
     }
 
     float attenuate = 1.0f / dot(l.Attenuation, float3(1.0f, dist, dist * dist));
@@ -507,11 +520,24 @@ void ComputeSpotLight(Material m, SpotLight l, float3 position, float3 normal, f
         diffuse = diffuseFactor * m.Diffuse * l.Diffuse;
 
         float3 r = reflect(-light, normal);
-
         float specularFactor = 0;
-        specularFactor = saturate(dot(r, toEye));
+        float3 halfWayDir = normalize(light + toEye);
+       
+
+        float kEnergyConservation = (8.0f + m.Specular.a) / (8.0f * 3.14159265f);
+        specularFactor = saturate(dot(halfWayDir, normal));
         specularFactor = pow(specularFactor, m.Specular.a);
-        specular = specularFactor * m.Specular * l.Specular;
+        specular += kEnergyConservation * specularFactor * m.Specular;
+
+        kEnergyConservation = (8.0f + l.Specular.a) / (8.0f * 3.14159265f);
+        specularFactor = saturate(dot(halfWayDir, normal));
+        specularFactor = pow(specularFactor, l.Specular.a);
+        specular += kEnergyConservation * specularFactor * l.Specular;
+
+        //float specularFactor = 0;
+        //specularFactor = saturate(dot(r, toEye));
+        //specularFactor = pow(specularFactor, m.Specular.a);
+        //specular = specularFactor * m.Specular * l.Specular;
     }
 
     float spot = pow(max(dot(-light, l.Direction), 0.0f), l.Spot);
